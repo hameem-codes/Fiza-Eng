@@ -158,7 +158,7 @@ export function Footer() {
             <Link href="/products?category=Railway+Solutions" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
               Locomotives
             </Link>
-            <Link href="/capabilities/mineral-trading" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
+            <Link href="/products?category=Traded+Minerals" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
               Traded Minerals
             </Link>
           </div>

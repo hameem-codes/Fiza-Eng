@@ -49,8 +49,15 @@ function ContactFormInner() {
 
   useEffect(() => {
     const typeParam = searchParams.get("type");
+    const productParam = searchParams.get("product");
     if (typeParam) {
       setEnquiryType(normalizeEnquiryType(typeParam));
+    }
+    if (productParam) {
+      setFormData((prev) => ({
+        ...prev,
+        message: prev.message ? prev.message : `Quotation and specification inquiry for: ${productParam}.`,
+      }));
     }
   }, [searchParams]);
 

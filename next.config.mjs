@@ -23,6 +23,11 @@ const nextConfig = {
         destination: "/capabilities/:slug*",
         permanent: true,
       },
+      {
+        source: "/products/off-highway-rigid-truck-777",
+        destination: "/products/fiza-rt100-haul-truck",
+        permanent: true,
+      },
     ];
   },
 };

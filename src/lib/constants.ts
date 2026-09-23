@@ -16,6 +16,9 @@ export interface Capability {
 export type { Project, ProjectStatus } from "./projects";
 export { PROJECTS, hiddenProjects } from "./projects";
 
+export type { ProductItem, KeySpec } from "./products";
+export { PRODUCTS, TRADED_MINERALS, ALL_CATALOG_ITEMS, SHOW_PRODUCT_SPECS } from "./products";
+
 export interface MineralResource {
   id: string;
   name: string;
@@ -25,18 +28,6 @@ export interface MineralResource {
   annualVolume: string;
   description: string;
   specifications: { label: string; value: string }[];
-}
-
-export interface ProductItem {
-  id: string;
-  slug: string;
-  name: string;
-  category: string;
-  modelNumber: string;
-  heroImage: string;
-  specs: { [key: string]: string };
-  applications: string[];
-  overview: string;
 }
 
 export interface NewsArticle {
@@ -337,99 +328,6 @@ export const MINERALS: MineralResource[] = [
       { label: "U + Th (Radionuclides)", value: "< 120 ppm Low Trace" },
       { label: "Bulk Density", value: "2.65 t/m³" }
     ]
-  }
-];
-
-export const PRODUCTS: ProductItem[] = [
-  {
-    id: "fiza-980-excavator",
-    slug: "fiza-980-excavator",
-    name: "FIZA-980 Ultra-Heavy Hydraulic Mining Excavator",
-    category: "Heavy Mining Fleet",
-    modelNumber: "FX-980-HD",
-    heroImage: SITE_IMAGES.products.hydraulicShovel.src,
-    specs: {
-      "Operating Weight": "98,500 kg (108 US Tons)",
-      "Engine Power": "567 kW (760 HP) Cummins QSK19 Diesel",
-      "Standard Bucket Capacity": "6.5 m³ Heavy Rock Armored",
-      "Maximum Digging Depth": "9.24 meters",
-      "Breakout Force": "480 kN ISO",
-      "Fuel Tank Capacity": "1,220 Liters"
-    },
-    applications: [
-      "Open-pit overburden removal",
-      "Direct truck loading into 60T-100T haulers",
-      "Hard-rock quarry extraction without continuous blasting",
-      "Bulk material reclamation"
-    ],
-    overview: "Built for continuous 24-hour operation in sub-Saharan heat. Features an oversized heavy-duty cooling radiator pack, reinforced forged boom linkages, and an air-filtered operator cab insulated for desert environments."
-  },
-  {
-    id: "jaw-crusher-station-1200",
-    slug: "jaw-crusher-station-1200",
-    name: "Stationary Modular Primary Jaw Crusher Station",
-    category: "Turnkey Plant Modules",
-    modelNumber: "JC-1200-MOD",
-    heroImage: SITE_IMAGES.products.crusherStation.src,
-    specs: {
-      "Feed Opening Size": "1,200 mm x 950 mm",
-      "Maximum Feed Chunk": "820 mm Solid Basalt / Quartz",
-      "Throughput Capacity": "350 - 680 TPH (variable CSS)",
-      "Drive Electric Motor": "200 kW 400V 50Hz ABB",
-      "Discharge Conveyor": "1,200 mm Heavy Belt with Magnet",
-      "Structural Foundation": "Pre-cast skid modular mount"
-    },
-    applications: [
-      "Primary run-of-mine reduction",
-      "Pre-crushing circuit for ball mill feeds",
-      "Railway ballast production from granite quarries",
-      "Concrete aggregate processing"
-    ],
-    overview: "Engineered for rapid field erection within 14 working days. All electrical switchgear, variable frequency drives, and grease lubrication pumps are pre-wired into a standardized containerized control module."
-  },
-  {
-    id: "heavy-haul-locomotive-4400",
-    slug: "heavy-haul-locomotive-4400",
-    name: "FIZA-4400 Heavy-Haul Diesel-Electric Freight Locomotive",
-    category: "Railway Solutions",
-    modelNumber: "FL-4400-AC",
-    heroImage: SITE_IMAGES.products.locomotive.src,
-    specs: {
-      "Power Output": "4,400 BHP (3,280 kW) AC Traction",
-      "Axle Configuration": "Co-Co (6 Axles Powered)",
-      "Starting Tractive Effort": "640 kN",
-      "Continuous Tractive Effort": "534 kN",
-      "Track Gauge": "1,067 mm (Cape Gauge) or 1,435 mm (Standard)",
-      "Maximum Operating Speed": "105 km/h Loaded"
-    },
-    applications: [
-      "Heavy bulk mineral consist haulage (6,000+ tonnes)",
-      "Long-distance cross-border mineral logistics",
-      "Steep grade ascent on mountain corridor routes"
-    ],
-    overview: "High-adhesion microprocessor wheel-slip management combined with rugged AC traction motors delivers dependable haulage on rugged alignments with dust-resistant central engine filtration."
-  },
-  {
-    id: "off-highway-rigid-truck-777",
-    slug: "off-highway-rigid-truck-777",
-    name: "FIZA-RT100 Rigid Mining Haul Truck",
-    category: "Heavy Mining Fleet",
-    modelNumber: "RT-100-MINER",
-    heroImage: SITE_IMAGES.products.dumpTruck.src,
-    specs: {
-      "Nominal Payload": "95,000 kg (105 US Tons)",
-      "Gross Machine Weight": "165,000 kg",
-      "Engine Rating": "783 kW (1,050 HP) Heavy V12 Turbo",
-      "Heaped Capacity (SAE 2:1)": "60.4 m³",
-      "Top Speed (Loaded)": "64 km/h",
-      "Tire Size": "27.00R49 E-4 Deep Tread"
-    },
-    applications: [
-      "Large-scale open-pit iron ore and bauxite haulage",
-      "High-gradient pit ramp ascents up to 12%",
-      "Continuous fleet operations pairing with 80T-120T excavators"
-    ],
-    overview: "Features an oil-cooled multiple-disc brake retarder that prevents fade on downhill loaded descents. The structural box-section chassis resists severe torsional twisting under uneven loading."
   }
 ];
 
