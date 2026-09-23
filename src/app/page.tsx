@@ -1,7 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
 import { HomeHero } from "@/components/sections/HomeHero";
-import { StatsWall } from "@/components/sections/StatsWall";
 import { CompanyEditorial } from "@/components/sections/CompanyEditorial";
 import { CapabilitiesGrid } from "@/components/sections/CapabilitiesGrid";
 import { ActiveProjectsSection } from "@/components/sections/ActiveProjectsSection";
@@ -34,13 +33,10 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="w-full">
-      {/* 1. Hero (video placeholder, marquee ticker, serif headline, stats bar) */}
+      {/* 1. Hero (includes single stats row directly underneath) */}
       <HomeHero />
 
-      {/* 2. Stats Wall — 5 massive animated numbers on dark charcoal */}
-      <StatsWall />
-
-      {/* 3. About — 65/35 asymmetric, founder portrait, pull-quote */}
+      {/* 2. About (short single paragraph of 51 words) */}
       <CompanyEditorial />
 
       {/* 3. Three primary divisions */}

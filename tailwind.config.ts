@@ -40,7 +40,6 @@ const config: Config = {
         heading: ["var(--font-heading)", "Inter", "Helvetica Neue", "sans-serif"],
         body: ["var(--font-body)", "Inter", "Helvetica Neue", "Arial", "sans-serif"],
         mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
-        display: ["var(--font-display)", "DM Serif Display", "Georgia", "serif"],
       },
       fontSize: {
         "display-xl": ["4.5rem", { lineHeight: "0.92", letterSpacing: "-0.03em" }],

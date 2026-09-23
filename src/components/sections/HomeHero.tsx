@@ -1,203 +1,125 @@
-"use client";
-
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { SITE_FACTS } from "@/lib/siteFacts";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
-
-// Marquee ticker text — doubled so it loops seamlessly
-const TICKER_ITEMS =
-  "WEST AFRICA\u00A0\u00A0·\u00A0\u00A0RAIL CORRIDORS\u00A0\u00A0·\u00A0\u00A0450+ MACHINES DEPLOYED\u00A0\u00A0·\u00A0\u00A030 YEARS DIRECT EXECUTION\u00A0\u00A0·\u00A0\u00A0MINERAL SUPPLY CHAINS\u00A0\u00A0·\u00A0\u00A0OPEN-PIT MINING\u00A0\u00A0·\u00A0\u00A0TURNKEY INDUSTRIAL PLANTS\u00A0\u00A0·\u00A0\u00A0";
 
 export function HomeHero() {
   return (
     <div className="w-full">
       {/* 1. Hero Main Frame */}
-      <section className="relative w-full min-h-screen lg:min-h-[100vh] flex flex-col justify-end overflow-hidden bg-[#0D0D0C]">
-
-        {/* ── VIDEO BACKGROUND PLACEHOLDER ── */}
-        {/* TODO: Replace this placeholder with <video> when real site footage is supplied */}
+      <section className="relative w-full min-h-[580px] lg:h-[82vh] max-h-[880px] flex flex-col justify-end overflow-hidden bg-coal-dark">
+        {/* Background Image: real Fiza site photo */}
+        {/* // TODO: [REPLACE: /images/hero-real.jpg] with real client-supplied Fiza site photo if available */}
         <div className="absolute inset-0 z-0 select-none">
-          {/* Real footage placeholder */}
-          <div className="absolute inset-0 bg-[#0D0D0C] flex items-center justify-center">
-            <div
-              className="border border-slab-grey/20 px-8 py-5 text-center max-w-lg mx-auto"
-              style={{ opacity: 0.18 }}
-            >
-              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-dust-tan block mb-2">
-                Video placeholder
-              </span>
-              <span className="font-mono text-xs text-quarry-grey block">
-                [REAL SITE FOOTAGE — Excavators, haul trucks, dust, African terrain]
+          <Image
+            src="/images/hero-real.jpg"
+            alt="Fiza Engineering heavy open-pit mining operations with hydraulic excavators and haul fleet"
+            fill
+            priority
+            sizes="100vw"
+            className="img-cover object-center scale-[1.01] transition-transform duration-1000 ease-out"
+          />
+          {/* Subtle Industrial Mesh Texture */}
+          <div
+            className="absolute inset-0 opacity-20 pointer-events-none"
+            style={{
+              backgroundImage: "radial-gradient(rgba(242, 240, 235, 0.35) 1px, transparent 1px)",
+              backgroundSize: "28px 28px",
+            }}
+          />
+          {/* Cinematic Dark Coal Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-earth-black via-earth-black/70 to-earth-black/35" />
+        </div>
+
+        {/* Hero Copy & Actions */}
+        <div className="relative z-10 max-w-content mx-auto w-full px-6 md:px-12 pb-14 md:pb-20 pt-32">
+          <div className="max-w-3xl">
+            {/* Overline with established date from siteFacts */}
+            <div className="flex items-center gap-2.5 mb-5">
+              <span className="w-2.5 h-2.5 bg-oxide-red inline-block" />
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-dust-tan font-medium">
+                Est. {SITE_FACTS.foundedYear} · {SITE_FACTS.yearsInBusinessLabel} Direct Execution
               </span>
             </div>
-          </div>
 
-          {/* Fallback: dark textured background simulating heavy industrial ambience */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse at 30% 60%, rgba(60,35,20,0.55) 0%, rgba(13,13,12,0) 70%), radial-gradient(ellipse at 70% 20%, rgba(30,25,15,0.4) 0%, rgba(13,13,12,0) 60%)",
-            }}
-          />
+            {/* Specific Headline naming actual operations */}
+            <h1 className="text-display-lg sm:text-[3.25rem] md:text-[3.75rem] font-medium text-iron-white tracking-tight leading-[0.96] mb-5">
+              Mining, rail and heavy civil works across Africa.
+            </h1>
 
-          {/* Subtle dot mesh texture */}
-          <div
-            className="absolute inset-0 opacity-[0.07] pointer-events-none"
-            style={{
-              backgroundImage:
-                "radial-gradient(rgba(242, 240, 235, 0.4) 1px, transparent 1px)",
-              backgroundSize: "32px 32px",
-            }}
-          />
+            {/* Concise Subtext: exactly 16 words (max 20 words) */}
+            <p className="text-body-lg text-dust-tan max-w-2xl mb-8 leading-relaxed font-normal">
+              Direct open-pit concessions, heavy-haul railway corridors, and turnkey processing plants operating across key African resource jurisdictions.
+            </p>
 
-          {/* Cinematic gradient — strong at bottom, fades toward top */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0C] via-[#0D0D0C]/80 to-[#0D0D0C]/30" />
-        </div>
-
-        {/* ── AMBER MARQUEE TICKER ── */}
-        <div className="absolute top-[72px] left-0 right-0 z-20 overflow-hidden border-y border-safety-amber/15 py-2.5 bg-[#0D0D0C]/40 backdrop-blur-sm">
-          <div className="marquee-track">
-            {/* Render twice so the loop is seamless */}
-            {[0, 1].map((pass) => (
-              <span
-                key={pass}
-                className="font-mono text-[10px] uppercase tracking-[0.25em] text-safety-amber whitespace-nowrap pr-0"
-                aria-hidden={pass === 1}
+            {/* Specific, Non-Duplicate CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/projects"
+                className="btn-primary !bg-oxide-red hover:!bg-earth-black text-iron-white text-xs py-3.5 px-7 font-mono uppercase tracking-wider font-semibold shadow-sm transition-colors"
               >
-                {TICKER_ITEMS.repeat(4)}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* ── HERO COPY & ACTIONS ── */}
-        <div className="relative z-10 max-w-content mx-auto w-full px-6 md:px-12 pb-16 md:pb-24 pt-40">
-          <div className="max-w-4xl">
-
-            {/* Overline */}
-            <ScrollReveal delay={0}>
-              <div className="flex items-center gap-2.5 mb-7">
-                <span className="w-2.5 h-2.5 bg-oxide-red inline-block" />
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-dust-tan font-medium">
-                  Est. {SITE_FACTS.foundedYear} · {SITE_FACTS.yearsInBusinessLabel} Direct Execution · Dubai, UAE
-                </span>
-              </div>
-            </ScrollReveal>
-
-            {/* Main headline — DM Serif Display */}
-            <ScrollReveal delay={80}>
-              <h1
-                className="text-iron-white leading-[0.95] mb-6"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(3rem, 7vw, 6.5rem)",
-                  fontWeight: 400,
-                  letterSpacing: "-0.02em",
-                }}
+                View active projects
+              </Link>
+              <Link
+                href="/capabilities"
+                className="btn-secondary !border-iron-white !text-iron-white hover:!bg-iron-white hover:!text-earth-black text-xs py-3.5 px-7 font-mono uppercase tracking-wider font-semibold transition-colors"
               >
-                We don&apos;t advise.
-                <br />
-                <span className="text-safety-amber">We extract.</span>
-              </h1>
-            </ScrollReveal>
-
-            {/* Subheading — Inter */}
-            <ScrollReveal delay={160}>
-              <p className="text-body-lg text-dust-tan/90 max-w-2xl mb-10 leading-relaxed font-normal">
-                Open-pit mining. Heavy-haul rail. Turnkey plants.{" "}
-                <span className="text-iron-white/70">
-                  Across {SITE_FACTS.countries} African jurisdictions — with our own fleet.
-                </span>
-              </p>
-            </ScrollReveal>
-
-            {/* CTA Buttons */}
-            <ScrollReveal delay={240}>
-              <div className="flex flex-wrap items-center gap-4">
-                <Link
-                  href="/projects"
-                  className="btn-pulse inline-flex items-center gap-2 bg-oxide-red text-iron-white text-xs py-3.5 px-8 font-mono uppercase tracking-wider font-semibold transition-colors hover:bg-[#8a2e1c]"
-                  style={{ transitionDuration: "200ms" }}
-                >
-                  View active projects
-                </Link>
-                <Link
-                  href="/capabilities"
-                  className="inline-flex items-center gap-2 border border-iron-white/40 text-iron-white/90 hover:border-safety-amber hover:text-safety-amber text-xs py-3.5 px-8 font-mono uppercase tracking-wider font-semibold transition-all duration-200"
-                  style={{
-                    boxShadow: "0 0 0 0 rgba(212,148,26,0)",
-                    transitionProperty: "color, border-color, box-shadow",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.boxShadow =
-                      "0 0 18px 2px rgba(212,148,26,0.18)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.boxShadow =
-                      "0 0 0 0 rgba(212,148,26,0)";
-                  }}
-                >
-                  See our services
-                </Link>
-              </div>
-            </ScrollReveal>
+                See our services
+              </Link>
+            </div>
           </div>
         </div>
-
-        {/* Thin amber accent line at very bottom of hero */}
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-safety-amber/60 via-safety-amber/20 to-transparent z-20" />
       </section>
 
-      {/* 2. Compact Stats Row (unchanged data, slightly refreshed styling) */}
-      <section className="w-full bg-[#111110] border-b border-slab-grey/10 text-iron-white py-5 md:py-6">
+      {/* 2. Single Stats Row directly under the hero (Kept ONCE on the page, imported from siteFacts) */}
+      <section className="w-full bg-[#181816] border-b border-slab-grey/20 text-iron-white py-5 md:py-6">
         <div className="max-w-content mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-slab-grey/10">
-            <div className="pt-4 md:pt-0 md:px-8 first:pl-0">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-quarry-grey block mb-1">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-slab-grey/15">
+            <div className="pt-4 md:pt-0">
+              <span className="font-mono text-xs uppercase tracking-wider text-quarry-grey block mb-1">
                 Fleet Capacity
               </span>
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-display text-3xl sm:text-4xl text-safety-amber" style={{ fontFamily: "var(--font-display)" }}>
+              <div className="flex items-baseline gap-2">
+                <span className="font-heading text-3xl sm:text-4xl font-semibold text-oxide-red">
                   {SITE_FACTS.fleetSize}
                 </span>
-                <span className="text-xs font-mono text-dust-tan/70">Machines</span>
+                <span className="text-xs font-mono text-dust-tan">Machines</span>
               </div>
             </div>
 
-            <div className="pt-4 md:pt-0 md:px-8">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-quarry-grey block mb-1">
+            <div className="pt-4 md:pt-0 md:pl-8">
+              <span className="font-mono text-xs uppercase tracking-wider text-quarry-grey block mb-1">
                 Jurisdictions
               </span>
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-display text-3xl sm:text-4xl text-iron-white" style={{ fontFamily: "var(--font-display)" }}>
+              <div className="flex items-baseline gap-2">
+                <span className="font-heading text-3xl sm:text-4xl font-semibold text-iron-white">
                   {SITE_FACTS.countries}
                 </span>
-                <span className="text-xs font-mono text-dust-tan/70">Countries</span>
+                <span className="text-xs font-mono text-dust-tan">Countries</span>
               </div>
             </div>
 
-            <div className="pt-4 md:pt-0 md:px-8">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-quarry-grey block mb-1">
-                Annual Volume
+            <div className="pt-4 md:pt-0 md:pl-8">
+              <span className="font-mono text-xs uppercase tracking-wider text-quarry-grey block mb-1">
+                Global Footprint
               </span>
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-display text-3xl sm:text-4xl text-iron-white" style={{ fontFamily: "var(--font-display)" }}>
-                  {SITE_FACTS.annualTonnesNumber}
+              <div className="flex items-baseline gap-2">
+                <span className="font-heading text-3xl sm:text-4xl font-semibold text-iron-white">
+                  {SITE_FACTS.continents}
                 </span>
-                <span className="text-xs font-mono text-dust-tan/70">Tonnes</span>
+                <span className="text-xs font-mono text-dust-tan">Continents</span>
               </div>
             </div>
 
-            <div className="pt-4 md:pt-0 md:px-8">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-quarry-grey block mb-1">
+            <div className="pt-4 md:pt-0 md:pl-8">
+              <span className="font-mono text-xs uppercase tracking-wider text-quarry-grey block mb-1">
                 Track Record
               </span>
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-display text-3xl sm:text-4xl text-safety-amber" style={{ fontFamily: "var(--font-display)" }}>
+              <div className="flex items-baseline gap-2">
+                <span className="font-heading text-3xl sm:text-4xl font-semibold text-oxide-red">
                   {SITE_FACTS.yearsInBusinessLabel}
                 </span>
+                <span className="text-xs font-mono text-dust-tan">Experience</span>
               </div>
             </div>
           </div>

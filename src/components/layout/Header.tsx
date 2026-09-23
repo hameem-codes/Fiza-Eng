@@ -19,16 +19,12 @@ export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setScrolled(scrollTop > 20);
-      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
+      setScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -40,12 +36,6 @@ export function Header() {
 
   return (
     <>
-      {/* Amber scroll progress bar */}
-      <div
-        aria-hidden="true"
-        style={{ width: `${scrollProgress}%` }}
-        className="scroll-progress-bar"
-      />
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 h-[72px] transition-all duration-300 px-6 md:px-12 flex items-center justify-between",

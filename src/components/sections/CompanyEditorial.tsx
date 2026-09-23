@@ -1,134 +1,70 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SITE_FACTS } from "@/lib/siteFacts";
 import { SITE_IMAGES } from "@/lib/images";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function CompanyEditorial() {
   return (
-    <section className="w-full py-14 md:py-20 bg-iron-white border-b border-slab-grey">
+    <section className="w-full py-11 md:py-16 bg-iron-white border-b border-slab-grey">
       <div className="max-w-content mx-auto px-6 md:px-12">
-        {/* Asymmetric 65 / 35 grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[13fr_7fr] gap-12 lg:gap-16 items-start">
-
-          {/* LEFT — Text block (65%) */}
-          <ScrollReveal delay={0}>
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="w-2 h-2 bg-oxide-red inline-block" />
-                <span className="text-label text-earth-black font-mono tracking-widest font-semibold uppercase">
-                  About Fiza Engineering
-                </span>
-              </div>
-
-              {/* DM Serif Display heading */}
-              <h2
-                className="text-earth-black leading-[1.05] mb-7"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(2rem, 3.5vw, 3rem)",
-                  fontWeight: 400,
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                Engineering heavy infrastructure and direct mineral supply chains across Africa.
-              </h2>
-
-              <p className="text-body-lg text-earth-black/80 leading-relaxed mb-5 font-normal max-w-2xl">
-                Founded in {SITE_FACTS.foundedYear} by Muhammed Farooghuddin, Fiza Engineering Corporation is an integrated industrial company headquartered in Dubai with principal operations across Africa. We develop mineral concessions, engineer heavy-haul railway corridors, build turnkey processing plants, and supply bulk commodities to global markets with direct operational control and our own heavy machinery fleet.
-              </p>
-
-              {/* Key fact list */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 border border-slab-grey mb-8">
-                {[
-                  { label: "Founded", value: String(SITE_FACTS.foundedYear) },
-                  { label: "Headquarters", value: "Dubai, UAE" },
-                  { label: "Active Countries", value: String(SITE_FACTS.countries) },
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    className={`px-5 py-4 ${i < 2 ? "border-b sm:border-b-0 sm:border-r border-slab-grey" : ""}`}
-                  >
-                    <span className="block font-mono text-[10px] uppercase tracking-widest text-quarry-grey mb-1">
-                      {item.label}
-                    </span>
-                    <span className="block font-heading text-lg font-semibold text-earth-black">
-                      {item.value}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pt-4 border-t border-slab-grey/60">
-                <Link
-                  href="/company"
-                  className="btn-primary text-xs py-3 px-7 inline-flex items-center gap-2 font-mono uppercase tracking-wider font-semibold hover:bg-oxide-red"
-                >
-                  See who runs this operation <span aria-hidden>→</span>
-                </Link>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Text Block (7 Columns) */}
+          <div className="lg:col-span-7">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-2 h-2 bg-oxide-red inline-block" />
+              <span className="text-label text-earth-black font-mono tracking-widest font-semibold">
+                About Fiza Engineering
+              </span>
             </div>
-          </ScrollReveal>
 
-          {/* RIGHT — Portrait (35%) */}
-          <ScrollReveal delay={120}>
-            <div className="flex flex-col">
-              {/* Image with amber border on top + right only */}
-              <div
-                className="relative h-[420px] sm:h-[480px] w-full bg-[#1A1A18] overflow-hidden"
-                style={{
-                  borderTop: "2px solid var(--safety-amber)",
-                  borderRight: "2px solid var(--safety-amber)",
-                  borderBottom: "1px solid var(--slab-grey)",
-                  borderLeft: "1px solid var(--slab-grey)",
-                }}
+            <h2 className="text-display-lg sm:text-[2.6rem] font-medium text-earth-black leading-[1.05] mb-6">
+              Engineering heavy infrastructure and direct mineral supply chains.
+            </h2>
+
+            {/* Exactly ONE paragraph of 51 words (50-60 words range) */}
+            <p className="text-body-lg text-earth-black/85 leading-relaxed mb-8 font-normal max-w-xl">
+              Founded in {SITE_FACTS.foundedYear} by Muhammed Farooghuddin, Fiza Engineering Corporation is an integrated industrial company headquartered in Dubai with principal operations across Africa. We develop mineral concessions, engineer heavy-haul railway corridors, build turnkey processing plants, and supply bulk commodities to global markets with direct operational control and our own heavy machinery fleet.
+            </p>
+
+            <div className="pt-4 border-t border-slab-grey/60">
+              <Link
+                href="/company"
+                className="btn-primary text-xs py-3 px-6 inline-flex items-center gap-2 font-mono uppercase tracking-wider font-semibold"
               >
-                {/* Placeholder label (replace with real portrait) */}
-                {/* TODO: OWNER TO SUPPLY — [FOUNDER PHOTO — Muhammed Farooghuddin, formal portrait] */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#1C1C1A]">
-                  <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-quarry-grey/50 block mb-1">
-                    Founder portrait
-                  </span>
-                  <span className="font-mono text-xs text-quarry-grey/30 text-center px-6">
-                    [FOUNDER PHOTO — Muhammed Farooghuddin, formal portrait]
-                  </span>
-                </div>
+                Read company profile <span>→</span>
+              </Link>
+            </div>
+          </div>
 
-                {/* If a real portrait exists in SITE_IMAGES, uncomment: */}
-                {/* <Image src={SITE_IMAGES.founderPortrait.src} alt="Muhammed Farooghuddin, Founder & CEO" fill sizes="35vw" className="img-cover" /> */}
+          {/* Right Image Block (5 Columns) */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative h-[380px] sm:h-[420px] w-full border border-slab-grey bg-slab-grey/40 shadow-sm overflow-hidden">
+              <Image
+                src={SITE_IMAGES.editorialMining.src}
+                alt={SITE_IMAGES.editorialMining.alt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="img-cover object-center transition-transform duration-700 hover:scale-[1.02]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-earth-black/75 via-transparent to-transparent pointer-events-none" />
 
-                {/* Name overlay at bottom */}
-                <div className="absolute bottom-0 left-0 right-0 bg-[#0D0D0C]/90 backdrop-blur-sm px-4 py-3 border-t border-slab-grey/20">
-                  <span className="block font-mono text-[10px] uppercase tracking-widest text-safety-amber">
-                    Muhammed Farooghuddin
-                  </span>
-                  <span className="block font-mono text-xs text-dust-tan/70 mt-0.5">
-                    Founder & Chief Executive Officer
-                  </span>
-                </div>
-              </div>
-
-              {/* Pull-quote below the image */}
-              <div className="mt-6 pl-4 border-l-2 border-safety-amber">
-                <p
-                  className="text-earth-black/85 leading-snug"
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontStyle: "italic",
-                    fontSize: "clamp(1rem, 1.4vw, 1.2rem)",
-                  }}
-                >
-                  &ldquo;We built this company with machines, not meetings.&rdquo;
-                </p>
-                <span className="block font-mono text-[10px] uppercase tracking-widest text-quarry-grey mt-2">
-                  — M. Farooghuddin, CEO
+              <div className="absolute bottom-4 left-4 right-4 bg-earth-black/90 backdrop-blur-sm p-3.5 text-iron-white border border-slab-grey/20">
+                <span className="block font-mono text-[10px] uppercase text-dust-tan tracking-wider">
+                  Our fleet
+                </span>
+                <span className="text-xs font-mono text-iron-white block mt-0.5">
+                  {SITE_FACTS.fleetSize} company-owned machines active across {SITE_FACTS.continents} continents.
                 </span>
               </div>
             </div>
-          </ScrollReveal>
+
+            {/* Asymmetric Floating Established Tag */}
+            <div className="hidden sm:block absolute -top-3 -right-3 bg-iron-white border border-slab-grey px-4 py-2.5 shadow-sm">
+              <span className="font-mono text-xl font-bold text-oxide-red block leading-none">{SITE_FACTS.foundedYear}</span>
+              <span className="font-mono text-[9px] uppercase text-quarry-grey tracking-wider mt-0.5 block">Founded</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

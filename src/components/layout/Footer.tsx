@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { SITE_FACTS } from "@/lib/siteFacts";
 
 export function Footer() {
@@ -199,58 +199,20 @@ export function Footer() {
         </div>
 
         {/* Tier 3: Copyright & Policy Links */}
-        <div className="pt-8 border-t border-slab-grey/20">
-          {/* Social media icons row */}
-          <div className="flex items-center gap-4 mb-6">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-quarry-grey mr-2">Follow</span>
-            <a
-              href="https://linkedin.com/company/fiza-engineering"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Fiza Engineering on LinkedIn"
-              className="text-quarry-grey hover:text-iron-white transition-colors p-1.5 border border-slab-grey/20 hover:border-slab-grey/50"
-            >
-              <Linkedin size={14} />
-            </a>
-            <a
-              href="https://twitter.com/fizaengineering"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Fiza Engineering on X / Twitter"
-              className="text-quarry-grey hover:text-iron-white transition-colors p-1.5 border border-slab-grey/20 hover:border-slab-grey/50"
-            >
-              <Twitter size={14} />
-            </a>
-            <a
-              href="#"
-              aria-label="Fiza Engineering on YouTube (placeholder)"
-              className="text-quarry-grey hover:text-iron-white transition-colors p-1.5 border border-slab-grey/20 hover:border-slab-grey/50"
-            >
-              <Youtube size={14} />
-            </a>
+        <div className="pt-8 border-t border-slab-grey/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs font-mono text-quarry-grey">
+          <div>
+            © {SITE_FACTS.foundedYear + SITE_FACTS.yearsInBusiness} {SITE_FACTS.companyName}. Established {SITE_FACTS.foundedYear}. All rights reserved.
           </div>
-
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs font-mono text-quarry-grey">
-            <div className="space-y-1">
-              <div>
-                &copy; {SITE_FACTS.foundedYear + SITE_FACTS.yearsInBusiness} {SITE_FACTS.companyName}. All rights reserved.
-              </div>
-              <div className="text-quarry-grey/50 text-[10px]">
-                {/* TODO: OWNER TO SUPPLY — Company Registration Number */}
-                Registered: DIFC, Dubai, UAE &nbsp;·&nbsp; Reg. No. [OWNER TO SUPPLY] &nbsp;·&nbsp; Established {SITE_FACTS.foundedYear}
-              </div>
-            </div>
-            <div className="flex flex-wrap items-center gap-6">
-              <Link href="/privacy" className="hover:text-iron-white transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="hover:text-iron-white transition-colors">
-                Terms of Operations
-              </Link>
-              <Link href="/achievements" className="hover:text-iron-white transition-colors">
-                Certifications &amp; Awards
-              </Link>
-            </div>
+          <div className="flex flex-wrap items-center gap-6">
+            <Link href="/privacy" className="hover:text-iron-white transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-iron-white transition-colors">
+              Terms of Operations
+            </Link>
+            <Link href="/achievements" className="hover:text-iron-white transition-colors">
+              Certifications & Awards
+            </Link>
           </div>
         </div>
       </div>
