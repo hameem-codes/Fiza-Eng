@@ -1,8 +1,31 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { CAPABILITIES } from "@/lib/constants";
-import { SectionDivider } from "@/components/ui/SectionDivider";
+
+export const metadata: Metadata = {
+  title: "Engineering Capabilities | Fiza Engineering",
+  description:
+    "Explore our eight core divisions: open-pit mining services, physical mineral trading, heavy rail, turnkey processing plants, and hybrid power systems.",
+  alternates: {
+    canonical: "/capabilities",
+  },
+  openGraph: {
+    title: "Engineering Capabilities | Fiza Engineering",
+    description:
+      "Explore our eight core divisions: open-pit mining services, physical mineral trading, heavy rail, turnkey processing plants, and hybrid power systems.",
+    url: "https://fiza-one.vercel.app/capabilities",
+    siteName: "Fiza Engineering Corporation",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Engineering Capabilities | Fiza Engineering",
+    description:
+      "Explore our eight core divisions: open-pit mining services, physical mineral trading, heavy rail, turnkey processing plants, and hybrid power systems.",
+  },
+};
 
 export default function CapabilitiesPage() {
   return (
@@ -37,6 +60,7 @@ export default function CapabilitiesPage() {
                       src={cap.image}
                       alt={cap.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="img-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     />
                     <div className="absolute top-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] tracking-wider px-2 py-0.5">
@@ -75,7 +99,7 @@ export default function CapabilitiesPage() {
                     href={`/capabilities/${cap.slug}`}
                     className="text-label font-bold text-oxide-red hover:underline uppercase tracking-wider font-mono inline-flex items-center gap-1"
                   >
-                    Division Dossier →
+                    Division Overview →
                   </Link>
                 </div>
               </div>

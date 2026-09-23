@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ACHIEVEMENTS } from "@/lib/constants";
 import { Tag } from "@/components/ui/Tag";
+import { SITE_FACTS } from "@/lib/siteFacts";
 
 const CATEGORIES = ["ALL", "Certifications", "Awards", "Milestones", "Partnerships"];
 
@@ -26,7 +27,7 @@ export default function AchievementsPage() {
             Corporate Achievements
           </h1>
           <p className="text-body-lg text-quarry-grey max-w-2xl leading-relaxed">
-            International ISO safety accreditations, continental infrastructure awards, and high-tonnage mining milestones earned through 25 years of field discipline.
+            International ISO safety accreditations, continental infrastructure awards, and high-tonnage mining milestones earned through {SITE_FACTS.yearsInBusinessLower} of field discipline.
           </p>
 
           {/* Filter Categories */}
@@ -58,24 +59,25 @@ export default function AchievementsPage() {
                 {/* Square pin */}
                 <div className="absolute -left-[41px] md:-left-[73px] top-1.5 w-4 h-4 bg-earth-black group-hover:bg-oxide-red transition-colors" />
 
-                <div className="bg-iron-white border border-slab-grey p-8 max-w-3xl hover:border-earth-black transition-colors">
-                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3 pb-3 border-b border-slab-grey">
-                    <span className="text-display-lg font-medium text-earth-black leading-none">
+                <div className="bg-iron-white border border-slab-grey p-8 max-w-3xl group-hover:border-earth-black transition-colors">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span className="font-mono text-xs text-oxide-red uppercase tracking-wider font-semibold">
+                      {item.category}
+                    </span>
+                    <span className="font-mono text-xs text-quarry-grey font-bold">
                       {item.year}
                     </span>
-                    <div className="flex items-center gap-2">
-                      <Tag active>{item.category}</Tag>
-                      <span className="font-mono text-xs text-quarry-grey uppercase">
-                        {item.organization}
-                      </span>
-                    </div>
                   </div>
 
-                  <h3 className="text-heading-2 font-medium text-earth-black mb-3">
+                  <h2 className="text-heading-2 font-medium text-earth-black mb-2">
                     {item.title}
-                  </h3>
+                  </h2>
 
-                  <p className="text-body text-quarry-grey leading-relaxed">
+                  <span className="text-label text-quarry-grey font-mono uppercase tracking-wider block mb-4">
+                    Audited by: {item.organization}
+                  </span>
+
+                  <p className="text-body-sm text-quarry-grey leading-relaxed">
                     {item.description}
                   </p>
                 </div>

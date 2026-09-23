@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { NEWS_ARTICLES } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 
@@ -15,6 +16,53 @@ export function generateStaticParams() {
   return NEWS_ARTICLES.map((a) => ({
     slug: a.slug,
   }));
+}
+
+export function generateMetadata({ params }: Props): Metadata {
+  const article = NEWS_ARTICLES.find((a) => a.slug === params.slug);
+  if (!article) {
+    return {
+      title: "News Dispatch | Fiza Engineering",
+    };
+  }
+
+  const fullTitle = `${article.headline.slice(0, 40)} | Fiza Engineering`;
+  const title = fullTitle.length <= 60 ? fullTitle : `${article.headline.slice(0, 38)} | Fiza Engineering`;
+
+  const rawDesc = article.leadParagraph;
+  const description = rawDesc.length >= 120 && rawDesc.length <= 155
+    ? rawDesc
+    : rawDesc.length > 155
+    ? `${rawDesc.slice(0, 151)}...`
+    : `${rawDesc} Official news from Fiza Engineering Corporation.`.slice(0, 150);
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/news/${article.slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://fiza-one.vercel.app/news/${article.slug}`,
+      siteName: "Fiza Engineering Corporation",
+      type: "article",
+      images: [
+        {
+          url: article.image,
+          width: 1200,
+          height: 630,
+          alt: article.headline,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 }
 
 export default function ArticlePage({ params }: Props) {
@@ -58,10 +106,11 @@ export default function ArticlePage({ params }: Props) {
               alt={article.headline}
               fill
               priority
+              sizes="100vw"
               className="img-cover"
             />
             <div className="absolute bottom-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] px-2.5 py-1 uppercase">
-              PHOTO ARCHIVE // CORRESPONDENCE DISPATCH
+              FIELD PHOTOGRAPHIC ARCHIVE · OPERATIONAL DISPATCH
             </div>
           </div>
         </div>
@@ -102,48 +151,52 @@ export default function ArticlePage({ params }: Props) {
               </div>
 
               <div className="mt-12 pt-8 border-t border-slab-grey flex items-center justify-between text-xs font-mono text-quarry-grey">
-                <span>FIZA CORPORATE DISPATCH DESK</span>
-                <Link href="/news" className="text-oxide-red font-bold uppercase hover:underline">
-                  More Articles →
-                </Link>
+                <span>COMMUNICATIONS DESK</span>
+                <span>DOC REF: FEC-DISPATCH-{article.slug.toUpperCase().slice(0, 10)}</span>
               </div>
             </article>
 
             {/* Sidebar (4 Columns) */}
             <aside className="lg:col-span-4 flex flex-col space-y-8">
-              <div className="bg-[#EBE8E0] border border-slab-grey p-6">
-                <span className="text-label text-earth-black font-mono uppercase tracking-wider block mb-4 pb-2 border-b border-slab-grey">
-                  Related Dispatches
+              <div className="bg-[#EBE8E0] p-6 border border-slab-grey font-mono text-xs">
+                <span className="text-label text-earth-black uppercase tracking-wider block mb-3 pb-2 border-b border-slab-grey font-bold">
+                  Corporate Dispatches
                 </span>
-                <div className="space-y-6">
-                  {related.map((item) => (
-                    <Link
-                      key={item.id}
-                      href={`/news/${item.slug}`}
-                      className="group block"
-                    >
-                      <span className="font-mono text-[10px] text-oxide-red uppercase tracking-wider block mb-1">
-                        {item.category}
-                      </span>
-                      <h4 className="text-body-sm font-medium text-earth-black group-hover:text-oxide-red transition-colors leading-snug">
-                        {item.headline}
-                      </h4>
-                    </Link>
-                  ))}
-                </div>
+                <p className="text-quarry-grey leading-relaxed mb-4">
+                  For press inquiries, technical documentation requests, or photographic assets, contact our corporate communications desk.
+                </p>
+                <Link
+                  href="/contact"
+                  className="text-label font-bold text-oxide-red uppercase tracking-wider hover:underline block"
+                >
+                  Media & Public Relations →
+                </Link>
               </div>
 
-              <div className="bg-coal-dark text-iron-white p-6 border border-slab-grey">
-                <span className="text-label text-dust-tan font-mono uppercase tracking-wider block mb-2">
-                  Media Contact
-                </span>
-                <p className="text-quarry-grey text-xs leading-relaxed mb-4">
-                  For press inquiries, site inspection credentials, and technical whitepapers:
-                </p>
-                <span className="text-mono text-xs text-iron-white block font-semibold">
-                  press@fizaengineering.com
-                </span>
-              </div>
+              {/* Related Stories */}
+              {related.length > 0 && (
+                <div>
+                  <span className="text-label text-earth-black font-mono uppercase tracking-wider block mb-4">
+                    Related Dispatches
+                  </span>
+                  <div className="space-y-4">
+                    {related.map((rel) => (
+                      <Link
+                        key={rel.id}
+                        href={`/news/${rel.slug}`}
+                        className="group block p-4 border border-slab-grey bg-iron-white hover:border-earth-black transition-colors"
+                      >
+                        <span className="font-mono text-[10px] text-oxide-red uppercase tracking-wider block mb-1">
+                          {rel.category}
+                        </span>
+                        <h4 className="text-heading-3 font-medium text-earth-black text-sm group-hover:text-oxide-red transition-colors leading-snug">
+                          {rel.headline}
+                        </h4>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </aside>
           </div>
         </div>

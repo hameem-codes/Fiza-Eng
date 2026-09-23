@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { SITE_FACTS } from "@/lib/siteFacts";
+import { SITE_IMAGES } from "@/lib/images";
 
 export function CompanyEditorial() {
   return (
@@ -18,18 +20,18 @@ export function CompanyEditorial() {
             </div>
 
             <h2 className="text-display-lg sm:text-[3rem] font-medium text-earth-black leading-[1.0] mb-8">
-              Turning complex industrial ground into credible, deliverable opportunities.
+              Turning complex industrial terrain into dependable, executed operations.
             </h2>
 
             <div className="space-y-6 text-quarry-grey text-body leading-relaxed max-w-editorial">
               <p className="text-earth-black font-medium text-body-lg leading-relaxed">
-                Fiza Engineering Corporation is a multidisciplinary industrial company headquartered in the Middle East, with a strong focus on Africa. We develop mining and infrastructure projects, supply minerals and heavy industrial solutions to international markets.
+                Fiza Engineering Corporation is a multidisciplinary industrial company headquartered in the Middle East, with an operational focus across Africa. We develop mining and infrastructure projects, supply minerals and deliver heavy industrial solutions to international markets.
               </p>
               <p>
-                We are more than a commercial intermediary. We combine active mining interests, equipment manufacturing, engineering capability and international project development to turn complex industrial requirements into credible, deliverable opportunities.
+                We combine active mining interests, equipment manufacturing, engineering capability and international project development to turn complex industrial requirements into dependable, operational assets.
               </p>
               <p className="border-l-2 border-oxide-red pl-4 text-earth-black/90 italic text-sm">
-                Founded by <strong className="font-semibold text-earth-black">Muhammed Farooghuddin</strong>, with over four decades of experience in international business and mineral trading, Fiza has developed sovereign concessions, heavy rail logistics, and large-scale plant operations with unyielding operational discipline.
+                Founded by <strong className="font-semibold text-earth-black">Muhammed Farooghuddin</strong>, with over four decades of experience in international business and mineral trading, Fiza has developed strategic concessions, heavy rail logistics, and large-scale plant operations with rigorous operational discipline.
               </p>
             </div>
 
@@ -53,8 +55,8 @@ export function CompanyEditorial() {
           <div className="lg:col-span-5 relative">
             <div className="relative h-[420px] sm:h-[480px] w-full border border-slab-grey bg-slab-grey/40 shadow-sm overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1200&auto=format&fit=crop"
-                alt="Active heavy earthmoving and mining infrastructure in Africa"
+                src={SITE_IMAGES.editorialMining.src}
+                alt={SITE_IMAGES.editorialMining.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="img-cover object-center transition-transform duration-700 hover:scale-[1.02]"
@@ -63,17 +65,17 @@ export function CompanyEditorial() {
               
               <div className="absolute bottom-4 left-4 right-4 bg-earth-black/90 backdrop-blur-sm p-4 text-iron-white border border-slab-grey/20">
                 <span className="block font-mono text-[10px] uppercase text-dust-tan tracking-wider">
-                  Field Operations // Concession Development
+                  Field Operations · Concession Development
                 </span>
                 <span className="text-body-sm font-medium text-iron-white block mt-1">
-                  100% owned fleet of over 450 machines active across 4 continents.
+                  100% owned fleet of over {SITE_FACTS.fleetSize} machines active across {SITE_FACTS.continents} continents.
                 </span>
               </div>
             </div>
 
             {/* Asymmetric Floating Stat Tag */}
             <div className="hidden sm:block absolute -top-4 -right-4 bg-iron-white border border-slab-grey p-4 shadow-sm">
-              <span className="font-heading text-2xl font-bold text-oxide-red block">1994</span>
+              <span className="font-heading text-2xl font-bold text-oxide-red block">{SITE_FACTS.foundedYear}</span>
               <span className="font-mono text-[10px] uppercase text-quarry-grey tracking-wider">Established</span>
             </div>
           </div>

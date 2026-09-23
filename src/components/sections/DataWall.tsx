@@ -39,7 +39,7 @@ export function DataWall() {
               Vertically integrated operations.
             </h3>
             <p className="text-quarry-grey text-body-sm leading-relaxed">
-              We own 100% of our fleet machinery, operate our own logistics corridors, and manage extraction concessions directly. No intermediaries, no delegation — end-to-end operational control.
+              We own 100% of our fleet machinery, operate our own logistics corridors, and manage extraction concessions directly through end-to-end operational control.
             </p>
           </div>
         </div>

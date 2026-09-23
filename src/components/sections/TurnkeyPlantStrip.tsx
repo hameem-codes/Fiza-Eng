@@ -2,31 +2,36 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SectionDivider } from "@/components/ui/SectionDivider";
+import { SITE_IMAGES } from "@/lib/images";
 
 const PLANT_TYPES = [
   {
     title: "1,500 TPH Primary Jaw Crushing Circuit",
     category: "Crushing & Screening",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800&auto=format&fit=crop",
-    href: "/products"
+    image: SITE_IMAGES.turnkeyStrip.primaryCrushing.src,
+    alt: SITE_IMAGES.turnkeyStrip.primaryCrushing.alt,
+    href: "/products?category=Turnkey+Plant+Modules"
   },
   {
     title: "Modular Dense Media Separation (DMS) Unit",
     category: "Beneficiation",
-    image: "https://images.unsplash.com/photo-1615680022647-99c397cbcaea?w=800&q=80",
-    href: "/products"
+    image: SITE_IMAGES.turnkeyStrip.gravitySeparation.src,
+    alt: SITE_IMAGES.turnkeyStrip.gravitySeparation.alt,
+    href: "/products?category=Turnkey+Plant+Modules"
   },
   {
     title: "Heavy Ball Mill & Dynamic Cyclone Station",
     category: "Grinding Circuits",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop",
-    href: "/products"
+    image: SITE_IMAGES.turnkeyStrip.grainSilo.src,
+    alt: SITE_IMAGES.turnkeyStrip.grainSilo.alt,
+    href: "/products?category=Turnkey+Plant+Modules"
   },
   {
     title: "60,000 MT Aerated Grain Terminal & Elevator",
     category: "Agro-Processing",
-    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop",
-    href: "/products"
+    image: SITE_IMAGES.turnkeyStrip.slurryPumps.src,
+    alt: SITE_IMAGES.turnkeyStrip.slurryPumps.alt,
+    href: "/products?category=Turnkey+Plant+Modules"
   }
 ];
 
@@ -63,8 +68,9 @@ export function TurnkeyPlantStrip() {
               <div className="relative aspect-[16/11] w-full overflow-hidden bg-slab-grey mb-3">
                 <Image
                   src={plant.image}
-                  alt={plant.title}
+                  alt={plant.alt}
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="img-cover transition-transform duration-300 group-hover:scale-[1.03]"
                 />
               </div>

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { SOCIAL_POSTS } from "@/lib/constants";
 
-const PLATFORMS = ["ALL", "DISPATCH // MALI", "FIELD LOG // DRC", "LOGISTICS // SIKASSO"];
+const PLATFORMS = ["ALL", "DISPATCH: MALI", "FIELD LOG: DRC", "LOGISTICS: SIKASSO"];
 
 export default function SocialPage() {
   const [activePlatform, setActivePlatform] = useState("ALL");
@@ -76,6 +76,7 @@ export default function SocialPage() {
                     src={post.image}
                     alt={post.platform}
                     fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="img-cover"
                   />
                   <div className="absolute bottom-2 left-2 bg-earth-black/85 text-iron-white font-mono text-[9px] px-2 py-0.5 uppercase">

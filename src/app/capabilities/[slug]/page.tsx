@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { CAPABILITIES, PROJECTS, PRODUCTS } from "@/lib/constants";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 
@@ -15,6 +16,55 @@ export function generateStaticParams() {
   return CAPABILITIES.map((c) => ({
     slug: c.slug,
   }));
+}
+
+export function generateMetadata({ params }: Props): Metadata {
+  const capability = CAPABILITIES.find((c) => c.slug === params.slug);
+  if (!capability) {
+    return {
+      title: "Division Overview | Fiza Engineering",
+    };
+  }
+
+  // Format: Page Name | Fiza Engineering (max 60 chars)
+  const fullTitle = `${capability.title} | Fiza Engineering`;
+  const title = fullTitle.length <= 60 ? fullTitle : `${capability.title.slice(0, 38)} | Fiza Engineering`;
+
+  // Description: 120-155 characters
+  const rawDesc = `${capability.tagline} ${capability.description}`;
+  const description = rawDesc.length >= 120 && rawDesc.length <= 155
+    ? rawDesc
+    : rawDesc.length > 155
+    ? `${rawDesc.slice(0, 151)}...`
+    : `${rawDesc} Engineered for demanding remote African operations.`.slice(0, 150);
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/capabilities/${capability.slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://fiza-one.vercel.app/capabilities/${capability.slug}`,
+      siteName: "Fiza Engineering Corporation",
+      type: "website",
+      images: [
+        {
+          url: capability.image,
+          width: 1200,
+          height: 630,
+          alt: capability.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 }
 
 export default function CapabilityDetailPage({ params }: Props) {
@@ -37,6 +87,7 @@ export default function CapabilityDetailPage({ params }: Props) {
           alt={capability.title}
           fill
           priority
+          sizes="100vw"
           className="img-cover object-center"
         />
         <div className="dark-overlay-heavy" />
@@ -155,6 +206,7 @@ export default function CapabilityDetailPage({ params }: Props) {
                     src={proj.image}
                     alt={proj.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="img-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </div>
@@ -173,23 +225,23 @@ export default function CapabilityDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Related Products / Plant Modules */}
+      {/* Related Equipment */}
       <section className="w-full bg-[#EBE8E0] py-20">
         <div className="max-w-content mx-auto px-6 md:px-12">
           <div className="flex justify-between items-end mb-12">
             <div>
               <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
-                Deployment Machinery
+                Plant & Equipment
               </span>
               <h2 className="text-heading-1 font-medium text-earth-black">
-                Featured Fleet & Modules
+                Machinery Deployed in Sector
               </h2>
             </div>
             <Link
               href="/products"
               className="text-label font-bold text-earth-black hover:text-oxide-red uppercase tracking-wider font-mono"
             >
-              All Machinery →
+              Equipment Catalog →
             </Link>
           </div>
 
@@ -205,18 +257,19 @@ export default function CapabilityDetailPage({ params }: Props) {
                     src={prod.heroImage}
                     alt={prod.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="img-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </div>
-                <span className="font-mono text-xs text-quarry-grey uppercase tracking-wider block mb-1">
+                <span className="font-mono text-xs text-oxide-red uppercase tracking-wider block mb-1">
                   {prod.modelNumber}
                 </span>
                 <h3 className="text-heading-3 font-medium text-earth-black group-hover:text-oxide-red transition-colors mb-2">
                   {prod.name}
                 </h3>
-                <span className="text-xs font-mono font-bold text-oxide-red uppercase tracking-wider">
-                  Technical Specifications →
-                </span>
+                <p className="text-body-sm text-quarry-grey leading-relaxed">
+                  {prod.overview}
+                </p>
               </Link>
             ))}
           </div>

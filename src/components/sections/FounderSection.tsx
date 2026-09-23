@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { SITE_FACTS } from "@/lib/siteFacts";
 
 export function FounderSection() {
   return (
@@ -71,7 +72,7 @@ export function FounderSection() {
             <div className="relative z-10 pt-6 border-t border-slab-grey/20 space-y-4 font-mono text-xs text-dust-tan">
               <div className="flex justify-between items-center">
                 <span className="text-quarry-grey">Established</span>
-                <span className="text-iron-white font-semibold">1994</span>
+                <span className="text-iron-white font-semibold">{SITE_FACTS.foundedYear}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-quarry-grey">Executive Base</span>

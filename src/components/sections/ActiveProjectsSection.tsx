@@ -22,7 +22,7 @@ export function ActiveProjectsSection() {
             </h2>
           </div>
           <p className="text-body-sm text-quarry-grey max-w-md">
-            Direct operational investments combining sovereign concessions, heavy machinery ownership, and dedicated transport infrastructure.
+            Direct operational investments combining strategic concessions, heavy machinery ownership, and dedicated transport infrastructure.
           </p>
         </div>
 
@@ -69,29 +69,26 @@ export function ActiveProjectsSection() {
                     {project.description}
                   </p>
 
-                  {/* Key Operational Highlights */}
-                  <div className="bg-[#EBE8DF] border border-slab-grey/60 p-4 space-y-2 mb-2 font-mono text-xs text-earth-black">
+                  <div className="space-y-2.5 border-t border-slab-grey/40 pt-5">
                     {project.keyDetails.map((detail, idx) => (
-                      <div key={idx} className="flex items-start gap-2.5">
-                        <CheckCircle2 size={14} className="text-oxide-red flex-shrink-0 mt-0.5" />
-                        <span className="leading-snug">{detail}</span>
+                      <div key={idx} className="flex items-start gap-2.5 text-xs text-earth-black font-mono">
+                        <CheckCircle2 size={14} className="text-oxide-red mt-0.5 shrink-0" />
+                        <span>{detail}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
 
-              {/* Card Footer Link */}
-              <div className="px-6 md:px-8 pb-6 pt-2 border-t border-slab-grey/40 flex items-center justify-between">
+              {/* Bottom Card Footer */}
+              <div className="p-6 md:px-8 md:pb-8 pt-0">
                 <Link
                   href="/projects"
-                  className="text-label font-mono font-bold text-earth-black uppercase tracking-wider group-hover:text-oxide-red transition-colors inline-flex items-center gap-1.5"
+                  className="w-full bg-[#EAE7DF] border border-slab-grey hover:bg-earth-black hover:text-iron-white hover:border-earth-black transition-colors font-mono text-xs uppercase font-semibold py-3 px-4 flex items-center justify-between text-earth-black group-hover:bg-oxide-red group-hover:text-iron-white group-hover:border-oxide-red"
                 >
-                  Portfolio Details <ArrowRight size={14} />
+                  <span>Explore Project Specs</span>
+                  <ArrowRight size={14} />
                 </Link>
-                <span className="text-[11px] font-mono text-quarry-grey">
-                  Fiza Concessions
-                </span>
               </div>
             </div>
           ))}

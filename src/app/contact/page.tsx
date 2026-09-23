@@ -43,7 +43,7 @@ export default function ContactPage() {
             Direct Commercial Contact
           </h1>
           <p className="text-body-lg text-quarry-grey max-w-2xl leading-relaxed">
-            Reach our engineering dispatch offices and commodity trading desks across Africa and our international treasury hub in Dubai.
+            Reach our engineering project offices and commodity trading centers across Africa and our international treasury hub in Dubai.
           </p>
         </div>
       </section>
@@ -104,7 +104,7 @@ export default function ContactPage() {
               {submitted ? (
                 <div className="p-8 bg-[#EBE8E0] border-l-4 border-oxide-red font-mono">
                   <h3 className="font-sans text-heading-3 font-medium text-earth-black mb-2">
-                    Inquiry Transmitted to Dispatch Desk
+                    Inquiry Received by Project Engineering Team
                   </h3>
                   <p className="text-body-sm text-quarry-grey leading-relaxed mb-6 font-sans">
                     Your request has been routed to the relevant technical division. A senior project engineer will review specifications and respond within 24 operational hours.
@@ -135,7 +135,7 @@ export default function ContactPage() {
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                     />
                     <Input
-                      label="Organization / Sovereign Entity"
+                      label="Organization / Company / Ministry"
                       required
                       placeholder="e.g. Societe Miniere de Kayes"
                       value={formData.company}
@@ -199,7 +199,7 @@ export default function ContactPage() {
 
                   <div className="pt-4">
                     <Button type="submit" variant="primary" className="w-full md:w-auto">
-                      Transmit Inquiry to Operations Desk →
+                      Submit Operational Inquiry →
                     </Button>
                   </div>
                 </form>

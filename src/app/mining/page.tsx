@@ -1,10 +1,35 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { AfricaMiningMap } from "@/components/maps/AfricaMiningMap";
 import { MINERALS } from "@/lib/constants";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import { Tag } from "@/components/ui/Tag";
+import { SITE_IMAGES } from "@/lib/images";
+
+export const metadata: Metadata = {
+  title: "Mining Concessions & Ports | Fiza Engineering",
+  description:
+    "Direct extraction concessions and logistical transport corridors across Mali, the Democratic Republic of Congo, and Madagascar coastal terminals.",
+  alternates: {
+    canonical: "/mining",
+  },
+  openGraph: {
+    title: "Mining Concessions & Ports | Fiza Engineering",
+    description:
+      "Direct extraction concessions and logistical transport corridors across Mali, the Democratic Republic of Congo, and Madagascar coastal terminals.",
+    url: "https://fiza-one.vercel.app/mining",
+    siteName: "Fiza Engineering Corporation",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mining Concessions & Ports | Fiza Engineering",
+    description:
+      "Direct extraction concessions and logistical transport corridors across Mali, the Democratic Republic of Congo, and Madagascar coastal terminals.",
+  },
+};
 
 export default function MiningPage() {
   return (
@@ -40,7 +65,7 @@ export default function MiningPage() {
         </div>
       </section>
 
-      {/* Country-Specific Operational Dossiers */}
+      {/* Country-Specific Operational Profiles */}
       <section className="w-full bg-iron-white py-20 md:py-28 border-b border-slab-grey">
         <div className="max-w-content mx-auto px-6 md:px-12">
           <div className="mb-16">
@@ -48,18 +73,18 @@ export default function MiningPage() {
               Territorial Breakdown
             </span>
             <h2 className="text-display-lg font-medium text-earth-black leading-[0.95]">
-              Sovereign Operations
+              Concession Operations
             </h2>
           </div>
 
           <div className="space-y-16">
-            {/* Mali Dossier */}
+            {/* Mali Operational Profile */}
             <div id="mali" className="border border-slab-grey p-8 md:p-12 bg-[#EBE8E0]">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div className="lg:col-span-7">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="font-mono text-xs text-oxide-red uppercase tracking-wider font-bold">
-                      JURISDICTION 01 // WEST AFRICA
+                      JURISDICTION 01 · WEST AFRICA
                     </span>
                     <Tag active>ACTIVE EXTRACTION</Tag>
                   </div>
@@ -86,22 +111,23 @@ export default function MiningPage() {
                 </div>
                 <div className="lg:col-span-5 relative aspect-[16/10] bg-slab-grey border border-slab-grey">
                   <Image
-                    src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1200&auto=format&fit=crop"
-                    alt="Mali operations"
+                    src={SITE_IMAGES.miningPage.mali.src}
+                    alt={SITE_IMAGES.miningPage.mali.alt}
                     fill
+                    sizes="(max-width: 1024px) 100vw, 42vw"
                     className="img-cover"
                   />
                 </div>
               </div>
             </div>
 
-            {/* DRC Dossier */}
+            {/* DRC Operational Profile */}
             <div id="drc" className="border border-slab-grey p-8 md:p-12 bg-[#EBE8E0]">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div className="lg:col-span-7">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="font-mono text-xs text-oxide-red uppercase tracking-wider font-bold">
-                      JURISDICTION 02 // CENTRAL AFRICA
+                      JURISDICTION 02 · CENTRAL AFRICA
                     </span>
                     <Tag active>ACTIVE EXTRACTION</Tag>
                   </div>
@@ -128,22 +154,23 @@ export default function MiningPage() {
                 </div>
                 <div className="lg:col-span-5 relative aspect-[16/10] bg-slab-grey border border-slab-grey">
                   <Image
-                    src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop"
-                    alt="DRC mining operations"
+                    src={SITE_IMAGES.miningPage.drc.src}
+                    alt={SITE_IMAGES.miningPage.drc.alt}
                     fill
+                    sizes="(max-width: 1024px) 100vw, 42vw"
                     className="img-cover"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Madagascar Dossier */}
+            {/* Madagascar Operational Profile */}
             <div id="madagascar" className="border border-slab-grey p-8 md:p-12 bg-[#EBE8E0]">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div className="lg:col-span-7">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="font-mono text-xs text-oxide-red uppercase tracking-wider font-bold">
-                      JURISDICTION 03 // EAST AFRICA MARITIME
+                      JURISDICTION 03 · EAST AFRICA MARITIME
                     </span>
                     <Tag status="COMPLETED">RAIL OPERATIONAL</Tag>
                   </div>
@@ -170,9 +197,10 @@ export default function MiningPage() {
                 </div>
                 <div className="lg:col-span-5 relative aspect-[16/10] bg-slab-grey border border-slab-grey">
                   <Image
-                    src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=1200&q=80"
-                    alt="Madagascar rail corridor"
+                    src={SITE_IMAGES.miningPage.madagascar.src}
+                    alt={SITE_IMAGES.miningPage.madagascar.alt}
                     fill
+                    sizes="(max-width: 1024px) 100vw, 42vw"
                     className="img-cover"
                   />
                 </div>

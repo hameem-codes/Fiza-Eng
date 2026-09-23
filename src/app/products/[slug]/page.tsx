@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { PRODUCTS } from "@/lib/constants";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 
@@ -15,6 +16,53 @@ export function generateStaticParams() {
   return PRODUCTS.map((p) => ({
     slug: p.slug,
   }));
+}
+
+export function generateMetadata({ params }: Props): Metadata {
+  const product = PRODUCTS.find((p) => p.slug === params.slug);
+  if (!product) {
+    return {
+      title: "Equipment Catalog | Fiza Engineering",
+    };
+  }
+
+  const fullTitle = `${product.name} | Fiza Engineering`;
+  const title = fullTitle.length <= 60 ? fullTitle : `${product.name.slice(0, 38)} | Fiza Engineering`;
+
+  const rawDesc = `${product.overview} Model: ${product.modelNumber}. Engineered for heavy industrial service.`;
+  const description = rawDesc.length >= 120 && rawDesc.length <= 155
+    ? rawDesc
+    : rawDesc.length > 155
+    ? `${rawDesc.slice(0, 151)}...`
+    : `${rawDesc} Multidisciplinary mining and rail solutions across Africa.`.slice(0, 150);
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/products/${product.slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://fiza-one.vercel.app/products/${product.slug}`,
+      siteName: "Fiza Engineering Corporation",
+      type: "website",
+      images: [
+        {
+          url: product.heroImage,
+          width: 1200,
+          height: 630,
+          alt: product.name,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 }
 
 export default function ProductDetailPage({ params }: Props) {
@@ -66,15 +114,16 @@ export default function ProductDetailPage({ params }: Props) {
                   alt={product.name}
                   fill
                   priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="img-cover"
                 />
                 <div className="absolute bottom-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] px-2.5 py-1 uppercase">
-                  SPECIFICATION ARCHIVE // {product.modelNumber}
+                  TECHNICAL SPECIFICATION · {product.modelNumber}
                 </div>
               </div>
 
               <div className="p-6 bg-iron-white border border-slab-grey">
-                <span className="text-label text-earth-black font-mono uppercase tracking-wider block mb-2">
+                <span className="text-label text-earth-black font-mono uppercase tracking-wider block mb-2 font-bold">
                   Engineering Overview
                 </span>
                 <p className="text-body-sm text-quarry-grey leading-relaxed">
@@ -99,12 +148,12 @@ export default function ProductDetailPage({ params }: Props) {
                   {Object.entries(product.specs).map(([specKey, specVal], idx) => (
                     <tr
                       key={idx}
-                      className="border-b border-slab-grey/60 hover:bg-[#F2F0EB] transition-colors"
+                      className={idx % 2 === 0 ? "bg-[#F5F3ED]" : "bg-iron-white"}
                     >
-                      <td className="py-3.5 pr-4 text-quarry-grey uppercase font-medium">
+                      <td className="py-3 px-4 font-semibold text-earth-black border-b border-slab-grey/40">
                         {specKey}
                       </td>
-                      <td className="py-3.5 pl-4 text-earth-black font-bold text-right">
+                      <td className="py-3 px-4 text-quarry-grey border-b border-slab-grey/40">
                         {specVal}
                       </td>
                     </tr>
@@ -112,50 +161,38 @@ export default function ProductDetailPage({ params }: Props) {
                 </tbody>
               </table>
 
-              <div className="mt-8 pt-6 border-t border-slab-grey flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs text-quarry-grey">
-                <span>All machinery certified to ISO/SAE standards.</span>
-                <span className="text-earth-black font-semibold">Warranty: 24 Mo / 5,000 Hrs</span>
+              <div className="mt-8 pt-6 border-t border-slab-grey">
+                <span className="text-label font-bold text-earth-black uppercase tracking-wider block mb-3">
+                  Qualified Operational Applications
+                </span>
+                <ul className="space-y-2 text-xs text-quarry-grey">
+                  {product.applications.map((app, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-oxide-red inline-block" />
+                      <span>{app}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Applications & Service Protocols Below */}
-      <section className="w-full bg-iron-white py-20">
-        <div className="max-w-content mx-auto px-6 md:px-12">
-          <div className="max-w-3xl">
-            <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
-              Field Suitability
-            </span>
-            <h2 className="text-heading-1 font-medium text-earth-black mb-8">
-              Target Field Applications
-            </h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-sm">
-              {product.applications.map((app, i) => (
-                <div key={i} className="p-4 bg-[#EBE8E0] border border-slab-grey flex items-center gap-3">
-                  <span className="w-2 h-2 bg-oxide-red inline-block" />
-                  <span className="text-earth-black">{app}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-12 p-6 bg-coal-dark text-iron-white border border-slab-grey flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-              <div>
-                <h4 className="text-heading-3 text-iron-white mb-1">Require Site Mobilization?</h4>
-                <p className="text-quarry-grey text-xs">
-                  We handle customs clearance, lowbed road transit, and on-site assembly across West and Central Africa.
-                </p>
-              </div>
-              <Link
-                href="/contact"
-                className="btn-primary !bg-iron-white !text-earth-black hover:!bg-oxide-red hover:!text-iron-white text-xs py-3 px-6 whitespace-nowrap"
-              >
-                Inquire Logistics →
-              </Link>
-            </div>
+      {/* Procurement CTA Strip */}
+      <section className="w-full bg-iron-white py-16">
+        <div className="max-w-content mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 className="text-heading-2 font-medium text-earth-black">
+              Procure Machinery or Reserve Fleet Units
+            </h3>
+            <p className="text-body-sm text-quarry-grey mt-1">
+              Direct factory commissioning, bonded port transit, and on-site operator training included.
+            </p>
           </div>
+          <Link href="/contact" className="btn-primary text-xs py-3 px-6 whitespace-nowrap">
+            Submit Equipment Tender →
+          </Link>
         </div>
       </section>
     </div>

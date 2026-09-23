@@ -1,14 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { PRODUCTS } from "@/lib/constants";
 
 const PRODUCT_CATEGORIES = ["ALL", "Heavy Mining Fleet", "Turnkey Plant Modules", "Railway Solutions"];
 
-export default function ProductsPage() {
+function ProductsContent() {
+  const searchParams = useSearchParams();
+  const catParam = searchParams.get("category");
   const [selectedCategory, setSelectedCategory] = useState("ALL");
+
+  useEffect(() => {
+    if (catParam) {
+      // Find matching category case-insensitively
+      const match = PRODUCT_CATEGORIES.find(
+        (c) => c.toLowerCase() === catParam.toLowerCase()
+      );
+      if (match) {
+        setSelectedCategory(match);
+      }
+    }
+  }, [catParam]);
 
   const filteredProducts = PRODUCTS.filter((p) => {
     if (selectedCategory === "ALL") return true;
@@ -66,6 +81,7 @@ export default function ProductsPage() {
                       src={product.heroImage}
                       alt={product.name}
                       fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="img-cover transition-transform duration-300 group-hover:scale-[1.03]"
                     />
                     <div className="absolute top-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] uppercase tracking-wider px-2 py-0.5">
@@ -100,5 +116,13 @@ export default function ProductsPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen pt-[100px] text-center font-mono">Loading equipment catalog...</div>}>
+      <ProductsContent />
+    </Suspense>
   );
 }

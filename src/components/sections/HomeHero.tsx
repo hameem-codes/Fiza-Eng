@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { SITE_FACTS } from "@/lib/siteFacts";
+import { SITE_IMAGES } from "@/lib/images";
 
 export function HomeHero() {
   return (
@@ -9,10 +10,11 @@ export function HomeHero() {
       {/* Background Image with Dark Industrial Texture & Gradient Overlay */}
       <div className="absolute inset-0 z-0 select-none">
         <Image
-          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2000&auto=format&fit=crop"
-          alt="Heavy industrial engineering, mining, and structural infrastructure"
+          src={SITE_IMAGES.homeHero.src}
+          alt={SITE_IMAGES.homeHero.alt}
           fill
           priority
+          sizes="100vw"
           className="img-cover object-center scale-[1.02] transform transition-transform duration-1000 ease-out"
         />
         {/* Subtle Industrial Mesh/Dot Texture */}
@@ -34,7 +36,7 @@ export function HomeHero() {
           <div className="flex items-center gap-3 mb-5">
             <span className="w-2.5 h-2.5 bg-oxide-red inline-block" />
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-dust-tan font-medium">
-              Established 1994 · Middle East · Africa · Global Logistics
+              Established {SITE_FACTS.foundedYear} · {SITE_FACTS.footprintRegions}
             </span>
           </div>
 
@@ -70,20 +72,20 @@ export function HomeHero() {
         {/* Authentic Footprint Quick Stat Counter Bar */}
         <div className="hidden lg:grid grid-cols-4 gap-6 pt-10 mt-12 border-t border-slab-grey/20 max-w-4xl text-iron-white font-mono text-xs">
           <div>
-            <span className="block text-oxide-red text-base font-semibold">450+</span>
+            <span className="block text-oxide-red text-base font-semibold">{SITE_FACTS.fleetSize}</span>
             <span className="text-dust-tan text-[11px] uppercase tracking-wider">Heavy Machines</span>
           </div>
           <div>
-            <span className="block text-iron-white text-base font-semibold">12</span>
+            <span className="block text-iron-white text-base font-semibold">{SITE_FACTS.countries}</span>
             <span className="text-dust-tan text-[11px] uppercase tracking-wider">Countries</span>
           </div>
           <div>
-            <span className="block text-iron-white text-base font-semibold">4</span>
+            <span className="block text-iron-white text-base font-semibold">{SITE_FACTS.continents}</span>
             <span className="text-dust-tan text-[11px] uppercase tracking-wider">Active Continents</span>
           </div>
           <div>
-            <span className="block text-oxide-red text-base font-semibold">40+</span>
-            <span className="text-dust-tan text-[11px] uppercase tracking-wider">Years of Excellence</span>
+            <span className="block text-oxide-red text-base font-semibold">{SITE_FACTS.yearsInBusinessLabel}</span>
+            <span className="text-dust-tan text-[11px] uppercase tracking-wider">Experience</span>
           </div>
         </div>
       </div>

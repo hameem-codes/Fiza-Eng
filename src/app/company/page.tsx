@@ -6,10 +6,13 @@ import Link from "next/link";
 import { LEADERSHIP, MILESTONES, Leader } from "@/lib/constants";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import { Tag } from "@/components/ui/Tag";
+import { SITE_FACTS } from "@/lib/siteFacts";
+import { SITE_IMAGES } from "@/lib/images";
+import { PersonPlaceholder } from "@/components/ui/PersonPlaceholder";
 
 const WHAT_SETS_US_APART = [
   {
-    metric: "450+",
+    metric: SITE_FACTS.fleetSize,
     label: "Heavy Equipment Units",
     title: "100% Owned Fleet",
     desc: "We own, maintain, and mobilize our excavators, haulers, and track equipment directly, eliminating third-party rental bottlenecks."
@@ -27,7 +30,7 @@ const WHAT_SETS_US_APART = [
     desc: "We rehabilitate and operate specialized 32-tonne axle-load railway tracks to ensure extraction volumes reach coastal ports without delay."
   },
   {
-    metric: "0.12",
+    metric: SITE_FACTS.ltifrRate,
     label: "LTIFR Safety Rating",
     title: "Strict Safety Governance",
     desc: "Every pit, maintenance bay, and construction site operates under certified ISO 45001 standards with daily supervisor briefings."
@@ -39,10 +42,10 @@ const WHAT_SETS_US_APART = [
     desc: "Centralized powertrain overhaul workshops in Bamako and Kolwezi keep fleet availability consistently above 94%."
   },
   {
-    metric: "12",
-    label: "Sovereign Jurisdictions",
+    metric: String(SITE_FACTS.countries),
+    label: "Active Jurisdictions",
     title: "Pan-African Relationships",
-    desc: "Deep partnerships with national resource ministries, port authorities, and local community leadership built over 25 years."
+    desc: `Deep partnerships with national resource ministries, port authorities, and local community leadership built over ${SITE_FACTS.yearsInBusinessLower}.`
   }
 ];
 
@@ -55,7 +58,7 @@ const PROCESS_STEPS = [
   {
     step: "02",
     name: "CONNECT",
-    desc: "Securing sovereign concessions, establishing off-take partnerships, and engineering dedicated rail or barge access corridors."
+    desc: "Securing strategic concessions, establishing off-take partnerships, and engineering dedicated rail or barge access corridors."
   },
   {
     step: "03",
@@ -77,10 +80,11 @@ export default function CompanyPage() {
       {/* 60vh Hero Section */}
       <section className="relative w-full h-[60vh] min-h-[460px] flex items-end overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?q=80&w=2000&auto=format&fit=crop"
-          alt="Fiza Engineering Corporation site works"
+          src={SITE_IMAGES.company.hero.src}
+          alt={SITE_IMAGES.company.hero.alt}
           fill
           priority
+          sizes="100vw"
           className="img-cover object-center"
         />
         <div className="dark-overlay-heavy" />
@@ -92,7 +96,7 @@ export default function CompanyPage() {
             Fiza Engineering Corporation.
           </h1>
           <p className="text-body-lg text-dust-tan max-w-2xl mt-4 font-normal">
-            Moving earth, building heavy rail, and engineering mineral supply chains across Africa and beyond since 1994.
+            Moving earth, building heavy rail, and engineering mineral supply chains across Africa and beyond since {SITE_FACTS.foundedYear}.
           </p>
         </div>
       </section>
@@ -110,7 +114,7 @@ export default function CompanyPage() {
               </h2>
               <div className="space-y-6 text-quarry-grey text-body leading-relaxed max-w-editorial">
                 <p>
-                  Established in 1994 by Muhammed Farooghuddin, with over four decades of international business and mineral trading experience, Fiza Engineering Corporation has expanded into a multidisciplinary heavy engineering and mining conglomerate. We combine active concession operations, equipment manufacturing, engineering capability, and international trade.
+                  Established in {SITE_FACTS.foundedYear} by Muhammed Farooghuddin, with over four decades of international business and mineral trading experience, Fiza Engineering Corporation has expanded into a multidisciplinary heavy engineering and mining conglomerate. We combine active concession operations, equipment manufacturing, engineering capability, and international trade.
                 </p>
                 <p>
                   Today, we coordinate multi-thousand-tonne mineral extraction operations across Mali and the DRC, rehabilitate heavy freight rail corridors in Madagascar, and trade industrial commodities to global smelters. By controlling every layer of equipment, maintenance, and logistics, we deliver certainty in volatile frontiers.
@@ -120,13 +124,14 @@ export default function CompanyPage() {
 
             <div className="lg:col-span-5 relative h-[380px] sm:h-[460px] border border-slab-grey lg:-mr-16">
               <Image
-                src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1200&auto=format&fit=crop"
-                alt="Open-pit operations and heavy fleet"
+                src={SITE_IMAGES.company.fieldOps.src}
+                alt={SITE_IMAGES.company.fieldOps.alt}
                 fill
+                sizes="(max-width: 1024px) 100vw, 42vw"
                 className="img-cover object-center"
               />
               <div className="absolute bottom-3 left-3 bg-earth-black text-iron-white px-3 py-1 font-mono text-[10px] uppercase">
-                FIG. 02 // PIT SITE 04 — WEST AFRICA
+                FIG. 02 — PIT SITE 04 · WEST AFRICA
               </div>
             </div>
           </div>
@@ -149,7 +154,7 @@ export default function CompanyPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-slab-grey pt-10">
             <div className="p-8 bg-[#EBE8E0] border border-slab-grey">
               <span className="text-label font-mono text-oxide-red uppercase tracking-wider block mb-2">
-                01 // Direct Control
+                01. Direct Control
               </span>
               <h3 className="text-heading-2 font-medium text-earth-black mb-3">Own The Iron</h3>
               <p className="text-quarry-grey text-body-sm leading-relaxed">
@@ -159,7 +164,7 @@ export default function CompanyPage() {
 
             <div className="p-8 bg-[#EBE8E0] border border-slab-grey">
               <span className="text-label font-mono text-oxide-red uppercase tracking-wider block mb-2">
-                02 // Sovereign Partnership
+                02. Institutional Partnership
               </span>
               <h3 className="text-heading-2 font-medium text-earth-black mb-3">Long-Term Respect</h3>
               <p className="text-quarry-grey text-body-sm leading-relaxed">
@@ -169,7 +174,7 @@ export default function CompanyPage() {
 
             <div className="p-8 bg-[#EBE8E0] border border-slab-grey">
               <span className="text-label font-mono text-oxide-red uppercase tracking-wider block mb-2">
-                03 // Zero Ambiguity
+                03. Transparent Execution
               </span>
               <h3 className="text-heading-2 font-medium text-earth-black mb-3">Engineering Truth</h3>
               <p className="text-quarry-grey text-body-sm leading-relaxed">
@@ -179,7 +184,7 @@ export default function CompanyPage() {
 
             <div className="p-8 bg-[#EBE8E0] border border-slab-grey">
               <span className="text-label font-mono text-oxide-red uppercase tracking-wider block mb-2">
-                04 // Environmental Rigor
+                04. Environmental Rigor
               </span>
               <h3 className="text-heading-2 font-medium text-earth-black mb-3">Contoured Restoration</h3>
               <p className="text-quarry-grey text-body-sm leading-relaxed">
@@ -227,12 +232,12 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* "How We Work" — 4-Step Numbered Process */}
-      <section className="w-full bg-iron-white py-20 md:py-28">
+      {/* How We Operate (4-step Process) */}
+      <section className="w-full py-20 md:py-28 bg-iron-white">
         <div className="max-w-content mx-auto px-6 md:px-12">
           <div className="mb-14">
             <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
-              Execution Methodology
+              Operating Methodology
             </span>
             <h2 className="text-display-lg font-medium text-earth-black leading-[0.95]">
               How We Work
@@ -241,11 +246,11 @@ export default function CompanyPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {PROCESS_STEPS.map((step) => (
-              <div key={step.step} className="border-t-2 border-earth-black pt-6 flex flex-col">
-                <span className="text-display-lg font-medium text-oxide-red leading-none mb-4">
+              <div key={step.step} className="border-t-2 border-earth-black pt-6">
+                <span className="font-mono text-2xl font-bold text-oxide-red block mb-3">
                   {step.step}
                 </span>
-                <h3 className="text-heading-3 font-medium text-earth-black mb-3">
+                <h3 className="text-heading-3 font-medium text-earth-black mb-2">
                   {step.name}
                 </h3>
                 <p className="text-body-sm text-quarry-grey leading-relaxed">
@@ -257,45 +262,47 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* Timeline: Large Year Numbers, Alternating Entries */}
-      <section id="timeline" className="w-full bg-[#EBE8E0] py-20 md:py-28 border-t border-b border-slab-grey">
+      {/* Company Timeline */}
+      <section id="timeline" className="w-full bg-[#EBE8E0] py-20 md:py-28 border-t border-slab-grey">
         <div className="max-w-content mx-auto px-6 md:px-12">
-          <div className="mb-16">
+          <div className="mb-14">
             <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
-              Quarter-Century Trajectory
+              Historical Milestones
             </span>
             <h2 className="text-display-lg font-medium text-earth-black leading-[0.95]">
-              Corporate History
+              {SITE_FACTS.yearsInBusinessStory}
             </h2>
           </div>
 
-          <div className="relative border-l-2 border-earth-black ml-4 md:ml-12 pl-8 md:pl-16 space-y-16">
-            {MILESTONES.map((m) => (
-              <div key={m.year} className="relative group">
-                {/* Square marker on timeline */}
-                <div className="absolute -left-[41px] md:-left-[73px] top-1 w-4 h-4 bg-earth-black group-hover:bg-oxide-red transition-colors" />
-
-                <span className="text-display-lg md:text-[3.5rem] font-medium text-earth-black leading-none block mb-2">
-                  {m.year}
-                </span>
-
-                <h3 className="text-heading-2 font-medium text-earth-black mb-3">
-                  {m.title}
-                </h3>
-
-                <p className="text-body text-quarry-grey max-w-2xl leading-relaxed">
-                  {m.description}
-                </p>
+          <div className="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-[1px] before:bg-slab-grey">
+            {MILESTONES.map((milestone, idx) => (
+              <div
+                key={milestone.year}
+                className={`relative flex flex-col md:flex-row gap-6 md:gap-12 items-start ${
+                  idx % 2 === 0 ? "md:flex-row-reverse text-left" : "text-left"
+                }`}
+              >
+                <div className="md:w-1/2 flex flex-col pl-10 md:pl-0">
+                  <span className="font-mono text-xl font-bold text-oxide-red mb-1">
+                    {milestone.year}
+                  </span>
+                  <h3 className="text-heading-3 font-medium text-earth-black mb-2">
+                    {milestone.title}
+                  </h3>
+                  <p className="text-body-sm text-quarry-grey leading-relaxed">
+                    {milestone.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Leadership: Square Headshots, Name, Title, Clickable Bio Modal */}
-      <section id="leadership" className="w-full bg-iron-white py-20 md:py-28">
+      {/* Leadership Section */}
+      <section id="leadership" className="w-full bg-iron-white py-20 md:py-28 border-t border-slab-grey">
         <div className="max-w-content mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-6">
             <div>
               <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
                 Executive Governance
@@ -316,14 +323,9 @@ export default function CompanyPage() {
                 onClick={() => setSelectedLeader(leader)}
                 className="group cursor-pointer flex flex-col border border-slab-grey p-4 bg-iron-white hover:border-earth-black transition-colors"
               >
-                {/* Square aspect ratio 1:1 headshot */}
-                <div className="relative aspect-square w-full overflow-hidden bg-slab-grey mb-4">
-                  <Image
-                    src={leader.image}
-                    alt={leader.name}
-                    fill
-                    className="img-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                  />
+                {/* Neutral placeholder component labelled [Photo to be supplied] */}
+                <div className="mb-4">
+                  <PersonPlaceholder name={leader.name} title={leader.title} />
                 </div>
 
                 <h3 className="text-heading-3 font-medium text-earth-black group-hover:text-oxide-red transition-colors mb-1">
@@ -335,7 +337,7 @@ export default function CompanyPage() {
                 </span>
 
                 <span className="text-xs font-mono font-bold text-oxide-red uppercase tracking-wider mt-auto inline-flex items-center gap-1">
-                  View Dossier →
+                  View Profile →
                 </span>
               </div>
             ))}
@@ -361,16 +363,11 @@ export default function CompanyPage() {
               ✕
             </button>
 
-            <div className="flex items-center gap-6 mb-6">
-              <div className="relative w-24 h-24 flex-shrink-0 bg-slab-grey border border-slab-grey">
-                <Image
-                  src={selectedLeader.image}
-                  alt={selectedLeader.name}
-                  fill
-                  className="img-cover"
-                />
+            <div className="flex flex-col sm:flex-row items-center gap-6 mb-6">
+              <div className="w-28 h-28 flex-shrink-0">
+                <PersonPlaceholder name={selectedLeader.name} className="h-full aspect-square" />
               </div>
-              <div>
+              <div className="text-center sm:text-left">
                 <h3 className="text-heading-2 font-medium text-earth-black">
                   {selectedLeader.name}
                 </h3>

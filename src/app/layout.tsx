@@ -17,9 +17,43 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fiza Engineering Corporation — Heavy Engineering, Mining & Infrastructure",
+  metadataBase: new URL("https://fiza-one.vercel.app"),
+  title: {
+    default: "Fiza Engineering | Heavy Engineering, Mining & Rail",
+    template: "%s | Fiza Engineering",
+  },
   description:
-    "Integrated heavy engineering, open-pit mining services, railway corridors, and mineral trading operations across Africa.",
+    "Direct open-pit mining concessions, turnkey plant EPC, and heavy-haul railway corridors connecting African resource belts to global markets.",
+  alternates: {
+    canonical: "/",
+  },
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://fiza-one.vercel.app",
+    siteName: "Fiza Engineering Corporation",
+    title: "Fiza Engineering | Heavy Engineering, Mining & Rail",
+    description:
+      "Direct open-pit mining concessions, turnkey plant EPC, and heavy-haul railway corridors connecting African resource belts to global markets.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Fiza Engineering Corporation - Heavy Engineering, Mining & Infrastructure",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fiza Engineering | Heavy Engineering, Mining & Rail",
+    description:
+      "Direct open-pit mining concessions, turnkey plant EPC, and heavy-haul railway corridors connecting African resource belts to global markets.",
+  },
 };
 
 export default function RootLayout({
