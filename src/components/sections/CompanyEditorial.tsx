@@ -51,10 +51,10 @@ export function CompanyEditorial() {
 
               <div className="absolute bottom-4 left-4 right-4 bg-earth-black/90 backdrop-blur-sm p-3.5 text-iron-white border border-slab-grey/20">
                 <span className="block font-mono text-[10px] uppercase text-dust-tan tracking-wider">
-                  Operational Ground Truth
+                  Our fleet
                 </span>
                 <span className="text-xs font-mono text-iron-white block mt-0.5">
-                  Over {SITE_FACTS.fleetSize} company-owned machines active across {SITE_FACTS.continents} continents.
+                  {SITE_FACTS.fleetSize} company-owned machines active across {SITE_FACTS.continents} continents.
                 </span>
               </div>
             </div>

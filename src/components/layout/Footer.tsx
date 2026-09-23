@@ -73,7 +73,7 @@ export function Footer() {
                 href="/contact"
                 className="btn-primary !bg-oxide-red hover:!bg-iron-white hover:!text-earth-black text-xs py-3 px-6 shadow-sm inline-block"
               >
-                Initiate Project Discussion →
+                Contact us
               </Link>
             </div>
           </div>

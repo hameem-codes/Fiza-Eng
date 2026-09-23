@@ -147,7 +147,7 @@ export const CAPABILITIES: Capability[] = [
     slug: "mineral-trading",
     title: "Mineral Trading",
     tagline: "Direct physical commodity flows from African concessions to global smelters.",
-    description: "We bridge African extraction corridors directly to industrial end-users in Asia, Europe, and the Middle East. Through long-term off-take agreements and bonded port warehouses, Fiza eliminates intermediate friction in bulk commodities.",
+    description: "We bridge African extraction corridors directly to industrial end-users in Asia, Europe, and the Middle East. We supply bulk commodities directly to international refineries and smelters through long-term off-take agreements.",
     scope: [
       "Bauxite (Metallurgical & Chemical Grade)",
       "High-Grade Hematite & Magnetite Iron Ore (Fe 62-65%)",
@@ -167,7 +167,7 @@ export const CAPABILITIES: Capability[] = [
     slug: "railway-solutions",
     title: "Railway Solutions",
     tagline: "Heavy-haul rail corridors connecting isolated deposits to deep-water ports.",
-    description: "Mining volume cannot scale without dedicated heavy rail. Fiza engineers, tracks, ballasts, and maintains standard and narrow gauge industrial corridors built to withstand 32-tonne axle loads in adverse soils.",
+    description: "We provide heavy-haul rail infrastructure for bulk mineral transport from remote extraction sites to deep-water ports. Fiza engineers, tracks, ballasts, and maintains standard and narrow gauge industrial corridors built to withstand 32-tonne axle loads in adverse soils.",
     scope: [
       "Heavy-Haul Track Laying & Ballast Tamping",
       "Locomotive & Rolling Stock Overhaul and Fleet Leasing",

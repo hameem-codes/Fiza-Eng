@@ -13,16 +13,16 @@ export function ContactCTA() {
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 bg-oxide-red inline-block" />
               <span className="text-label text-dust-tan font-mono uppercase tracking-widest font-semibold">
-                Direct Operational Tenders
+                Contact
               </span>
             </div>
 
             <h2 className="text-display-lg sm:text-[3rem] font-medium text-iron-white leading-[0.96] mb-6">
-              Ready to deploy heavy industrial capability.
+              Talk to our team.
             </h2>
 
             <p className="text-quarry-grey text-body-lg max-w-xl mb-8 leading-relaxed font-normal">
-              Whether mobilizing equipment for an open-pit concession, engineering heavy-haul rail, or structuring direct mineral off-takes, our teams deploy with direct accountability.
+              Whether mobilizing equipment for an open-pit concession, engineering heavy-haul rail, or structuring direct mineral off-takes, our engineering teams are ready to deploy.
             </p>
 
             <div>
@@ -39,7 +39,7 @@ export function ContactCTA() {
           {/* Quick Direct Contacts Block */}
           <div className="lg:col-span-5 bg-[#1F1F1D] border border-slab-grey/20 p-8 space-y-5">
             <span className="font-mono text-xs uppercase tracking-wider text-dust-tan font-semibold block border-b border-slab-grey/15 pb-3">
-              Headquarters & Operations Desk
+              Direct Inquiries
             </span>
 
             <div className="flex items-start gap-3 text-xs font-mono">
@@ -53,7 +53,7 @@ export function ContactCTA() {
             <div className="flex items-start gap-3 text-xs font-mono">
               <Mail size={16} className="text-oxide-red shrink-0 mt-0.5" />
               <div>
-                <span className="text-iron-white block font-medium">Direct Inquiries</span>
+                <span className="text-iron-white block font-medium">Email</span>
                 <a
                   href={`mailto:${SITE_FACTS.contact.primaryEmail}`}
                   className="text-dust-tan hover:text-oxide-red transition-colors"
@@ -66,7 +66,7 @@ export function ContactCTA() {
             <div className="flex items-start gap-3 text-xs font-mono">
               <Phone size={16} className="text-oxide-red shrink-0 mt-0.5" />
               <div>
-                <span className="text-iron-white block font-medium">Executive Office</span>
+                <span className="text-iron-white block font-medium">Telephone</span>
                 <a
                   href={`tel:${SITE_FACTS.contact.primaryPhone.replace(/\s+/g, "")}`}
                   className="text-dust-tan hover:text-oxide-red transition-colors"

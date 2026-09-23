@@ -2,6 +2,10 @@ import React from "react";
 import Link from "next/link";
 import { PersonPlaceholder } from "@/components/ui/PersonPlaceholder";
 
+// TODO: CONFIRM PARTNERSHIP with AELMET and Eliixir Traintech
+// Keep row hidden until owner confirms active strategic partnerships
+const SHOW_PARTNERS = false;
+
 export function FounderSection() {
   return (
     <section className="w-full bg-[#EAE7DF] py-16 md:py-24 border-b border-slab-grey">
@@ -49,19 +53,19 @@ export function FounderSection() {
                 href="/company#leadership"
                 className="btn-primary text-xs py-3 px-6 font-mono uppercase tracking-wider font-semibold"
               >
-                Meet the executive team →
+                Read leadership profile
               </Link>
             </div>
 
-            {/* Strategic Partners Row */}
-            {/* // TODO: CONFIRM PARTNERSHIP — Keep AELMET and Eliixir Traintech only if the owner confirms these partnerships. */}
-            <div className="mt-8 pt-5 border-t border-slab-grey/80 flex flex-wrap items-center gap-3 text-xs font-mono text-quarry-grey">
-              <span className="font-bold text-earth-black uppercase tracking-wider">Partners:</span>
-              <span className="text-earth-black font-medium">AELMET (USA)</span>
-              <span>·</span>
-              <span className="text-earth-black font-medium">Eliixir Traintech (India)</span>
-              <span className="text-[11px] text-quarry-grey/80">(Subject to final owner confirmation)</span>
-            </div>
+            {/* Strategic Partners Row - Hidden behind SHOW_PARTNERS until confirmed */}
+            {SHOW_PARTNERS && (
+              <div className="mt-8 pt-5 border-t border-slab-grey/80 flex flex-wrap items-center gap-3 text-xs font-mono text-quarry-grey">
+                <span className="font-bold text-earth-black uppercase tracking-wider">Partners:</span>
+                <span className="text-earth-black font-medium">AELMET (USA)</span>
+                <span>·</span>
+                <span className="text-earth-black font-medium">Eliixir Traintech (India)</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

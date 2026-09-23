@@ -63,9 +63,9 @@ export const SITE_FACTS = {
     primaryEmail: "info@fizaengineering.com",
     projectsEmail: "projects@fizaengineering.com",
     supportEmail: "support@fizaengineering.com",
-    primaryPhone: "+971 4 362 8800", // TODO: VERIFY
+    primaryPhone: "+971 4 362 8800", // TODO: OWNER TO VERIFY
     hqCity: "Dubai, United Arab Emirates",
-    hqAddress: "DIFC Gate Precinct, Building 4, Level 7, Dubai",
+    hqAddress: "DIFC Gate Precinct, Building 4, Level 7, Dubai", // TODO: OWNER TO VERIFY
   },
 
   // Regional Footprint: Real operations hubs (no unverified SE Asia / Latin America offices)
@@ -76,8 +76,8 @@ export const SITE_FACTS = {
       city: "Dubai",
       country: "United Arab Emirates",
       type: "Corporate Headquarters & International Mineral Trading Hub",
-      address: "DIFC Gate Precinct, Building 4, Level 7, Dubai",
-      phone: "+971 4 362 8800", // TODO: VERIFY
+      address: "DIFC Gate Precinct, Building 4, Level 7, Dubai", // TODO: OWNER TO VERIFY
+      phone: "+971 4 362 8800", // TODO: OWNER TO VERIFY
       email: "info@fizaengineering.com",
       coordinates: { x: 74, y: 35 }
     },
