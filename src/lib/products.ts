@@ -100,8 +100,8 @@ export const PRODUCTS: ProductItem[] = [
     category: "Heavy Mining Fleet",
     // TODO: OWNER TO CONFIRM MANUFACTURER
     modelNumber: "FX-980-HD",
-    heroImage: SITE_IMAGES.products.hydraulicShovel.src,
-    imageAlt: "Heavy hydraulic mining excavator operating at open-pit mine face",
+    heroImage: "https://images.unsplash.com/photo-1580983218765-f663bec07b37?q=80&w=1600&auto=format&fit=crop",
+    imageAlt: "FIZA-980 massive hydraulic excavator actively digging and loading in an open-pit mine",
     // TODO: OWNER TO CONFIRM MANUFACTURER
     verified: false,
     specs: {
@@ -134,8 +134,8 @@ export const PRODUCTS: ProductItem[] = [
     category: "Turnkey Plant Modules",
     // TODO: OWNER TO CONFIRM MANUFACTURER
     modelNumber: "JC-1200-MOD",
-    heroImage: SITE_IMAGES.products.crusherStation.src,
-    imageAlt: "Modular primary jaw crusher station installation at mine site",
+    heroImage: "https://images.unsplash.com/photo-1516937941344-00b4e0337589?q=80&w=1600&auto=format&fit=crop",
+    imageAlt: "Large industrial jaw crusher and primary crushing station with conveyor belts",
     // TODO: OWNER TO CONFIRM MANUFACTURER
     verified: false,
     specs: {
@@ -168,8 +168,8 @@ export const PRODUCTS: ProductItem[] = [
     category: "Railway Solutions",
     // TODO: OWNER TO CONFIRM MANUFACTURER
     modelNumber: "FL-4400-AC",
-    heroImage: SITE_IMAGES.products.locomotive.src,
-    imageAlt: "Heavy-haul diesel-electric freight locomotive on mainline tracks",
+    heroImage: "https://images.unsplash.com/photo-1498084393753-b411b2d26b34?q=80&w=1600&auto=format&fit=crop",
+    imageAlt: "FIZA-4400 large freight locomotive pulling cargo wagons on industrial railway tracks",
     // TODO: OWNER TO CONFIRM MANUFACTURER
     verified: false,
     specs: {
@@ -201,8 +201,8 @@ export const PRODUCTS: ProductItem[] = [
     category: "Heavy Mining Fleet",
     // TODO: OWNER TO CONFIRM MANUFACTURER
     modelNumber: "RT-100-MINER",
-    heroImage: SITE_IMAGES.products.dumpTruck.src,
-    imageAlt: "Off-highway rigid dump truck transporting mineral ore",
+    heroImage: "/images/projects/project_falea.jpg",
+    imageAlt: "FIZA-RT100 massive rigid mining haul truck operating inside an open-pit mine",
     // TODO: OWNER TO CONFIRM MANUFACTURER
     verified: false,
     specs: {
@@ -235,8 +235,8 @@ export const TRADED_MINERALS: ProductItem[] = [
     slug: "mineral-bauxite",
     name: "Metallurgical Bauxite Ore",
     category: "Traded Minerals",
-    heroImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1600&q=80",
-    imageAlt: "Raw red bauxite mineral deposit and stockpiles",
+    heroImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop",
+    imageAlt: "Large stockpile of reddish-brown metallurgical bauxite ore at port terminal",
     verified: true,
     grade: "45% - 48% Al₂O₃ (Total Alumina), Reactive Silica < 2.5%",
     origin: "Republic of Guinea / Western Mali Corridors",
@@ -268,8 +268,8 @@ export const TRADED_MINERALS: ProductItem[] = [
     slug: "mineral-iron-ore",
     name: "Direct Shipping Iron Ore (Hematite & Magnetite)",
     category: "Traded Minerals",
-    heroImage: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=1600&q=80",
-    imageAlt: "Processed iron ore mineral concentrates ready for shipment",
+    heroImage: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1600&auto=format&fit=crop",
+    imageAlt: "Close-up of direct shipping iron ore lumps and hematite metallic chunks",
     verified: true,
     grade: "62% - 64.5% Fe (Lump & Sinter Fines)",
     origin: "West & Central African Extraction Corridors",
@@ -301,8 +301,8 @@ export const TRADED_MINERALS: ProductItem[] = [
     slug: "mineral-copper-cathode",
     name: "Grade-A Copper Cathode & Copper Blister",
     category: "Traded Minerals",
-    heroImage: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=1600&q=80",
-    imageAlt: "Refined copper cathode plates stacked for export",
+    heroImage: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=1600&auto=format&fit=crop",
+    imageAlt: "Stacked Grade-A copper cathode plates bundled for export",
     verified: true,
     grade: "Grade-A 99.9935% Cu Cathode & 98.5%+ Copper Blister Ingots",
     origin: "Democratic Republic of the Congo (Haut-Katanga / Kolwezi)",
@@ -334,8 +334,8 @@ export const TRADED_MINERALS: ProductItem[] = [
     slug: "mineral-ilmenite",
     name: "Heavy Mineral Sands Ilmenite Concentrate",
     category: "Traded Minerals",
-    heroImage: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=1600&q=80",
-    imageAlt: "Heavy mineral sands extraction and separation",
+    heroImage: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1600&auto=format&fit=crop",
+    imageAlt: "Dark stockpile of heavy mineral sands and ilmenite concentrate extraction",
     verified: true,
     grade: "48% - 52% TiO₂ Heavy Mineral Sands Concentrate",
     origin: "Republic of Madagascar (Toamasina Coastal Spurring)",

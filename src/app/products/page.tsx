@@ -181,8 +181,11 @@ function ProductsContent() {
                           alt={item.imageAlt}
                           fill
                           sizes="(max-width: 768px) 100vw, 50vw"
-                          className="img-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                          className="img-cover transition-transform duration-300 group-hover:scale-[1.02] saturate-[0.85]"
                         />
+                        {isMachinery && (
+                          <div className="absolute inset-0 bg-blue-900/10 mix-blend-color pointer-events-none" />
+                        )}
                         {SHOW_PRODUCT_SPECS && item.modelNumber && (
                           <div className="absolute top-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] uppercase tracking-wider px-2 py-0.5">
                             {item.modelNumber}
