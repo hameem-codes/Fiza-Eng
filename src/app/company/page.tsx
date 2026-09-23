@@ -6,6 +6,7 @@ import { SectionDivider } from "@/components/ui/SectionDivider";
 import { SITE_FACTS, currentYear } from "@/lib/siteFacts";
 import { SITE_IMAGES } from "@/lib/images";
 import { PersonPlaceholder } from "@/components/ui/PersonPlaceholder";
+import { CompanyTimeline } from "@/components/sections/CompanyTimeline";
 import { MapPin, Building2, CheckCircle2 } from "lucide-react";
 
 // What Sets Us Apart - figures pulled from siteFacts or marked with TODO
@@ -76,44 +77,6 @@ const PROCESS_STEPS = [
 ];
 
 // TODO: OWNER TO VERIFY - Timeline milestones and historical dates
-const TIMELINE_MILESTONES = [
-  {
-    year: "1994",
-    title: "Establishment & International Commodity Trade",
-    description: "Founded by Muhammed Farooghuddin, developing international mineral trading and heavy industrial equipment supply channels across the Middle East, Asia, and Africa."
-  },
-  {
-    year: "2001",
-    title: "Heavy Fleet Equipment Services",
-    description: "Expanded direct operations with heavy earthmoving fleet deployment supporting industrial civil foundations and mining logistics."
-  },
-  {
-    year: "2007",
-    title: "Open-Pit Mining Concessions",
-    description: "Awarded multi-year overburden stripping concessions in Mali, establishing on-site rebuild machine workshops."
-  },
-  {
-    year: "2013",
-    title: "Turnkey Industrial Plants Division",
-    description: "Commissioned automated primary crushing circuits and expanded into Central Africa and the DRC copperbelt."
-  },
-  {
-    year: "2018",
-    title: "Direct Mineral Trading Corridors",
-    description: "Structured direct off-take agreements for bauxite, high-grade hematite iron ore, and cathode copper to global markets."
-  },
-  {
-    year: "2022",
-    title: "Heavy-Haul Rail Infrastructure",
-    description: "Executed railway track renewal and heavy-haul rolling stock operations across specialized mineral corridors."
-  },
-  {
-    year: "2026",
-    title: `Operations across ${SITE_FACTS.countries} countries`,
-    description: `Operating mining, civil, rail, and agro-industrial infrastructure projects across ${SITE_FACTS.countries} countries on ${SITE_FACTS.continents} continents.`
-  }
-];
-
 export default function CompanyPage() {
   return (
     <div className="w-full pt-[72px]">
@@ -316,43 +279,8 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* 6. History / Timeline */}
-      <section id="timeline" className="w-full bg-[#EBE8E0] py-20 md:py-28 border-b border-slab-grey">
-        <div className="max-w-content mx-auto px-6 md:px-12">
-          <div className="mb-14">
-            <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
-              Corporate Chronology
-            </span>
-            <h2 className="text-display-lg font-medium text-earth-black leading-[0.95]">
-              Our History
-            </h2>
-          </div>
-
-          {/* // TODO: OWNER TO VERIFY - Milestone descriptions and timeline accuracy */}
-          <div className="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-[1px] before:bg-slab-grey">
-            {TIMELINE_MILESTONES.map((milestone, idx) => (
-              <div
-                key={milestone.year}
-                className={`relative flex flex-col md:flex-row gap-6 md:gap-12 items-start ${
-                  idx % 2 === 0 ? "md:flex-row-reverse text-left" : "text-left"
-                }`}
-              >
-                <div className="md:w-1/2 flex flex-col pl-10 md:pl-0">
-                  <span className="font-mono text-xl font-bold text-oxide-red mb-1">
-                    {milestone.year}
-                  </span>
-                  <h3 className="text-heading-3 font-medium text-earth-black mb-2">
-                    {milestone.title}
-                  </h3>
-                  <p className="text-body-sm text-quarry-grey leading-relaxed">
-                    {milestone.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Company Timeline */}
+      <CompanyTimeline />
 
       {/* 7. Leadership Section (Muhammed Farooghuddin ONLY) */}
       <section id="leadership" className="w-full bg-iron-white py-20 md:py-28 border-b border-slab-grey">
