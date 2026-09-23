@@ -51,27 +51,27 @@ const WHAT_SETS_US_APART = [
   }
 ];
 
-// How We Work - One concise line per step (max 15 words each)
+// How We Work - Actual engineering project execution
 const PROCESS_STEPS = [
   {
     step: "01",
-    name: "UNDERSTAND",
-    desc: "Geotechnical feasibility, ore assay verification, and transport route mapping before committing capital."
+    name: "ASSESS",
+    desc: "Geological validation, site survey, and deposit feasibility scoping."
   },
   {
     step: "02",
-    name: "CONNECT",
-    desc: "Securing concession agreements, export off-take arrangements, and dedicated transport corridor permissions."
+    name: "MOBILISE",
+    desc: "Fleet deployment, logistics planning, and local workforce onboarding."
   },
   {
     step: "03",
-    name: "STRUCTURE",
-    desc: "Mobilizing heavy machinery, pouring concrete foundations, and erecting modular plant circuits on schedule."
+    name: "EXECUTE",
+    desc: "Round-the-clock extraction, civil construction, or plant commissioning."
   },
   {
     step: "04",
-    name: "PROGRESS",
-    desc: "Managing continuous extraction, scheduled fleet maintenance, and steady mineral haulage to export terminals."
+    name: "DELIVER",
+    desc: "Tonnage targets met, site restoration, and handover documentation."
   }
 ];
 
@@ -122,7 +122,7 @@ export default function CompanyPage() {
         {/* // TODO: REPLACE WITH REAL FIZA PHOTO */}
         <Image
           src={SITE_IMAGES.company.hero.src}
-          alt="Open-pit mining operation"
+          alt="Aerial view of large-scale open-pit mining operations and mineral excavation benches"
           fill
           priority
           sizes="100vw"
@@ -185,8 +185,7 @@ export default function CompanyPage() {
       </section>
 
       {/* 3. Operating Principles */}
-      <section className="w-full bg-iron-white">
-        <SectionDivider />
+      <section className="w-full bg-iron-white border-t border-b border-slab-grey">
         <div className="max-w-content mx-auto px-6 md:px-12 py-20 md:py-28">
           <div className="mb-14">
             <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">

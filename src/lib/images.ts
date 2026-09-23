@@ -32,8 +32,8 @@ export const SITE_IMAGES = {
   // Company Page
   company: {
     hero: {
-      src: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=2000&auto=format&fit=crop",
-      alt: "Geological survey and heavy engineering site terrain in Africa",
+      src: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?q=80&w=2000&auto=format&fit=crop",
+      alt: "Aerial view of large-scale open-pit mining operations and mineral excavation benches",
       width: 2000,
       height: 1200,
     },
