@@ -3,12 +3,13 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { LEADERSHIP, MILESTONES, Leader } from "@/lib/constants";
+import { LEADERSHIP, Leader } from "@/lib/constants";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import { Tag } from "@/components/ui/Tag";
 import { SITE_FACTS } from "@/lib/siteFacts";
 import { SITE_IMAGES } from "@/lib/images";
 import { PersonPlaceholder } from "@/components/ui/PersonPlaceholder";
+import { CompanyTimeline } from "@/components/sections/CompanyTimeline";
 
 const WHAT_SETS_US_APART = [
   {
@@ -263,41 +264,7 @@ export default function CompanyPage() {
       </section>
 
       {/* Company Timeline */}
-      <section id="timeline" className="w-full bg-[#EBE8E0] py-20 md:py-28 border-t border-slab-grey">
-        <div className="max-w-content mx-auto px-6 md:px-12">
-          <div className="mb-14">
-            <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
-              Historical Milestones
-            </span>
-            <h2 className="text-display-lg font-medium text-earth-black leading-[0.95]">
-              {SITE_FACTS.yearsInBusinessStory}
-            </h2>
-          </div>
-
-          <div className="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-[1px] before:bg-slab-grey">
-            {MILESTONES.map((milestone, idx) => (
-              <div
-                key={milestone.year}
-                className={`relative flex flex-col md:flex-row gap-6 md:gap-12 items-start ${
-                  idx % 2 === 0 ? "md:flex-row-reverse text-left" : "text-left"
-                }`}
-              >
-                <div className="md:w-1/2 flex flex-col pl-10 md:pl-0">
-                  <span className="font-mono text-xl font-bold text-oxide-red mb-1">
-                    {milestone.year}
-                  </span>
-                  <h3 className="text-heading-3 font-medium text-earth-black mb-2">
-                    {milestone.title}
-                  </h3>
-                  <p className="text-body-sm text-quarry-grey leading-relaxed">
-                    {milestone.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CompanyTimeline />
 
       {/* Leadership Section */}
       <section id="leadership" className="w-full bg-iron-white py-20 md:py-28 border-t border-slab-grey">
