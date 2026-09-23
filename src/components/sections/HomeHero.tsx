@@ -72,7 +72,7 @@ export function HomeHero() {
       </section>
 
       {/* 2. Single Stats Row directly under the hero (Kept ONCE on the page, imported from siteFacts) */}
-      <section className="w-full bg-[#181816] border-b border-slab-grey/20 text-iron-white py-8">
+      <section className="w-full bg-[#181816] border-b border-slab-grey/20 text-iron-white py-5 md:py-6">
         <div className="max-w-content mx-auto px-6 md:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-slab-grey/15">
             <div className="pt-4 md:pt-0">

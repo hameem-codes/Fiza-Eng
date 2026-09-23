@@ -8,7 +8,7 @@ const SHOW_PARTNERS = false;
 
 export function FounderSection() {
   return (
-    <section className="w-full bg-[#EAE7DF] py-16 md:py-24 border-b border-slab-grey">
+    <section className="w-full bg-[#EAE7DF] py-11 md:py-16 border-b border-slab-grey">
       <div className="max-w-content mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left: Founder Portrait Placeholder */}

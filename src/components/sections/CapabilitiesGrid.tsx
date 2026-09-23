@@ -20,10 +20,10 @@ export function CapabilitiesGrid() {
   const primaryDivisions = CAPABILITIES.slice(0, 3);
 
   return (
-    <section className="w-full bg-[#EFECE5] py-20 md:py-28 border-b border-slab-grey">
+    <section className="w-full bg-[#EFECE5] py-12 md:py-18 border-b border-slab-grey">
       <div className="max-w-content mx-auto px-6 md:px-12">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
           <div>
             <div className="flex items-center gap-2 mb-3">
               <span className="w-2 h-2 bg-oxide-red inline-block" />

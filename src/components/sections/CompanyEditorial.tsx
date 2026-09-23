@@ -6,7 +6,7 @@ import { SITE_IMAGES } from "@/lib/images";
 
 export function CompanyEditorial() {
   return (
-    <section className="w-full py-16 md:py-24 bg-iron-white border-b border-slab-grey">
+    <section className="w-full py-11 md:py-16 bg-iron-white border-b border-slab-grey">
       <div className="max-w-content mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left Text Block (7 Columns) */}

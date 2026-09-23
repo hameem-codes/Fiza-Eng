@@ -5,7 +5,7 @@ import { ArrowRight, Mail, Phone, MapPin } from "lucide-react";
 
 export function ContactCTA() {
   return (
-    <section className="w-full bg-coal-dark text-iron-white py-20 md:py-28 dark-section">
+    <section className="w-full bg-coal-dark text-iron-white py-12 md:py-18 dark-section">
       <div className="max-w-content mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Main Statement */}
