@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const CONSOLIDATED_NAV = [
@@ -62,10 +62,62 @@ export function Header() {
           </span>
         </Link>
 
-        {/* Desktop Navigation Links: 6 Consolidated Items */}
+        {/* Desktop Navigation Links */}
         <nav className="hidden lg:flex items-center gap-7">
           {CONSOLIDATED_NAV.map((link) => {
-            const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(`${link.href}/`));
+            const isCompany = link.href === "/company";
+            const isActive = isCompany
+              ? pathname === "/company" || pathname.startsWith("/company/") || pathname === "/achievements"
+              : pathname === link.href || (link.href !== "/" && pathname.startsWith(`${link.href}/`));
+
+            if (isCompany) {
+              return (
+                <div key={link.href} className="relative group py-2">
+                  <Link
+                    href="/company"
+                    className={cn(
+                      "text-body-sm font-medium tracking-[0.05em] uppercase transition-colors duration-200 flex items-center gap-1 relative py-1",
+                      isActive
+                        ? "text-oxide-red font-semibold"
+                        : scrolled || !isHome
+                        ? "text-earth-black hover:text-oxide-red"
+                        : "text-iron-white/90 hover:text-iron-white"
+                    )}
+                  >
+                    <span>{link.label}</span>
+                    <ChevronDown size={14} className="opacity-70 group-hover:rotate-180 transition-transform duration-200" />
+                    {isActive && (
+                      <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-oxide-red" />
+                    )}
+                  </Link>
+
+                  {/* Dropdown for About / Company Section */}
+                  <div className="absolute top-full left-0 pt-2 hidden group-hover:block group-focus-within:block z-50 animate-fade-in min-w-[240px]">
+                    <div className="bg-iron-white border border-slab-grey shadow-lg p-2 font-mono">
+                      <Link
+                        href="/company"
+                        className="block px-3 py-2 text-xs text-earth-black hover:bg-[#EBE8E0] hover:text-oxide-red transition-colors"
+                      >
+                        <span className="font-semibold block uppercase">Company Overview</span>
+                        <span className="text-[10px] text-quarry-grey font-sans block mt-0.5">
+                          Profile, leadership & footprint
+                        </span>
+                      </Link>
+                      <Link
+                        href="/achievements"
+                        className="block px-3 py-2 text-xs text-earth-black hover:bg-[#EBE8E0] hover:text-oxide-red transition-colors border-t border-slab-grey/40"
+                      >
+                        <span className="font-semibold block uppercase">Certifications & Awards</span>
+                        <span className="text-[10px] text-quarry-grey font-sans block mt-0.5">
+                          ISO accreditations & milestones
+                        </span>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
             return (
               <Link
                 key={link.href}
@@ -111,28 +163,50 @@ export function Header() {
         </button>
       </header>
 
-      {/* Mobile Drawer (Clean Full-Screen Dark Overlay) */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-coal-dark text-iron-white flex flex-col justify-between p-8 pt-28 lg:hidden animate-fade-in overflow-y-auto">
-          <div className="flex flex-col space-y-6">
-            <span className="text-label text-dust-tan tracking-widest uppercase font-mono">
+          <div className="flex flex-col space-y-4">
+            <span className="text-label text-dust-tan tracking-widest uppercase font-mono mb-2">
               Corporate Directory
             </span>
             {CONSOLIDATED_NAV.map((link) => {
-              const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
+              const isCompany = link.href === "/company";
+              const isActive = isCompany
+                ? pathname === "/company" || pathname.startsWith("/company/") || pathname === "/achievements"
+                : pathname === link.href || pathname.startsWith(`${link.href}/`);
+
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={cn(
-                    "text-2xl font-medium tracking-tight uppercase hover:text-oxide-red transition-colors flex items-center justify-between border-b border-slab-grey/15 pb-3",
-                    isActive ? "text-oxide-red" : "text-iron-white"
+                <div key={link.href} className="border-b border-slab-grey/15 pb-3">
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      "text-2xl font-medium tracking-tight uppercase hover:text-oxide-red transition-colors flex items-center justify-between",
+                      isActive ? "text-oxide-red" : "text-iron-white"
+                    )}
+                  >
+                    <span>{link.label}</span>
+                    <ArrowRight size={18} className="text-quarry-grey" />
+                  </Link>
+
+                  {/* Sub-item for Certifications & Awards under Company/About */}
+                  {isCompany && (
+                    <div className="pl-3 pt-2 font-mono text-sm">
+                      <Link
+                        href="/achievements"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={cn(
+                          "text-dust-tan/80 hover:text-oxide-red transition-colors flex items-center gap-2 py-1",
+                          pathname === "/achievements" && "text-oxide-red font-semibold"
+                        )}
+                      >
+                        <span className="text-oxide-red">↳</span>
+                        <span className="uppercase text-xs tracking-wider">Certifications & Awards</span>
+                      </Link>
+                    </div>
                   )}
-                >
-                  <span>{link.label}</span>
-                  <ArrowRight size={18} className="text-quarry-grey" />
-                </Link>
+                </div>
               );
             })}
           </div>

@@ -51,6 +51,7 @@ export const SITE_FACTS = {
   
   // Facilities & Operations
   commissionedFacilities: "14", // TODO: OWNER TO VERIFY - Turnkey industrial plants
+  activeProjectSites: "14", // TODO: OWNER TO VERIFY - Active operational sites
   rebuildDepotArea: "35,000 m²", // TODO: OWNER TO VERIFY - Bamako central rebuild depot
   haulRoadsBuiltKm: "850+ km", // TODO: OWNER TO VERIFY - All-weather heavy civil haul roads
   arableLandHectares: "45,000 hectares", // TODO: OWNER TO VERIFY - Commercial agriculture land developed

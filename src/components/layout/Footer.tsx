@@ -177,7 +177,7 @@ export function Footer() {
               Field Reports
             </Link>
             <Link href="/achievements" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
-              Certifications & ISO
+              Certifications & Awards
             </Link>
           </div>
 
@@ -211,7 +211,7 @@ export function Footer() {
               Terms of Operations
             </Link>
             <Link href="/achievements" className="hover:text-iron-white transition-colors">
-              ISO 45001 & Safety Standards
+              Certifications & Awards
             </Link>
           </div>
         </div>

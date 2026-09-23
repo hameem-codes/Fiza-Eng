@@ -475,55 +475,7 @@ export const MILESTONES = [
   }
 ];
 
-export const ACHIEVEMENTS = [
-  {
-    id: "iso-45001",
-    category: "Certifications",
-    year: "2025",
-    title: "ISO 45001:2018 Occupational Health & Safety",
-    organization: "Bureau Veritas International",
-    description: `Certified across all 14 active project sites, reflecting an industry-leading lost-time injury frequency rate (LTIFR) of ${SITE_FACTS.ltifrRate} per million hours.`
-  },
-  {
-    id: "african-infrastructure-award",
-    category: "Awards",
-    year: "2024",
-    title: "Heavy Infrastructure Excellence Award",
-    organization: "African Development Engineering Forum",
-    description: "Recognized for the rapid, flood-resistant construction of the Falea Mineral Corridor in southwestern Mali."
-  },
-  {
-    id: "iso-9001",
-    category: "Certifications",
-    year: "2023",
-    title: "ISO 9001:2015 Quality Management Systems",
-    organization: "SGS Global Services",
-    description: "Covers turnkey mineral processing plant fabrication, machine remanufacturing, and heavy-haul rail maintenance."
-  },
-  {
-    id: "mineral-corridor-milestone",
-    category: "Milestones",
-    year: "2023",
-    title: "38 Million Tonnes Moved Annually",
-    organization: "Internal Operations Milestone",
-    description: "Achieved annual earthmoving of 38 million tonnes across open-pit concessions with fleet availability above 94%."
-  },
-  {
-    id: "environmental-sustainability",
-    category: "Certifications",
-    year: "2022",
-    title: "ISO 14001:2015 Environmental Stewardship",
-    organization: "DNV GL",
-    description: "Tailings dam structural monitoring and comprehensive post-extraction land contouring and reforestation protocols."
-  },
-  {
-    id: "strategic-partnership",
-    category: "Partnerships",
-    year: "2021",
-    title: "Pan-African Mineral Logistics Syndicate",
-    organization: "International Port Authorities",
-    description: "Secured priority deep-water berth access and rail connection rights at two West African and two East African commercial maritime hubs."
-  }
-];
+export type { Achievement, AchievementCategory } from "./achievements";
+export { ACHIEVEMENTS, ACHIEVEMENT_CATEGORIES, HIDE_UNVERIFIED_ACHIEVEMENTS, getVisibleAchievements } from "./achievements";
 
 export const OFFICES: OfficeLocation[] = SITE_FACTS.offices;
