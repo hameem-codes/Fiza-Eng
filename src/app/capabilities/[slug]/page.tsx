@@ -3,7 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { CAPABILITIES, PROJECTS, PRODUCTS } from "@/lib/constants";
+import { CAPABILITIES } from "@/lib/constants";
+import { PROJECTS } from "@/lib/projects";
+import { PRODUCTS } from "@/lib/products";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 
 interface Props {
@@ -74,8 +76,31 @@ export default function CapabilityDetailPage({ params }: Props) {
     notFound();
   }
 
-  // Related projects and products
-  const relatedProjects = PROJECTS.slice(0, 2);
+  // Related projects tailored to this service
+  const getRelatedProjects = (slug: string) => {
+    switch (slug) {
+      case "mining-services":
+        return PROJECTS.filter(p => p.slug === "falea-bauxite-corridor" || p.slug === "katanga-copper-processing");
+      case "mineral-trading":
+        return PROJECTS.filter(p => p.slug === "falea-bauxite-corridor" || p.slug === "katanga-copper-processing");
+      case "railway-solutions":
+        return PROJECTS.filter(p => p.slug === "toamasina-bulk-rail-terminal" || p.slug === "falea-bauxite-corridor");
+      case "infrastructure":
+        return PROJECTS.filter(p => p.slug === "bamako-industrial-logistics-hub" || p.slug === "manono-lithium-infrastructure");
+      case "turnkey-plants":
+        return PROJECTS.filter(p => p.slug === "katanga-copper-processing" || p.slug === "sikasso-agro-processing");
+      case "agriculture":
+        return PROJECTS.filter(p => p.slug === "sikasso-agro-processing");
+      case "equipment-procurement":
+        return PROJECTS.filter(p => p.slug === "bamako-industrial-logistics-hub");
+      case "industrial-power":
+        return PROJECTS.filter(p => p.slug === "sikasso-agro-processing" || p.slug === "falea-bauxite-corridor");
+      default:
+        return PROJECTS.slice(0, 2);
+    }
+  };
+
+  const relatedProjects = getRelatedProjects(capability.slug);
   const relatedProducts = PRODUCTS.slice(0, 2);
 
   return (
@@ -96,7 +121,7 @@ export default function CapabilityDetailPage({ params }: Props) {
             href="/capabilities"
             className="text-label text-dust-tan font-mono uppercase tracking-[0.2em] inline-flex items-center gap-2 mb-3 hover:text-iron-white transition-colors"
           >
-            ← All Capabilities
+            ← All Services
           </Link>
           <h1 className="text-display-lg sm:text-[3.5rem] font-medium text-iron-white leading-[0.95]">
             {capability.title}
@@ -104,6 +129,14 @@ export default function CapabilityDetailPage({ params }: Props) {
           <p className="text-body-lg text-dust-tan max-w-2xl mt-4 font-normal">
             {capability.tagline}
           </p>
+          <div className="mt-6">
+            <Link
+              href={`/contact?type=${capability.slug}`}
+              className="btn-primary !bg-oxide-red hover:!bg-earth-black text-iron-white text-xs py-3.5 px-6 font-mono uppercase tracking-wider font-semibold inline-flex items-center gap-2 transition-colors"
+            >
+              Enquire about this service →
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -113,7 +146,7 @@ export default function CapabilityDetailPage({ params }: Props) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
               <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-3">
-                Division Profile
+                Service Overview
               </span>
               <p className="text-body-lg text-quarry-grey leading-relaxed">
                 {capability.description}
@@ -144,7 +177,7 @@ export default function CapabilityDetailPage({ params }: Props) {
               Operational Scope
             </span>
             <h2 className="text-display-lg font-medium text-earth-black leading-[0.95]">
-              Core Services & Specifications
+              Core Scope & Deliverables
             </h2>
           </div>
 
@@ -165,7 +198,7 @@ export default function CapabilityDetailPage({ params }: Props) {
 
                 <div className="lg:col-span-7">
                   <p className="text-body-sm text-quarry-grey leading-relaxed">
-                    Delivered with proprietary heavy plant, strict ISO quality and safety certifications, and dedicated engineering supervisors managing round-the-clock shift rotations.
+                    Delivered with direct company equipment, structured project management, and qualified technical supervisors managing on-site execution.
                   </p>
                 </div>
               </div>
@@ -175,55 +208,57 @@ export default function CapabilityDetailPage({ params }: Props) {
       </section>
 
       {/* Related Projects */}
-      <section className="w-full bg-iron-white py-20 border-b border-slab-grey">
-        <div className="max-w-content mx-auto px-6 md:px-12">
-          <div className="flex justify-between items-end mb-12">
-            <div>
-              <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
-                Field Execution
-              </span>
-              <h2 className="text-heading-1 font-medium text-earth-black">
-                Active Projects in This Sector
-              </h2>
-            </div>
-            <Link
-              href="/projects"
-              className="text-label font-bold text-earth-black hover:text-oxide-red uppercase tracking-wider font-mono"
-            >
-              All Projects →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {relatedProjects.map((proj) => (
-              <Link
-                key={proj.id}
-                href={`/projects/${proj.slug}`}
-                className="group border border-slab-grey p-6 bg-[#EBE8E0] hover:border-earth-black transition-colors"
-              >
-                <div className="relative aspect-[16/10] w-full overflow-hidden mb-4 bg-slab-grey">
-                  <Image
-                    src={proj.image}
-                    alt={proj.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="img-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  />
-                </div>
-                <span className="font-mono text-xs text-oxide-red uppercase tracking-wider block mb-1">
-                  {proj.country} · {proj.category}
+      {relatedProjects.length > 0 && (
+        <section className="w-full bg-iron-white py-20 border-b border-slab-grey">
+          <div className="max-w-content mx-auto px-6 md:px-12">
+            <div className="flex justify-between items-end mb-12">
+              <div>
+                <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
+                  Field Execution
                 </span>
-                <h3 className="text-heading-3 font-medium text-earth-black group-hover:text-oxide-red transition-colors mb-2">
-                  {proj.title}
-                </h3>
-                <p className="text-body-sm text-quarry-grey leading-relaxed">
-                  {proj.excerpt}
-                </p>
+                <h2 className="text-heading-1 font-medium text-earth-black">
+                  Related Projects
+                </h2>
+              </div>
+              <Link
+                href="/projects"
+                className="text-label font-bold text-earth-black hover:text-oxide-red uppercase tracking-wider font-mono"
+              >
+                All Projects →
               </Link>
-            ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {relatedProjects.map((proj) => (
+                <Link
+                  key={proj.id}
+                  href={`/projects/${proj.slug}`}
+                  className="group border border-slab-grey p-6 bg-[#EBE8E0] hover:border-earth-black transition-colors"
+                >
+                  <div className="relative aspect-[16/10] w-full overflow-hidden mb-4 bg-slab-grey">
+                    <Image
+                      src={proj.image}
+                      alt={proj.imageAlt || proj.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="img-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <span className="font-mono text-xs text-oxide-red uppercase tracking-wider block mb-1">
+                    {proj.country} · {proj.sector}
+                  </span>
+                  <h3 className="text-heading-3 font-medium text-earth-black group-hover:text-oxide-red transition-colors mb-2">
+                    {proj.name}
+                  </h3>
+                  <p className="text-body-sm text-quarry-grey leading-relaxed">
+                    {proj.summary}
+                  </p>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Related Equipment */}
       <section className="w-full bg-[#EBE8E0] py-20">
@@ -255,14 +290,14 @@ export default function CapabilityDetailPage({ params }: Props) {
                 <div className="relative aspect-[16/10] w-full overflow-hidden mb-4 bg-slab-grey">
                   <Image
                     src={prod.heroImage}
-                    alt={prod.name}
+                    alt={prod.imageAlt || prod.name}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="img-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </div>
                 <span className="font-mono text-xs text-oxide-red uppercase tracking-wider block mb-1">
-                  {prod.modelNumber}
+                  {prod.category}
                 </span>
                 <h3 className="text-heading-3 font-medium text-earth-black group-hover:text-oxide-red transition-colors mb-2">
                   {prod.name}
@@ -273,6 +308,29 @@ export default function CapabilityDetailPage({ params }: Props) {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="w-full bg-coal-dark py-16 text-iron-white border-t border-slab-grey/20">
+        <div className="max-w-content mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div>
+            <span className="text-label text-dust-tan font-mono uppercase tracking-widest block mb-2">
+              Start an Inquiry
+            </span>
+            <h2 className="text-heading-1 font-medium text-iron-white">
+              Tell us about your project
+            </h2>
+            <p className="text-body-sm text-dust-tan max-w-xl mt-2 font-normal">
+              Direct consultation with our engineering and commercial teams. We review site specifications, logistics constraints, and project timelines.
+            </p>
+          </div>
+          <Link
+            href={`/contact?type=${capability.slug}`}
+            className="btn-primary !bg-oxide-red hover:!bg-iron-white hover:!text-earth-black text-iron-white text-xs py-4 px-8 font-mono uppercase tracking-wider font-semibold whitespace-nowrap transition-colors"
+          >
+            Tell us about your project →
+          </Link>
         </div>
       </section>
     </div>

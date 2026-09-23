@@ -1,7 +1,7 @@
 /**
  * SINGLE SOURCE OF TRUTH: Fiza Engineering Corporation
  * Centralizes all verified company facts, statistics, operational figures, and contact details.
- * Any unverified values are noted with // TODO: VERIFY.
+ * Values marked TODO are unverified and must be confirmed by the owner before launch.
  */
 
 export const FOUNDED_YEAR = 1994;
@@ -20,8 +20,9 @@ export interface OfficeData {
   country: string;
   type: string;
   address: string;
-  phone: string; // TODO: VERIFY
+  phone: string;
   email: string;
+  mapUrl?: string;
   coordinates: { x: number; y: number };
 }
 
@@ -41,31 +42,45 @@ export const SITE_FACTS = {
   fleetSizeNumber: 450, // TODO: VERIFY
   countries: 12, // TODO: VERIFY
   continents: 4, // Middle East, Africa, Asia, plus global trade // TODO: VERIFY
-  kilometresOfTrack: "42 km", // TODO: VERIFY - completed Falea & Madagascar corridors
-  kilometresOfTrackNumber: 42, // TODO: VERIFY
-  mwInstalled: "25MW", // TODO: VERIFY - industrial hybrid microgrid
-  mwInstalledNumber: 25, // TODO: VERIFY
+  
+  // Rail infrastructure
+  railTrackKm: "1,140 km", // TODO: OWNER TO VERIFY
+  railTrackKmNumber: 1140, // TODO: OWNER TO VERIFY
+  spursCompletedKm: "42 km", // TODO: OWNER TO VERIFY - completed Falea & Madagascar mineral spurs
+  spursCompletedKmNumber: 42, // TODO: OWNER TO VERIFY
+  
+  // Facilities & Operations
+  commissionedFacilities: "14", // TODO: OWNER TO VERIFY - Turnkey industrial plants
+  activeProjectSites: "14", // TODO: OWNER TO VERIFY - Active operational sites
+  rebuildDepotArea: "35,000 m²", // TODO: OWNER TO VERIFY - Bamako central rebuild depot
+  haulRoadsBuiltKm: "850+ km", // TODO: OWNER TO VERIFY - All-weather heavy civil haul roads
+  arableLandHectares: "45,000 hectares", // TODO: OWNER TO VERIFY - Commercial agriculture land developed
+  procuredEquipmentMachines: "850+ machines", // TODO: OWNER TO VERIFY - Sourced and rebuilt equipment units
+  
+  // Commodity Trading Volume
+  annualTradedMineralTonnes: "4.2M tonnes", // TODO: OWNER TO VERIFY - Traded mineral volume
 
-  // Tonnage: Consistent unified figures
-  // ONE annual figure plus clearly dated record figure
+  // Power Generation
+  installedPower: "185 MW", // TODO: OWNER TO VERIFY
+  installedPowerNumber: 185, // TODO: OWNER TO VERIFY
+
+  // Tonnage: Consistent annual figure (no record claims)
   annualTonnesMoved: "38M Tonnes",
   annualTonnesNumber: "38M",
-  recordTonnesYear: "2023",
-  recordTonnesMoved: "38 Million Tonnes in 2023",
-  recordTonnesDescription: "Achieved record annual earthmoving of 38 million tonnes across open-pit contracts in 2023 with fleet availability above 94%.",
 
   // Safety & Operational Standards
   ltifrRate: "0.12", // Lost-Time Injury Frequency Rate // TODO: VERIFY
-  fleetAvailability: "94.8%", // TODO: VERIFY
+  fleetAvailability: "94%+", // TODO: OWNER TO VERIFY
 
-  // Contact Information - Unified contact set
+  // Contact Information - Single verified email, phone placeholder pending owner confirmation
   contact: {
     primaryEmail: "info@fizaengineering.com",
-    projectsEmail: "projects@fizaengineering.com",
-    supportEmail: "support@fizaengineering.com",
-    primaryPhone: "+971 4 362 8800", // TODO: VERIFY
+    // TODO: OWNER TO VERIFY: +971 4 362 8800
+    primaryPhone: "[REAL PHONE]",
     hqCity: "Dubai, United Arab Emirates",
+    // TODO: OWNER TO VERIFY: DIFC Gate Precinct, Building 4, Level 7, Dubai
     hqAddress: "DIFC Gate Precinct, Building 4, Level 7, Dubai",
+    hqMapUrl: "https://www.google.com/maps/search/?api=1&query=DIFC+Gate+Precinct+Dubai+UAE",
   },
 
   // Regional Footprint: Real operations hubs (no unverified SE Asia / Latin America offices)
@@ -76,36 +91,48 @@ export const SITE_FACTS = {
       city: "Dubai",
       country: "United Arab Emirates",
       type: "Corporate Headquarters & International Mineral Trading Hub",
+      // TODO: OWNER TO VERIFY: DIFC Gate Precinct, Building 4, Level 7, Dubai
       address: "DIFC Gate Precinct, Building 4, Level 7, Dubai",
-      phone: "+971 4 362 8800", // TODO: VERIFY
+      // TODO: OWNER TO VERIFY: +971 4 362 8800
+      phone: "[REAL PHONE]",
       email: "info@fizaengineering.com",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=DIFC+Gate+Precinct+Dubai+UAE",
       coordinates: { x: 74, y: 35 }
     },
     {
       city: "Bamako",
       country: "Mali",
       type: "West Africa Regional Operations & Fleet Depot",
+      // TODO: OWNER TO VERIFY: Zone Industrielle de Sotuba, Route de Koulikoro, Bamako
       address: "Zone Industrielle de Sotuba, Route de Koulikoro, Bamako",
-      phone: "+223 20 28 44 00", // TODO: VERIFY
+      // TODO: OWNER TO VERIFY: +223 20 28 44 00
+      phone: "[REAL PHONE]",
       email: "info@fizaengineering.com",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Zone+Industrielle+de+Sotuba+Bamako+Mali",
       coordinates: { x: 38, y: 44 }
     },
     {
       city: "Kinshasa & Kolwezi",
       country: "Democratic Republic of Congo",
       type: "Central Africa Operations & Mineral Logistics",
+      // TODO: OWNER TO VERIFY: Boulevard du 30 Juin, Gombe, Kinshasa / Kolwezi Mining Hub
       address: "Boulevard du 30 Juin, Gombe, Kinshasa / Kolwezi Mining Hub",
-      phone: "+243 81 55 92 100", // TODO: VERIFY
+      // TODO: OWNER TO VERIFY: +243 81 55 92 100
+      phone: "[REAL PHONE]",
       email: "info@fizaengineering.com",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Boulevard+du+30+Juin+Gombe+Kinshasa+DRC",
       coordinates: { x: 54, y: 56 }
     },
     {
       city: "Johannesburg",
       country: "South Africa",
       type: "Engineering Design & Supply Chain Center",
+      // TODO: OWNER TO VERIFY: Sandton City Office Towers, 5th Street, Sandton, 2196
       address: "Sandton City Office Towers, 5th Street, Sandton, 2196",
-      phone: "+27 11 884 9200", // TODO: VERIFY
+      // TODO: OWNER TO VERIFY: +27 11 884 9200
+      phone: "[REAL PHONE]",
       email: "info@fizaengineering.com",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Sandton+City+Office+Towers+Sandton+Johannesburg",
       coordinates: { x: 56, y: 78 }
     }
   ] as OfficeData[]

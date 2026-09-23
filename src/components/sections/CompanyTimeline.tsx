@@ -1,9 +1,46 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { MILESTONES } from "@/lib/constants";
 import { SITE_FACTS } from "@/lib/siteFacts";
 import { cn } from "@/lib/utils";
+
+const MILESTONES = [
+  {
+    year: "1994",
+    title: "Establishment & International Commodity Trade",
+    description: "Founded by Muhammed Farooghuddin, developing international mineral trading and heavy industrial equipment supply channels across the Middle East, Asia, and Africa."
+  },
+  {
+    year: "2001",
+    title: "Heavy Fleet Equipment Services",
+    description: "Expanded direct operations with heavy earthmoving fleet deployment supporting industrial civil foundations and mining logistics."
+  },
+  {
+    year: "2007",
+    title: "Open-Pit Mining Concessions",
+    description: "Awarded multi-year overburden stripping concessions in Mali, establishing on-site rebuild machine workshops."
+  },
+  {
+    year: "2013",
+    title: "Turnkey Industrial Plants Division",
+    description: "Commissioned automated primary crushing circuits and expanded into Central Africa and the DRC copperbelt."
+  },
+  {
+    year: "2018",
+    title: "Direct Mineral Trading Corridors",
+    description: "Structured direct off-take agreements for bauxite, high-grade hematite iron ore, and cathode copper to global markets."
+  },
+  {
+    year: "2022",
+    title: "Heavy-Haul Rail Infrastructure",
+    description: "Executed railway track renewal and heavy-haul rolling stock operations across specialized mineral corridors."
+  },
+  {
+    year: "2026",
+    title: `Operations across ${SITE_FACTS.countries} countries`,
+    description: `Operating mining, civil, rail, and agro-industrial infrastructure projects across ${SITE_FACTS.countries} countries on ${SITE_FACTS.continents} continents.`
+  }
+];
 
 export function CompanyTimeline() {
   const [activeIdx, setActiveIdx] = useState(0);

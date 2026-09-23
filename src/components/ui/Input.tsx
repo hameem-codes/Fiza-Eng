@@ -7,25 +7,38 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function Input({ label, error, className, id, ...props }: InputProps) {
-  const inputId = id || (label ? label.toLowerCase().replace(/\s+/g, "-") : undefined);
+  const generatedId = React.useId();
+  const inputId = id || (label ? label.toLowerCase().replace(/[^a-z0-9]+/g, "-") : generatedId);
+  const errorId = `${inputId}-error`;
 
   return (
     <div className="w-full flex flex-col mb-6">
       {label && (
-        <label htmlFor={inputId} className="form-label">
+        <label htmlFor={inputId} className="form-label cursor-pointer">
           {label}
         </label>
       )}
       <input
         id={inputId}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? errorId : undefined}
         className={cn(
-          "form-input",
+          "form-input min-h-[44px] focus:outline-none focus:border-b-oxide-red focus-visible:ring-2 focus-visible:ring-oxide-red/40",
           error && "border-b-oxide-red",
           className
         )}
         {...props}
       />
-      {error && <span className="text-xs text-oxide-red mt-1 font-mono uppercase tracking-wider">{error}</span>}
+      {error && (
+        <span
+          id={errorId}
+          role="alert"
+          aria-live="polite"
+          className="text-xs text-oxide-red mt-1 font-mono uppercase tracking-wider"
+        >
+          {error}
+        </span>
+      )}
     </div>
   );
 }
@@ -37,19 +50,23 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 export function Select({ label, error, options, className, id, ...props }: SelectProps) {
-  const selectId = id || (label ? label.toLowerCase().replace(/\s+/g, "-") : undefined);
+  const generatedId = React.useId();
+  const selectId = id || (label ? label.toLowerCase().replace(/[^a-z0-9]+/g, "-") : generatedId);
+  const errorId = `${selectId}-error`;
 
   return (
     <div className="w-full flex flex-col mb-6">
       {label && (
-        <label htmlFor={selectId} className="form-label">
+        <label htmlFor={selectId} className="form-label cursor-pointer">
           {label}
         </label>
       )}
       <select
         id={selectId}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? errorId : undefined}
         className={cn(
-          "form-input bg-transparent cursor-pointer",
+          "form-input bg-transparent cursor-pointer min-h-[44px] focus:outline-none focus:border-b-oxide-red focus-visible:ring-2 focus-visible:ring-oxide-red/40",
           error && "border-b-oxide-red",
           className
         )}
@@ -61,7 +78,16 @@ export function Select({ label, error, options, className, id, ...props }: Selec
           </option>
         ))}
       </select>
-      {error && <span className="text-xs text-oxide-red mt-1 font-mono uppercase tracking-wider">{error}</span>}
+      {error && (
+        <span
+          id={errorId}
+          role="alert"
+          aria-live="polite"
+          className="text-xs text-oxide-red mt-1 font-mono uppercase tracking-wider"
+        >
+          {error}
+        </span>
+      )}
     </div>
   );
 }
@@ -72,26 +98,39 @@ interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
 }
 
 export function Textarea({ label, error, className, id, rows = 4, ...props }: TextareaProps) {
-  const textareaId = id || (label ? label.toLowerCase().replace(/\s+/g, "-") : undefined);
+  const generatedId = React.useId();
+  const textareaId = id || (label ? label.toLowerCase().replace(/[^a-z0-9]+/g, "-") : generatedId);
+  const errorId = `${textareaId}-error`;
 
   return (
     <div className="w-full flex flex-col mb-6">
       {label && (
-        <label htmlFor={textareaId} className="form-label">
+        <label htmlFor={textareaId} className="form-label cursor-pointer">
           {label}
         </label>
       )}
       <textarea
         id={textareaId}
         rows={rows}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? errorId : undefined}
         className={cn(
-          "form-input resize-none",
+          "form-input resize-none min-h-[120px] focus:outline-none focus:border-b-oxide-red focus-visible:ring-2 focus-visible:ring-oxide-red/40",
           error && "border-b-oxide-red",
           className
         )}
         {...props}
       />
-      {error && <span className="text-xs text-oxide-red mt-1 font-mono uppercase tracking-wider">{error}</span>}
+      {error && (
+        <span
+          id={errorId}
+          role="alert"
+          aria-live="polite"
+          className="text-xs text-oxide-red mt-1 font-mono uppercase tracking-wider"
+        >
+          {error}
+        </span>
+      )}
     </div>
   );
 }

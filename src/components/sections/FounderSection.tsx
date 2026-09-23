@@ -1,92 +1,71 @@
 import React from "react";
 import Link from "next/link";
-import { SITE_FACTS } from "@/lib/siteFacts";
+import { PersonPlaceholder } from "@/components/ui/PersonPlaceholder";
+
+// TODO: CONFIRM PARTNERSHIP with AELMET and Eliixir Traintech
+// Keep row hidden until owner confirms active strategic partnerships
+const SHOW_PARTNERS = false;
 
 export function FounderSection() {
   return (
-    <section className="w-full bg-[#EAE7DF] py-20 md:py-28 border-t border-b border-slab-grey">
+    <section className="w-full bg-[#EAE7DF] py-11 md:py-16 border-b border-slab-grey">
       <div className="max-w-content mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Text Block (7 columns) */}
-          <div className="lg:col-span-7">
-            <span className="text-label text-earth-black font-mono uppercase tracking-widest font-semibold block mb-3">
-              Leadership
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left: Founder Portrait Placeholder */}
+          <div className="lg:col-span-4 max-w-sm mx-auto lg:mx-0 w-full">
+            <PersonPlaceholder
+              name="Muhammed Farooghuddin"
+              title="Founder & Chief Executive Officer"
+              className="w-full aspect-[4/5] max-h-[380px]"
+            />
+          </div>
+
+          {/* Right: Leadership Profile & Quote */}
+          <div className="lg:col-span-8">
+            <span className="text-label text-earth-black font-mono uppercase tracking-widest font-semibold block mb-2">
+              Executive Leadership
             </span>
 
-            <h2 className="text-display-lg sm:text-[2.75rem] font-medium text-earth-black leading-[1.05] mb-4">
+            <h2 className="text-display-lg sm:text-[2.5rem] font-medium text-earth-black leading-[1.05] mb-2">
               Muhammed Farooghuddin
             </h2>
-            <span className="font-mono text-xs uppercase tracking-wider text-oxide-red font-semibold block mb-6">
-              Founder & CEO
+            <span className="font-mono text-xs uppercase tracking-wider text-oxide-red font-semibold block mb-5">
+              Founder & Chief Executive Officer
             </span>
 
-            <p className="text-earth-black text-body-lg leading-relaxed mb-6 font-normal">
-              India-born and Dubai-based, with more than four decades in international business, mineral trading and industrial development. Under his leadership, Fiza has expanded from a construction equipment trading business into a multidisciplinary enterprise operating across Africa, Asia, the CIS and the Middle East.
+            {/* Founder Biography */}
+            <p className="text-earth-black/85 text-body leading-relaxed mb-6 font-normal">
+              India-born and Dubai-based, with more than four decades in international business, mineral trading and industrial development. Under his leadership, Fiza has developed strategic concessions, heavy rail logistics corridors, and large-scale turnkey industrial plant operations across Africa, Asia, and the Middle East.
             </p>
 
-            {/* Quote Block */}
-            <blockquote className="border-l-4 border-oxide-red pl-6 py-2 my-6 bg-iron-white/70 p-5 border border-slab-grey/40">
+            {/* Founder Quote */}
+            <blockquote className="border-l-4 border-oxide-red pl-5 py-2 my-5 bg-iron-white/80 p-4 border border-slab-grey/40">
               <p className="font-heading text-lg md:text-xl italic text-earth-black leading-snug font-normal">
                 &ldquo;Our purpose is to build partnerships that strengthen local capability, create lasting value and help ambitious projects move forward.&rdquo;
               </p>
-              <cite className="block text-xs font-mono text-quarry-grey uppercase tracking-wider mt-3 not-italic">
+              <cite className="block text-xs font-mono text-quarry-grey uppercase tracking-wider mt-2.5 not-italic">
                 — Muhammed Farooghuddin, Founder & CEO
               </cite>
             </blockquote>
 
-            <div className="mt-8 pt-6 border-t border-slab-grey/60 flex items-center gap-6">
+            <div className="mt-6 flex items-center gap-4">
               <Link
                 href="/company#leadership"
-                className="btn-primary text-xs py-3 px-6"
+                className="btn-primary text-xs py-3 px-6 font-mono uppercase tracking-wider font-semibold"
               >
-                Leadership Profile →
-              </Link>
-              <Link
-                href="/contact"
-                className="btn-secondary text-xs py-3 px-6"
-              >
-                Executive Inquiries
+                Read leadership profile
               </Link>
             </div>
-          </div>
 
-          {/* Right Solid Pattern Block (5 columns) - NO random stock photo */}
-          <div className="lg:col-span-5 h-[340px] sm:h-[400px] w-full bg-coal-dark border border-slab-grey p-8 flex flex-col justify-between relative overflow-hidden shadow-sm">
-            {/* Subtle Industrial Pattern */}
-            <div
-              className="absolute inset-0 opacity-15 pointer-events-none"
-              style={{
-                backgroundImage: "radial-gradient(#F2F0EB 1px, transparent 1px)",
-                backgroundSize: "24px 24px",
-              }}
-            />
-            <div className="relative z-10">
-              <span className="text-label text-dust-tan font-mono uppercase tracking-widest block mb-2">
-                Executive Governance
-              </span>
-              <h3 className="text-heading-3 text-iron-white font-medium">
-                Four Decades of Direct Execution
-              </h3>
-            </div>
-
-            <div className="relative z-10 pt-6 border-t border-slab-grey/20 space-y-4 font-mono text-xs text-dust-tan">
-              <div className="flex justify-between items-center">
-                <span className="text-quarry-grey">Established</span>
-                <span className="text-iron-white font-semibold">{SITE_FACTS.foundedYear}</span>
+            {/* Strategic Partners Row - Hidden behind SHOW_PARTNERS until confirmed */}
+            {SHOW_PARTNERS && (
+              <div className="mt-8 pt-5 border-t border-slab-grey/80 flex flex-wrap items-center gap-3 text-xs font-mono text-quarry-grey">
+                <span className="font-bold text-earth-black uppercase tracking-wider">Partners:</span>
+                <span className="text-earth-black font-medium">AELMET (USA)</span>
+                <span>·</span>
+                <span className="text-earth-black font-medium">Eliixir Traintech (India)</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-quarry-grey">Executive Base</span>
-                <span className="text-iron-white font-semibold">Dubai (DIFC)</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-quarry-grey">Operational Scope</span>
-                <span className="text-iron-white font-semibold">Africa · Asia · CIS · Middle East</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-quarry-grey">Operating Model</span>
-                <span className="text-oxide-red font-semibold">Vertically Integrated</span>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

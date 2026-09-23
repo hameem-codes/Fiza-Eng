@@ -50,20 +50,22 @@ export function Footer() {
                   </a>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Mail size={14} className="text-oxide-red shrink-0" />
-                  <a href={`mailto:${SITE_FACTS.contact.projectsEmail}`} className="hover:text-iron-white transition-colors truncate">
-                    {SITE_FACTS.contact.projectsEmail}
-                  </a>
-                </div>
-                <div className="flex items-center gap-2">
                   <Phone size={14} className="text-oxide-red shrink-0" />
-                  <a href={`tel:${SITE_FACTS.contact.primaryPhone.replace(/\s+/g, '')}`} className="hover:text-iron-white transition-colors">
+                  {/* TODO: OWNER TO VERIFY: +971 4 362 8800 */}
+                  <span className="text-quarry-grey">
                     {SITE_FACTS.contact.primaryPhone}
-                  </a>
+                  </span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 sm:col-span-2">
                   <MapPin size={14} className="text-oxide-red shrink-0" />
-                  <span>DIFC, Dubai (HQ) · Bamako · Kolwezi</span>
+                  <a
+                    href={SITE_FACTS.contact.hqMapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-iron-white transition-colors"
+                  >
+                    DIFC, Dubai (HQ) · Bamako · Kinshasa · Sandton
+                  </a>
                 </div>
               </div>
             </div>
@@ -73,7 +75,7 @@ export function Footer() {
                 href="/contact"
                 className="btn-primary !bg-oxide-red hover:!bg-iron-white hover:!text-earth-black text-xs py-3 px-6 shadow-sm inline-block"
               >
-                Initiate Project Discussion →
+                Contact us
               </Link>
             </div>
           </div>
@@ -121,7 +123,7 @@ export function Footer() {
               Turnkey Plants
             </Link>
             <Link href="/capabilities" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
-              All 8 Divisions →
+              All Services →
             </Link>
           </div>
 
@@ -158,7 +160,7 @@ export function Footer() {
             <Link href="/products?category=Railway+Solutions" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
               Locomotives
             </Link>
-            <Link href="/capabilities/mineral-trading" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
+            <Link href="/products?category=Traded+Minerals" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
               Traded Minerals
             </Link>
           </div>
@@ -175,7 +177,7 @@ export function Footer() {
               Field Reports
             </Link>
             <Link href="/achievements" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
-              Certifications & ISO
+              Certifications & Awards
             </Link>
           </div>
 
@@ -184,13 +186,13 @@ export function Footer() {
             <span className="text-label font-mono text-dust-tan tracking-wider uppercase font-semibold">
               Contact
             </span>
-            <Link href="/contact" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
+            <Link href="/contact#hq" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
               Corporate Headquarters
             </Link>
-            <Link href="/contact" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
+            <Link href="/contact#offices" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
               Regional Operations Hubs
             </Link>
-            <Link href="/contact" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
+            <Link href="/contact#form" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
               Project Procurement Tender
             </Link>
           </div>
@@ -209,7 +211,7 @@ export function Footer() {
               Terms of Operations
             </Link>
             <Link href="/achievements" className="hover:text-iron-white transition-colors">
-              ISO 45001 & Safety Standards
+              Certifications & Awards
             </Link>
           </div>
         </div>

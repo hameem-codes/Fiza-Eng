@@ -11,6 +11,25 @@ const nextConfig = {
     ],
     unoptimized: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/services",
+        destination: "/capabilities",
+        permanent: true,
+      },
+      {
+        source: "/services/:slug*",
+        destination: "/capabilities/:slug*",
+        permanent: true,
+      },
+      {
+        source: "/products/off-highway-rigid-truck-777",
+        destination: "/products/fiza-rt100-haul-truck",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

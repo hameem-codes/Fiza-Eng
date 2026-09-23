@@ -31,8 +31,8 @@ const CONCESSIONS: ConcessionPin[] = [
   {
     id: "drc",
     country: "Democratic Republic of Congo",
-    name: "Katanga Copper-Cobalt & Lithium Hub",
-    resources: ["Grade-A Copper Cathode", "Cobalt Hydroxide", "Spodumene SC6"],
+    name: "Katanga Copper-Cobalt Hub",
+    resources: ["Grade-A Copper Cathode", "Cobalt Hydroxide", "Copper Blister Ingots"],
     equipment: "220 Heavy Units Deployed",
     throughput: "1,500 TPH Modular Crushing",
     x: 58,

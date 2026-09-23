@@ -6,54 +6,40 @@ import { SITE_IMAGES } from "@/lib/images";
 
 export function CompanyEditorial() {
   return (
-    <section className="w-full py-20 md:py-28 overflow-hidden bg-iron-white border-b border-slab-grey">
+    <section className="w-full py-11 md:py-16 bg-iron-white border-b border-slab-grey">
       <div className="max-w-content mx-auto px-6 md:px-12">
-        {/* Pattern A: Editorial Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left Text Block (7 Columns) */}
           <div className="lg:col-span-7">
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-3">
               <span className="w-2 h-2 bg-oxide-red inline-block" />
               <span className="text-label text-earth-black font-mono tracking-widest font-semibold">
                 About Fiza Engineering
               </span>
             </div>
 
-            <h2 className="text-display-lg sm:text-[3rem] font-medium text-earth-black leading-[1.0] mb-8">
-              Turning complex industrial terrain into dependable, executed operations.
+            <h2 className="text-display-lg sm:text-[2.6rem] font-medium text-earth-black leading-[1.05] mb-6">
+              Engineering heavy infrastructure and direct mineral supply chains.
             </h2>
 
-            <div className="space-y-6 text-quarry-grey text-body leading-relaxed max-w-editorial">
-              <p className="text-earth-black font-medium text-body-lg leading-relaxed">
-                Fiza Engineering Corporation is a multidisciplinary industrial company headquartered in the Middle East, with an operational focus across Africa. We develop mining and infrastructure projects, supply minerals and deliver heavy industrial solutions to international markets.
-              </p>
-              <p>
-                We combine active mining interests, equipment manufacturing, engineering capability and international project development to turn complex industrial requirements into dependable, operational assets.
-              </p>
-              <p className="border-l-2 border-oxide-red pl-4 text-earth-black/90 italic text-sm">
-                Founded by <strong className="font-semibold text-earth-black">Muhammed Farooghuddin</strong>, with over four decades of experience in international business and mineral trading, Fiza has developed strategic concessions, heavy rail logistics, and large-scale plant operations with rigorous operational discipline.
-              </p>
-            </div>
+            {/* Exactly ONE paragraph of 51 words (50-60 words range) */}
+            <p className="text-body-lg text-earth-black/85 leading-relaxed mb-8 font-normal max-w-xl">
+              Founded in {SITE_FACTS.foundedYear} by Muhammed Farooghuddin, Fiza Engineering Corporation is an integrated industrial company headquartered in Dubai with principal operations across Africa. We develop mineral concessions, engineer heavy-haul railway corridors, build turnkey processing plants, and supply bulk commodities to global markets with direct operational control and our own heavy machinery fleet.
+            </p>
 
-            <div className="mt-10 pt-6 border-t border-slab-grey flex flex-wrap items-center gap-6">
+            <div className="pt-4 border-t border-slab-grey/60">
               <Link
                 href="/company"
-                className="btn-primary text-xs py-3 px-6 inline-flex items-center gap-2"
+                className="btn-primary text-xs py-3 px-6 inline-flex items-center gap-2 font-mono uppercase tracking-wider font-semibold"
               >
-                Read Company Profile <span>→</span>
-              </Link>
-              <Link
-                href="/contact"
-                className="btn-secondary text-xs py-3 px-6 inline-flex items-center gap-2"
-              >
-                Our Operations & Offices
+                Read company profile <span>→</span>
               </Link>
             </div>
           </div>
 
           {/* Right Image Block (5 Columns) */}
           <div className="lg:col-span-5 relative">
-            <div className="relative h-[420px] sm:h-[480px] w-full border border-slab-grey bg-slab-grey/40 shadow-sm overflow-hidden">
+            <div className="relative h-[380px] sm:h-[420px] w-full border border-slab-grey bg-slab-grey/40 shadow-sm overflow-hidden">
               <Image
                 src={SITE_IMAGES.editorialMining.src}
                 alt={SITE_IMAGES.editorialMining.alt}
@@ -61,22 +47,22 @@ export function CompanyEditorial() {
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="img-cover object-center transition-transform duration-700 hover:scale-[1.02]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-earth-black/70 via-transparent to-transparent pointer-events-none" />
-              
-              <div className="absolute bottom-4 left-4 right-4 bg-earth-black/90 backdrop-blur-sm p-4 text-iron-white border border-slab-grey/20">
+              <div className="absolute inset-0 bg-gradient-to-t from-earth-black/75 via-transparent to-transparent pointer-events-none" />
+
+              <div className="absolute bottom-4 left-4 right-4 bg-earth-black/90 backdrop-blur-sm p-3.5 text-iron-white border border-slab-grey/20">
                 <span className="block font-mono text-[10px] uppercase text-dust-tan tracking-wider">
-                  Field Operations · Concession Development
+                  Our fleet
                 </span>
-                <span className="text-body-sm font-medium text-iron-white block mt-1">
-                  100% owned fleet of over {SITE_FACTS.fleetSize} machines active across {SITE_FACTS.continents} continents.
+                <span className="text-xs font-mono text-iron-white block mt-0.5">
+                  {SITE_FACTS.fleetSize} company-owned machines active across {SITE_FACTS.continents} continents.
                 </span>
               </div>
             </div>
 
-            {/* Asymmetric Floating Stat Tag */}
-            <div className="hidden sm:block absolute -top-4 -right-4 bg-iron-white border border-slab-grey p-4 shadow-sm">
-              <span className="font-heading text-2xl font-bold text-oxide-red block">{SITE_FACTS.foundedYear}</span>
-              <span className="font-mono text-[10px] uppercase text-quarry-grey tracking-wider">Established</span>
+            {/* Asymmetric Floating Established Tag */}
+            <div className="hidden sm:block absolute -top-3 -right-3 bg-iron-white border border-slab-grey px-4 py-2.5 shadow-sm">
+              <span className="font-mono text-xl font-bold text-oxide-red block leading-none">{SITE_FACTS.foundedYear}</span>
+              <span className="font-mono text-[9px] uppercase text-quarry-grey tracking-wider mt-0.5 block">Founded</span>
             </div>
           </div>
         </div>

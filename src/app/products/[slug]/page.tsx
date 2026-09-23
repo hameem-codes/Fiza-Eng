@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { PRODUCTS } from "@/lib/constants";
-import { SectionDivider } from "@/components/ui/SectionDivider";
+import { PRODUCTS, ProductItem } from "@/lib/products";
 
 interface Props {
   params: {
@@ -26,15 +25,8 @@ export function generateMetadata({ params }: Props): Metadata {
     };
   }
 
-  const fullTitle = `${product.name} | Fiza Engineering`;
-  const title = fullTitle.length <= 60 ? fullTitle : `${product.name.slice(0, 38)} | Fiza Engineering`;
-
-  const rawDesc = `${product.overview} Model: ${product.modelNumber}. Engineered for heavy industrial service.`;
-  const description = rawDesc.length >= 120 && rawDesc.length <= 155
-    ? rawDesc
-    : rawDesc.length > 155
-    ? `${rawDesc.slice(0, 151)}...`
-    : `${rawDesc} Multidisciplinary mining and rail solutions across Africa.`.slice(0, 150);
+  const title = `${product.name} | Equipment Catalog | Fiza Engineering`;
+  const description = `${product.name} (${product.category}). ${product.overview.slice(0, 135)}`;
 
   return {
     title,
@@ -53,7 +45,7 @@ export function generateMetadata({ params }: Props): Metadata {
           url: product.heroImage,
           width: 1200,
           height: 630,
-          alt: product.name,
+          alt: product.imageAlt,
         },
       ],
     },
@@ -72,6 +64,9 @@ export default function ProductDetailPage({ params }: Props) {
     notFound();
   }
 
+  const relatedProducts = PRODUCTS.filter((p) => p.slug !== product.slug).slice(0, 3);
+  const quoteHref = `/contact?type=${product.quoteType}&product=${encodeURIComponent(product.name)}`;
+
   return (
     <div className="w-full pt-[72px]">
       {/* Header Bar */}
@@ -81,65 +76,91 @@ export default function ProductDetailPage({ params }: Props) {
             href="/products"
             className="text-label text-oxide-red font-mono uppercase tracking-[0.2em] inline-flex items-center gap-2 mb-4 hover:underline"
           >
-            ← All Products & Machinery
+            ← Back To Equipment & Fleet
           </Link>
-          <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+          <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-6">
             <div>
               <span className="font-mono text-xs text-quarry-grey uppercase tracking-wider block mb-1">
-                {product.category} · MODEL {product.modelNumber}
+                {product.category}
               </span>
               <h1 className="text-display-lg sm:text-[3rem] font-medium text-earth-black leading-[1.0]">
                 {product.name}
               </h1>
             </div>
             <Link
-              href="/contact"
-              className="btn-primary !bg-earth-black hover:!bg-oxide-red text-xs py-3 px-6 whitespace-nowrap"
+              href={quoteHref}
+              className="btn-primary !bg-oxide-red hover:!bg-earth-black text-xs py-3 px-6 whitespace-nowrap self-start md:self-auto"
             >
-              Request Fleet Quote
+              Request quote →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Technical Spec Sheet: Image Left, Specs Table Right */}
+      {/* Main Spec Sheet Section */}
       <section className="w-full bg-[#EBE8E0] py-20 md:py-24 border-b border-slab-grey">
         <div className="max-w-content mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Left: Image Gallery Container (6 Columns) */}
+            {/* Left: Image & Overview */}
             <div className="lg:col-span-6">
-              <div className="relative aspect-[16/11] w-full bg-slab-grey border border-slab-grey mb-4">
+              <div className="relative aspect-[16/11] w-full bg-slab-grey border border-slab-grey mb-6 overflow-hidden">
                 <Image
                   src={product.heroImage}
-                  alt={product.name}
+                  alt={product.imageAlt}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="img-cover"
                 />
-                <div className="absolute bottom-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] px-2.5 py-1 uppercase">
-                  TECHNICAL SPECIFICATION · {product.modelNumber}
+                <div className="absolute bottom-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] px-2.5 py-1 uppercase tracking-wider">
+                  EQUIPMENT PROFILE · {product.category.toUpperCase()}
                 </div>
               </div>
 
-              <div className="p-6 bg-iron-white border border-slab-grey">
+              <div className="p-6 bg-iron-white border border-slab-grey mb-6">
                 <span className="text-label text-earth-black font-mono uppercase tracking-wider block mb-2 font-bold">
-                  Engineering Overview
+                  Operational Overview
                 </span>
                 <p className="text-body-sm text-quarry-grey leading-relaxed">
                   {product.overview}
                 </p>
               </div>
+
+              {/* Download Spec Sheet Button (Disabled with Coming Soon if absent) */}
+              <div className="bg-iron-white p-6 border border-slab-grey font-mono text-xs">
+                <span className="text-label text-earth-black uppercase tracking-wider block mb-2 font-bold">
+                  Technical Documentation
+                </span>
+                <p className="text-quarry-grey mb-4 text-[11px]">
+                  Certified engineering spec sheets and load charts are provided directly to qualified engineering operators.
+                </p>
+                {product.specSheetPdf ? (
+                  <a
+                    href={product.specSheetPdf}
+                    download
+                    className="btn-primary w-full text-center block text-xs py-3"
+                  >
+                    Download Spec Sheet (PDF) ↓
+                  </a>
+                ) : (
+                  <button
+                    disabled
+                    className="w-full py-3 px-4 bg-[#E8E5DD] border border-slab-grey text-quarry-grey font-mono text-xs uppercase tracking-wider cursor-not-allowed opacity-80"
+                  >
+                    Download Spec Sheet (Coming soon)
+                  </button>
+                )}
+              </div>
             </div>
 
-            {/* Right: Technical Specs Table (6 Columns) */}
+            {/* Right: Technical Specs Table */}
             <div className="lg:col-span-6 bg-iron-white border border-slab-grey p-8 font-mono">
               <div className="flex items-center justify-between pb-4 border-b-2 border-earth-black mb-6">
                 <span className="text-label font-bold text-earth-black uppercase tracking-wider">
-                  Engineering Data Sheet
+                  Specifications Table
                 </span>
                 <span className="text-xs text-oxide-red font-semibold">
-                  REV 2026.4
+                  AUDITED SPECIFICATIONS
                 </span>
               </div>
 
@@ -179,8 +200,64 @@ export default function ProductDetailPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Related Products Section */}
+      <section className="w-full bg-iron-white py-20 border-b border-slab-grey">
+        <div className="max-w-content mx-auto px-6 md:px-12">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
+                Fleet & Equipment
+              </span>
+              <h2 className="text-heading-1 font-medium text-earth-black">
+                Related Equipment & Plant
+              </h2>
+            </div>
+            <Link
+              href="/products"
+              className="text-label font-bold text-earth-black hover:text-oxide-red uppercase tracking-wider font-mono text-xs hidden md:block"
+            >
+              View all equipment →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {relatedProducts.map((rel) => (
+              <Link
+                key={rel.id}
+                href={`/products/${rel.slug}`}
+                className="group border border-slab-grey p-6 bg-[#EBE8E0] hover:border-earth-black transition-colors flex flex-col justify-between"
+              >
+                <div>
+                  <div className="relative aspect-[16/10] w-full overflow-hidden mb-4 bg-slab-grey border border-slab-grey">
+                    <Image
+                      src={rel.heroImage}
+                      alt={rel.imageAlt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="img-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <span className="font-mono text-xs text-oxide-red uppercase tracking-wider block mb-1">
+                    {rel.category}
+                  </span>
+                  <h3 className="text-heading-3 font-medium text-earth-black group-hover:text-oxide-red transition-colors mb-2 text-base">
+                    {rel.name}
+                  </h3>
+                  <p className="text-body-sm text-quarry-grey leading-relaxed line-clamp-2">
+                    {rel.overview}
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-slab-grey/60 font-mono text-xs text-earth-black font-semibold">
+                  View specifications →
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Procurement CTA Strip */}
-      <section className="w-full bg-iron-white py-16">
+      <section className="w-full bg-[#EBE8E0] py-16">
         <div className="max-w-content mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-heading-2 font-medium text-earth-black">
@@ -190,8 +267,11 @@ export default function ProductDetailPage({ params }: Props) {
               Direct factory commissioning, bonded port transit, and on-site operator training included.
             </p>
           </div>
-          <Link href="/contact" className="btn-primary text-xs py-3 px-6 whitespace-nowrap">
-            Submit Equipment Tender →
+          <Link
+            href={quoteHref}
+            className="btn-primary !bg-earth-black hover:!bg-oxide-red text-xs py-3 px-6 whitespace-nowrap"
+          >
+            Request quote →
           </Link>
         </div>
       </section>
