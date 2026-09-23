@@ -733,8 +733,9 @@ export const SOCIAL_POSTS = [
 
 export const FOUNDER_INFO = {
   name: "Muhammed Farooghuddin",
-  title: "Founder & CEO",
+  title: "Founder & Chief Executive Officer",
   origin: "India-born and Dubai-based, with more than four decades in international business, mineral trading and industrial development.",
+  bio: "India-born and Dubai-based, with more than four decades in international business, mineral trading and industrial development. Under his leadership, Fiza has expanded from an equipment trading business into a multidisciplinary industrial enterprise operating across Africa, Asia, and the Middle East.",
   quote: "Our purpose is to build partnerships that strengthen local capability, create lasting value and help ambitious projects move forward.",
   established: String(SITE_FACTS.foundedYear),
   experience: SITE_FACTS.yearsInBusinessExcellence,

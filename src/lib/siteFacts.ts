@@ -43,6 +43,10 @@ export const SITE_FACTS = {
   continents: 4, // Middle East, Africa, Asia, plus global trade // TODO: VERIFY
   kilometresOfTrack: "42 km", // TODO: VERIFY - completed Falea & Madagascar corridors
   kilometresOfTrackNumber: 42, // TODO: VERIFY
+  // TODO: CONFLICT: 1,140 km network maintained in division specs vs 42 km completed corridors in siteFacts
+  railCorridorsMaintained: "1,140 km", // TODO: OWNER TO VERIFY
+  commissionedFacilities: "14", // TODO: OWNER TO VERIFY - Turnkey industrial plants
+  rebuildDepotArea: "35,000 m²", // TODO: OWNER TO VERIFY - Bamako central rebuild depot
   mwInstalled: "25MW", // TODO: VERIFY - industrial hybrid microgrid
   mwInstalledNumber: 25, // TODO: VERIFY
 

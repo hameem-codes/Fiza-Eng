@@ -1,84 +1,126 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { LEADERSHIP, MILESTONES, Leader } from "@/lib/constants";
+import { FOUNDER_INFO } from "@/lib/constants";
 import { SectionDivider } from "@/components/ui/SectionDivider";
-import { Tag } from "@/components/ui/Tag";
-import { SITE_FACTS } from "@/lib/siteFacts";
+import { SITE_FACTS, currentYear } from "@/lib/siteFacts";
 import { SITE_IMAGES } from "@/lib/images";
 import { PersonPlaceholder } from "@/components/ui/PersonPlaceholder";
+import { MapPin, Building2, CheckCircle2 } from "lucide-react";
 
+// What Sets Us Apart - figures pulled from siteFacts or marked with TODO
 const WHAT_SETS_US_APART = [
   {
     metric: SITE_FACTS.fleetSize,
     label: "Heavy Equipment Units",
     title: "100% Owned Fleet",
-    desc: "We own, maintain, and mobilize our excavators, haulers, and track equipment directly, eliminating third-party rental bottlenecks."
+    desc: "We own and operate our excavators, haulers, and track equipment directly, avoiding third-party rental delays."
   },
   {
-    metric: "14",
+    // TODO: OWNER TO VERIFY - 14 facilities figure
+    metric: SITE_FACTS.commissionedFacilities,
     label: "Industrial Facilities",
-    title: "Proprietary EPC Engineering",
-    desc: "From mechanical civil works to automated electrical control centers, our turnkey teams design and assemble processing plants in-house."
+    title: "EPC Engineering",
+    desc: "Our teams assemble turnkey processing plants, crushing stations, and electrical control centers in-house."
   },
   {
-    metric: "1,140 km",
+    // TODO: CONFLICT: 1,140 km network maintained in division specs vs 42 km completed corridors in siteFacts
+    metric: SITE_FACTS.railCorridorsMaintained,
     label: "Corridors Maintained",
     title: "Heavy-Haul Rail Competency",
-    desc: "We rehabilitate and operate specialized 32-tonne axle-load railway tracks to ensure extraction volumes reach coastal ports without delay."
+    desc: "We rehabilitate and operate specialized 32-tonne axle-load railway tracks to move extraction volume to coastal ports."
   },
   {
     metric: SITE_FACTS.ltifrRate,
     label: "LTIFR Safety Rating",
-    title: "Strict Safety Governance",
-    desc: "Every pit, maintenance bay, and construction site operates under certified ISO 45001 standards with daily supervisor briefings."
+    title: "Safety Governance",
+    desc: "Operational sites follow ISO 45001 standards with regular supervisor briefings and safety audits."
   },
   {
-    metric: "35,000 m²",
+    // TODO: OWNER TO VERIFY - 35,000 m² Bamako rebuild workshop footprint
+    metric: SITE_FACTS.rebuildDepotArea,
     label: "Rebuild Workshops",
     title: "Regional Machine Rebuild Bases",
-    desc: "Centralized powertrain overhaul workshops in Bamako and Kolwezi keep fleet availability consistently above 94%."
+    desc: `Powertrain overhaul workshops in Bamako support operations and maintain fleet availability at ${SITE_FACTS.fleetAvailability}.`
   },
   {
+    // TODO: OWNER TO VERIFY - Ministries and ports partnership claim
     metric: String(SITE_FACTS.countries),
     label: "Active Jurisdictions",
     title: "Pan-African Relationships",
-    desc: `Deep partnerships with national resource ministries, port authorities, and local community leadership built over ${SITE_FACTS.yearsInBusinessLower}.`
+    desc: `We maintain working relationships with national resource ministries, port authorities, and local communities established over ${SITE_FACTS.yearsInBusinessLower}.`
   }
 ];
 
+// How We Work - One concise line per step (max 15 words each)
 const PROCESS_STEPS = [
   {
     step: "01",
     name: "UNDERSTAND",
-    desc: "Deep geotechnical analysis, geological assay verification, and transport route mapping before committing capital or heavy plant."
+    desc: "Geotechnical feasibility, ore assay verification, and transport route mapping before committing capital."
   },
   {
     step: "02",
     name: "CONNECT",
-    desc: "Securing strategic concessions, establishing off-take partnerships, and engineering dedicated rail or barge access corridors."
+    desc: "Securing concession agreements, export off-take arrangements, and dedicated transport corridor permissions."
   },
   {
     step: "03",
     name: "STRUCTURE",
-    desc: "Mobilizing heavy fleets, pouring industrial concrete foundations, and erecting modular crushing circuits on tight timelines."
+    desc: "Mobilizing heavy machinery, pouring concrete foundations, and erecting modular plant circuits on schedule."
   },
   {
     step: "04",
     name: "PROGRESS",
-    desc: "Continuous round-the-clock extraction, preventive fleet maintenance, and steady bulk commodity transit to global ports."
+    desc: "Managing continuous extraction, scheduled fleet maintenance, and steady mineral haulage to export terminals."
+  }
+];
+
+// TODO: OWNER TO VERIFY - Timeline milestones and historical dates
+const TIMELINE_MILESTONES = [
+  {
+    year: "1994",
+    title: "Establishment & International Commodity Trade",
+    description: "Founded by Muhammed Farooghuddin, developing international mineral trading and heavy industrial equipment supply channels across the Middle East, Asia, and Africa."
+  },
+  {
+    year: "2001",
+    title: "Heavy Fleet Equipment Services",
+    description: "Expanded direct operations with heavy earthmoving fleet deployment supporting industrial civil foundations and mining logistics."
+  },
+  {
+    year: "2007",
+    title: "Open-Pit Mining Concessions",
+    description: "Awarded multi-year overburden stripping concessions in Mali, establishing on-site rebuild machine workshops."
+  },
+  {
+    year: "2013",
+    title: "Turnkey Industrial Plants Division",
+    description: "Commissioned automated primary crushing circuits and expanded into Central Africa and the DRC copperbelt."
+  },
+  {
+    year: "2018",
+    title: "Direct Mineral Trading Corridors",
+    description: "Structured direct off-take agreements for bauxite, high-grade hematite iron ore, and cathode copper to global markets."
+  },
+  {
+    year: "2022",
+    title: "Heavy-Haul Rail Infrastructure",
+    description: "Executed railway track renewal and heavy-haul rolling stock operations across specialized mineral corridors."
+  },
+  {
+    year: String(currentYear),
+    title: `${SITE_FACTS.yearsInBusinessLabel} of Integrated Operations`,
+    description: `Operating mining, civil, rail, and agro-industrial infrastructure projects across ${SITE_FACTS.countries} countries on ${SITE_FACTS.continents} continents.`
   }
 ];
 
 export default function CompanyPage() {
-  const [selectedLeader, setSelectedLeader] = useState<Leader | null>(null);
-
   return (
     <div className="w-full pt-[72px]">
-      {/* 60vh Hero Section */}
-      <section className="relative w-full h-[60vh] min-h-[460px] flex items-end overflow-hidden">
+      {/* 1. Hero Section */}
+      <section className="relative w-full h-[60vh] min-h-[460px] flex items-end overflow-hidden bg-coal-dark">
+        {/* // TODO: [REPLACE: /images/company-hero.jpg] with verified client corporate photo if provided */}
         <Image
           src={SITE_IMAGES.company.hero.src}
           alt={SITE_IMAGES.company.hero.alt}
@@ -95,34 +137,38 @@ export default function CompanyPage() {
           <h1 className="text-display-lg sm:text-[3.5rem] md:text-display-xl font-medium text-iron-white leading-[0.95]">
             Fiza Engineering Corporation.
           </h1>
-          <p className="text-body-lg text-dust-tan max-w-2xl mt-4 font-normal">
-            Moving earth, building heavy rail, and engineering mineral supply chains across Africa and beyond since {SITE_FACTS.foundedYear}.
+          <p className="text-body-lg text-dust-tan max-w-2xl mt-4 font-normal leading-relaxed">
+            An integrated mining, rail and heavy engineering company founded in 1994 and headquartered in Dubai, with operations across Africa.
           </p>
         </div>
       </section>
 
-      {/* "Who We Are" — Pattern A Layout */}
-      <section className="w-full py-20 md:py-28 bg-iron-white">
+      {/* 2. Who We Are */}
+      <section className="w-full py-20 md:py-28 bg-iron-white border-b border-slab-grey">
         <div className="max-w-content mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
-              <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-4">
-                Who We Are
-              </span>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-2 h-2 bg-oxide-red inline-block" />
+                <span className="text-label text-earth-black font-mono tracking-widest font-semibold">
+                  Who We Are
+                </span>
+              </div>
               <h2 className="text-display-lg font-medium text-earth-black leading-[0.98] mb-8">
-                An industrial operator rooted in heavy execution.
+                Heavy industrial operations across key African corridors.
               </h2>
-              <div className="space-y-6 text-quarry-grey text-body leading-relaxed max-w-editorial">
+              {/* Reduced to two short paragraphs, max 90 words total (currently 51 words) */}
+              <div className="space-y-5 text-quarry-grey text-body-lg leading-relaxed max-w-editorial">
                 <p>
-                  Established in {SITE_FACTS.foundedYear} by Muhammed Farooghuddin, with over four decades of international business and mineral trading experience, Fiza Engineering Corporation has expanded into a multidisciplinary heavy engineering and mining conglomerate. We combine active concession operations, equipment manufacturing, engineering capability, and international trade.
+                  Established in {SITE_FACTS.foundedYear} by Muhammed Farooghuddin, Fiza Engineering Corporation develops industrial infrastructure, operates extraction concessions, and manages direct commodity supply chains across Africa.
                 </p>
                 <p>
-                  Today, we coordinate multi-thousand-tonne mineral extraction operations across Mali and the DRC, rehabilitate heavy freight rail corridors in Madagascar, and trade industrial commodities to global smelters. By controlling every layer of equipment, maintenance, and logistics, we deliver certainty in volatile frontiers.
+                  Our field operations include active open-pit mining in Mali and the Democratic Republic of Congo, heavy freight railway rehabilitation in Madagascar, and physical mineral trading to international industrial markets.
                 </p>
               </div>
             </div>
 
-            <div className="lg:col-span-5 relative h-[380px] sm:h-[460px] border border-slab-grey lg:-mr-16">
+            <div className="lg:col-span-5 relative h-[380px] sm:h-[460px] border border-slab-grey lg:-mr-8 overflow-hidden bg-slab-grey/40">
               <Image
                 src={SITE_IMAGES.company.fieldOps.src}
                 alt={SITE_IMAGES.company.fieldOps.alt}
@@ -131,14 +177,14 @@ export default function CompanyPage() {
                 className="img-cover object-center"
               />
               <div className="absolute bottom-3 left-3 bg-earth-black text-iron-white px-3 py-1 font-mono text-[10px] uppercase">
-                FIG. 02 — PIT SITE 04 · WEST AFRICA
+                Open-pit operations, West Africa
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Mission & Values (2x2 Grid) */}
+      {/* 3. Operating Principles */}
       <section className="w-full bg-iron-white">
         <SectionDivider />
         <div className="max-w-content mx-auto px-6 md:px-12 py-20 md:py-28">
@@ -151,56 +197,65 @@ export default function CompanyPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-slab-grey pt-10">
-            <div className="p-8 bg-[#EBE8E0] border border-slab-grey">
-              <span className="text-label font-mono text-oxide-red uppercase tracking-wider block mb-2">
-                01. Direct Control
-              </span>
-              <h3 className="text-heading-2 font-medium text-earth-black mb-3">Own The Iron</h3>
-              <p className="text-quarry-grey text-body-sm leading-relaxed">
-                We refuse reliance on outsourced equipment contractors. When an excavator breaks down, our in-house mechanics replace the hydraulic pump on site within hours, safeguarding client production schedules.
-              </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-slab-grey pt-10">
+            {/* Principle 1 */}
+            <div className="p-8 bg-[#EBE8E0] border border-slab-grey flex flex-col justify-between">
+              <div>
+                <h3 className="text-heading-2 font-medium text-earth-black mb-3">
+                  Direct control of equipment
+                </h3>
+                <p className="text-quarry-grey text-body-sm leading-relaxed">
+                  We own, maintain, and dispatch our heavy machinery fleet directly. On-site technical workshops and mobile field mechanics handle repairs immediately, keeping operations on schedule.
+                </p>
+              </div>
             </div>
 
-            <div className="p-8 bg-[#EBE8E0] border border-slab-grey">
-              <span className="text-label font-mono text-oxide-red uppercase tracking-wider block mb-2">
-                02. Institutional Partnership
-              </span>
-              <h3 className="text-heading-2 font-medium text-earth-black mb-3">Long-Term Respect</h3>
-              <p className="text-quarry-grey text-body-sm leading-relaxed">
-                We invest in permanent infrastructure. Over 90% of our on-site workforce and senior operational engineers are recruited and trained domestically within the host nations where we operate.
-              </p>
+            {/* Principle 2 */}
+            <div className="p-8 bg-[#EBE8E0] border border-slab-grey flex flex-col justify-between">
+              <div>
+                <h3 className="text-heading-2 font-medium text-earth-black mb-3">
+                  Local employment and training
+                </h3>
+                {/* // TODO: OWNER TO VERIFY - Over 90% domestic workforce claim */}
+                <p className="text-quarry-grey text-body-sm leading-relaxed">
+                  We invest in local workforce capacity. Over 90% of our on-site personnel and technical teams are recruited and trained within the countries where we operate.
+                </p>
+              </div>
             </div>
 
-            <div className="p-8 bg-[#EBE8E0] border border-slab-grey">
-              <span className="text-label font-mono text-oxide-red uppercase tracking-wider block mb-2">
-                03. Transparent Execution
-              </span>
-              <h3 className="text-heading-2 font-medium text-earth-black mb-3">Engineering Truth</h3>
-              <p className="text-quarry-grey text-body-sm leading-relaxed">
-                We measure progress in tonnes moved, kilometers ballasted, and hours logged without accidents. We provide clear, verifiable data to every investor, partner, and government regulator.
-              </p>
+            {/* Principle 3 */}
+            <div className="p-8 bg-[#EBE8E0] border border-slab-grey flex flex-col justify-between">
+              <div>
+                <h3 className="text-heading-2 font-medium text-earth-black mb-3">
+                  Measured, reported results
+                </h3>
+                <p className="text-quarry-grey text-body-sm leading-relaxed">
+                  We track operational progress through verified metric tonnes extracted, kilometers of track ballasted, and machine operating hours logged without lost-time safety incidents.
+                </p>
+              </div>
             </div>
 
-            <div className="p-8 bg-[#EBE8E0] border border-slab-grey">
-              <span className="text-label font-mono text-oxide-red uppercase tracking-wider block mb-2">
-                04. Environmental Rigor
-              </span>
-              <h3 className="text-heading-2 font-medium text-earth-black mb-3">Contoured Restoration</h3>
-              <p className="text-quarry-grey text-body-sm leading-relaxed">
-                Mining must leave stable ground. We integrate continuous backfilling, topsoil preservation, and engineered water drainage into active pit planning to prevent erosion and acid runoff.
-              </p>
+            {/* Principle 4 */}
+            <div className="p-8 bg-[#EBE8E0] border border-slab-grey flex flex-col justify-between">
+              <div>
+                <h3 className="text-heading-2 font-medium text-earth-black mb-3">
+                  Site restoration
+                </h3>
+                <p className="text-quarry-grey text-body-sm leading-relaxed">
+                  We integrate concurrent backfilling, topsoil preservation, and engineered drainage into our active pit extraction plans to stabilize land contours and protect local watersheds.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* "What Sets Us Apart" — 3x2 Grid */}
+      {/* 4. What Sets Us Apart */}
       <section className="w-full bg-[#E5E2D9] py-20 md:py-28 border-t border-b border-slab-grey">
         <div className="max-w-content mx-auto px-6 md:px-12">
           <div className="mb-14">
             <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
-              Competitive Advantage
+              Operational Scale
             </span>
             <h2 className="text-display-lg font-medium text-earth-black leading-[0.95]">
               What Sets Us Apart
@@ -232,8 +287,8 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* How We Operate (4-step Process) */}
-      <section className="w-full py-20 md:py-28 bg-iron-white">
+      {/* 5. How We Work */}
+      <section className="w-full py-20 md:py-28 bg-iron-white border-b border-slab-grey">
         <div className="max-w-content mx-auto px-6 md:px-12">
           <div className="mb-14">
             <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
@@ -262,20 +317,21 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* Company Timeline */}
-      <section id="timeline" className="w-full bg-[#EBE8E0] py-20 md:py-28 border-t border-slab-grey">
+      {/* 6. History / Timeline */}
+      <section id="timeline" className="w-full bg-[#EBE8E0] py-20 md:py-28 border-b border-slab-grey">
         <div className="max-w-content mx-auto px-6 md:px-12">
           <div className="mb-14">
             <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
-              Historical Milestones
+              Corporate Chronology
             </span>
             <h2 className="text-display-lg font-medium text-earth-black leading-[0.95]">
-              {SITE_FACTS.yearsInBusinessStory}
+              Our History
             </h2>
           </div>
 
+          {/* // TODO: OWNER TO VERIFY - Milestone descriptions and timeline accuracy */}
           <div className="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-[1px] before:bg-slab-grey">
-            {MILESTONES.map((milestone, idx) => (
+            {TIMELINE_MILESTONES.map((milestone, idx) => (
               <div
                 key={milestone.year}
                 className={`relative flex flex-col md:flex-row gap-6 md:gap-12 items-start ${
@@ -299,95 +355,123 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* Leadership Section */}
-      <section id="leadership" className="w-full bg-iron-white py-20 md:py-28 border-t border-slab-grey">
+      {/* 7. Leadership Section (Muhammed Farooghuddin ONLY) */}
+      <section id="leadership" className="w-full bg-iron-white py-20 md:py-28 border-b border-slab-grey">
         <div className="max-w-content mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-6">
-            <div>
-              <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
-                Executive Governance
-              </span>
-              <h2 className="text-display-lg font-medium text-earth-black leading-[0.95]">
-                Corporate Leadership
-              </h2>
+          <div className="mb-14">
+            <span className="text-label text-oxide-red font-mono uppercase tracking-widest block mb-2">
+              Executive Governance
+            </span>
+            <h2 className="text-display-lg font-medium text-earth-black leading-[0.95]">
+              Corporate Leadership
+            </h2>
+          </div>
+
+          <div className="max-w-3xl border border-slab-grey bg-[#EAE7DF] p-8 md:p-10">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              {/* Neutral placeholder portrait labelled [Photo to be supplied] */}
+              <div className="md:col-span-4 max-w-[220px]">
+                <PersonPlaceholder
+                  name={FOUNDER_INFO.name}
+                  title={FOUNDER_INFO.title}
+                  className="w-full aspect-square"
+                />
+              </div>
+
+              {/* Founder Profile & Quote */}
+              <div className="md:col-span-8">
+                <h3 className="text-heading-2 font-medium text-earth-black mb-1">
+                  {FOUNDER_INFO.name}
+                </h3>
+                <span className="text-label text-oxide-red font-mono uppercase tracking-wider block mb-4">
+                  {FOUNDER_INFO.title}
+                </span>
+
+                <p className="text-body text-earth-black/85 leading-relaxed mb-6 font-normal">
+                  {FOUNDER_INFO.bio}
+                </p>
+
+                <blockquote className="border-l-2 border-oxide-red pl-4 py-1 bg-iron-white/70 p-3 border border-slab-grey/30">
+                  <p className="font-heading text-sm sm:text-base italic text-earth-black leading-snug">
+                    &ldquo;{FOUNDER_INFO.quote}&rdquo;
+                  </p>
+                  <cite className="block text-[11px] font-mono text-quarry-grey uppercase tracking-wider mt-2 not-italic">
+                    — {FOUNDER_INFO.name}, {FOUNDER_INFO.title}
+                  </cite>
+                </blockquote>
+              </div>
             </div>
-            <p className="text-body-sm text-quarry-grey max-w-sm">
-              Hands-on directors with decades of open-pit mining, structural civil engineering, and international commodity finance experience.
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Global Presence */}
+      <section id="global" className="w-full bg-[#E5E2D9] py-20 md:py-28">
+        <div className="max-w-content mx-auto px-6 md:px-12">
+          <div className="mb-14">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-2 h-2 bg-oxide-red inline-block" />
+              <span className="text-label text-earth-black font-mono tracking-widest font-semibold">
+                Operating Footprint
+              </span>
+            </div>
+            <h2 className="text-display-lg font-medium text-earth-black leading-[0.95]">
+              Global Presence & Offices
+            </h2>
+            <p className="text-body-lg text-quarry-grey max-w-2xl mt-4 leading-relaxed font-normal">
+              Direct headquarters and regional operations depots coordinating active mining extraction, heavy fleet mobilization, and freight rail logistics.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {LEADERSHIP.map((leader) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {SITE_FACTS.offices.map((office, idx) => (
               <div
-                key={leader.name}
-                onClick={() => setSelectedLeader(leader)}
-                className="group cursor-pointer flex flex-col border border-slab-grey p-4 bg-iron-white hover:border-earth-black transition-colors"
+                key={idx}
+                className="bg-iron-white border border-slab-grey p-8 flex flex-col justify-between"
               >
-                {/* Neutral placeholder component labelled [Photo to be supplied] */}
-                <div className="mb-4">
-                  <PersonPlaceholder name={leader.name} title={leader.title} />
+                <div>
+                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-slab-grey">
+                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-oxide-red">
+                      {office.country}
+                    </span>
+                    <span className="font-mono text-[11px] text-quarry-grey uppercase">
+                      Operational Hub
+                    </span>
+                  </div>
+
+                  <h3 className="text-heading-2 font-medium text-earth-black mb-2 flex items-center gap-2">
+                    <Building2 size={20} className="text-oxide-red shrink-0" />
+                    <span>{office.city}</span>
+                  </h3>
+
+                  <p className="text-body-sm text-earth-black font-medium mb-4">
+                    {office.type}
+                  </p>
+
+                  <div className="space-y-2 text-xs font-mono text-quarry-grey border-t border-slab-grey/40 pt-4">
+                    <div className="flex items-start gap-2">
+                      <MapPin size={14} className="text-oxide-red mt-0.5 shrink-0" />
+                      <span>{office.address}</span>
+                    </div>
+                  </div>
                 </div>
 
-                <h3 className="text-heading-3 font-medium text-earth-black group-hover:text-oxide-red transition-colors mb-1">
-                  {leader.name}
-                </h3>
-
-                <span className="text-label text-quarry-grey font-mono uppercase tracking-wider block mb-3">
-                  {leader.title}
-                </span>
-
-                <span className="text-xs font-mono font-bold text-oxide-red uppercase tracking-wider mt-auto inline-flex items-center gap-1">
-                  View Profile →
-                </span>
+                <div className="pt-6 mt-6 border-t border-slab-grey flex items-center justify-between">
+                  <span className="font-mono text-[11px] text-earth-black">
+                    {office.email}
+                  </span>
+                  <Link
+                    href="/contact"
+                    className="text-label font-mono font-bold text-oxide-red uppercase tracking-wider hover:underline"
+                  >
+                    Office Details →
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Leader Bio Modal */}
-      {selectedLeader && (
-        <div
-          onClick={() => setSelectedLeader(null)}
-          className="fixed inset-0 z-50 bg-earth-black/75 flex items-center justify-center p-4 backdrop-blur-none"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-iron-white border-2 border-earth-black max-w-xl w-full p-8 relative animate-fade-in"
-          >
-            <button
-              onClick={() => setSelectedLeader(null)}
-              className="absolute top-4 right-4 text-earth-black hover:text-oxide-red font-mono text-xl p-2"
-              aria-label="Close modal"
-            >
-              ✕
-            </button>
-
-            <div className="flex flex-col sm:flex-row items-center gap-6 mb-6">
-              <div className="w-28 h-28 flex-shrink-0">
-                <PersonPlaceholder name={selectedLeader.name} className="h-full aspect-square" />
-              </div>
-              <div className="text-center sm:text-left">
-                <h3 className="text-heading-2 font-medium text-earth-black">
-                  {selectedLeader.name}
-                </h3>
-                <span className="text-label text-oxide-red font-mono uppercase tracking-wider block mt-1">
-                  {selectedLeader.title}
-                </span>
-              </div>
-            </div>
-
-            <p className="text-body text-quarry-grey leading-relaxed mb-6">
-              {selectedLeader.bio}
-            </p>
-
-            <div className="p-4 bg-[#E8E5DD] border border-slab-grey font-mono text-xs">
-              <span className="text-quarry-grey uppercase block mb-1">Key Focus Area:</span>
-              <span className="text-earth-black font-semibold">{selectedLeader.focus}</span>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
