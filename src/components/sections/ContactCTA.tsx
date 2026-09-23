@@ -1,30 +1,80 @@
 import React from "react";
 import Link from "next/link";
+import { SITE_FACTS } from "@/lib/siteFacts";
+import { ArrowRight, Mail, Phone, MapPin } from "lucide-react";
 
 export function ContactCTA() {
   return (
-    <section className="w-full bg-coal-dark text-iron-white py-24 md:py-32 dark-section border-t border-slab-grey/20">
-      <div className="max-w-content mx-auto px-6 md:px-12 text-left">
-        <div className="max-w-3xl">
-          <span className="text-label text-dust-tan font-mono uppercase tracking-widest block mb-4">
-            Commercial Partnerships & EPC Tenders
-          </span>
+    <section className="w-full bg-coal-dark text-iron-white py-20 md:py-28 dark-section">
+      <div className="max-w-content mx-auto px-6 md:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Main Statement */}
+          <div className="lg:col-span-7">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-2 h-2 bg-oxide-red inline-block" />
+              <span className="text-label text-dust-tan font-mono uppercase tracking-widest font-semibold">
+                Direct Operational Tenders
+              </span>
+            </div>
 
-          <h2 className="text-display-lg sm:text-[3.5rem] md:text-display-xl font-medium text-iron-white leading-[0.92] mb-8">
-            Let&apos;s build something.
-          </h2>
+            <h2 className="text-display-lg sm:text-[3rem] font-medium text-iron-white leading-[0.96] mb-6">
+              Ready to deploy heavy industrial capability.
+            </h2>
 
-          <p className="text-quarry-grey text-body-lg max-w-xl mb-10 leading-relaxed font-normal">
-            Whether mobilizing heavy machinery for an open-pit cut, laying heavy-haul rail, or structuring direct mineral off-takes, our engineering teams are ready to deploy.
-          </p>
+            <p className="text-quarry-grey text-body-lg max-w-xl mb-8 leading-relaxed font-normal">
+              Whether mobilizing equipment for an open-pit concession, engineering heavy-haul rail, or structuring direct mineral off-takes, our teams deploy with direct accountability.
+            </p>
 
-          <div>
-            <Link
-              href="/contact"
-              className="btn-primary !bg-iron-white !text-earth-black hover:!bg-oxide-red hover:!text-iron-white text-sm py-4 px-10"
-            >
-              Get In Touch →
-            </Link>
+            <div>
+              <Link
+                href="/contact"
+                className="btn-primary !bg-oxide-red hover:!bg-iron-white hover:!text-earth-black text-xs py-4 px-8 font-mono uppercase tracking-wider font-semibold inline-flex items-center gap-2 shadow-sm transition-colors"
+              >
+                <span>Contact the team</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Quick Direct Contacts Block */}
+          <div className="lg:col-span-5 bg-[#1F1F1D] border border-slab-grey/20 p-8 space-y-5">
+            <span className="font-mono text-xs uppercase tracking-wider text-dust-tan font-semibold block border-b border-slab-grey/15 pb-3">
+              Headquarters & Operations Desk
+            </span>
+
+            <div className="flex items-start gap-3 text-xs font-mono">
+              <MapPin size={16} className="text-oxide-red shrink-0 mt-0.5" />
+              <div>
+                <span className="text-iron-white block font-medium">Headquarters</span>
+                <span className="text-quarry-grey">{SITE_FACTS.contact.hqAddress}</span>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 text-xs font-mono">
+              <Mail size={16} className="text-oxide-red shrink-0 mt-0.5" />
+              <div>
+                <span className="text-iron-white block font-medium">Direct Inquiries</span>
+                <a
+                  href={`mailto:${SITE_FACTS.contact.primaryEmail}`}
+                  className="text-dust-tan hover:text-oxide-red transition-colors"
+                >
+                  {SITE_FACTS.contact.primaryEmail}
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 text-xs font-mono">
+              <Phone size={16} className="text-oxide-red shrink-0 mt-0.5" />
+              <div>
+                <span className="text-iron-white block font-medium">Executive Office</span>
+                <a
+                  href={`tel:${SITE_FACTS.contact.primaryPhone.replace(/\s+/g, "")}`}
+                  className="text-dust-tan hover:text-oxide-red transition-colors"
+                >
+                  {SITE_FACTS.contact.primaryPhone}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

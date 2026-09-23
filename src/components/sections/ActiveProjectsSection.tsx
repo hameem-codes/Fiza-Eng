@@ -1,10 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ACTIVE_PORTFOLIO_PROJECTS } from "@/lib/constants";
+import { PROJECTS } from "@/lib/constants";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 export function ActiveProjectsSection() {
+  // Pull featured projects from the exact same data source as /projects: 3 strongest ACTIVE projects
+  const activeProjects = PROJECTS.filter((p) => p.status === "ACTIVE").slice(0, 3);
+
   return (
     <section className="w-full bg-iron-white py-20 md:py-28 border-b border-slab-grey">
       <div className="max-w-content mx-auto px-6 md:px-12">
@@ -14,66 +17,72 @@ export function ActiveProjectsSection() {
             <div className="flex items-center gap-2 mb-3">
               <span className="w-2 h-2 bg-oxide-red inline-block" />
               <span className="text-label text-earth-black font-mono tracking-widest font-semibold">
-                Active Projects
+                Execution on the ground
               </span>
             </div>
-            <h2 className="text-display-lg sm:text-[3rem] font-medium text-earth-black leading-[0.95]">
-              Active Projects & Operations
+            <h2 className="text-display-lg sm:text-[2.75rem] font-medium text-earth-black leading-[0.98]">
+              Featured Active Projects
             </h2>
           </div>
-          <p className="text-body-sm text-quarry-grey max-w-md">
-            Direct operational investments combining strategic concessions, heavy machinery ownership, and dedicated transport infrastructure.
-          </p>
+          <Link
+            href="/projects"
+            className="text-label font-bold text-earth-black hover:text-oxide-red uppercase tracking-wider inline-flex items-center gap-2 transition-colors font-mono"
+          >
+            Browse all projects <ArrowRight size={14} />
+          </Link>
         </div>
 
-        {/* 4 Real Active Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-          {ACTIVE_PORTFOLIO_PROJECTS.map((project) => (
+        {/* Exactly 3 Real Active Projects Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {activeProjects.map((project) => (
             <div
               key={project.id}
               className="bg-iron-white border border-slab-grey flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-earth-black group"
             >
               <div>
                 {/* Project Image Banner */}
-                <div className="relative aspect-[16/9] w-full overflow-hidden bg-slab-grey/40 border-b border-slab-grey">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-slab-grey/40 border-b border-slab-grey">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
                     className="img-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
-                  <div className="absolute top-4 left-4 flex items-center gap-2">
-                    <span className="bg-earth-black text-iron-white font-mono text-[10px] uppercase font-bold tracking-wider px-2.5 py-1">
+                  <div className="absolute top-3.5 left-3.5 flex items-center gap-2">
+                    <span className="bg-earth-black text-iron-white font-mono text-[10px] uppercase font-bold tracking-wider px-2 py-0.5">
                       {project.country}
                     </span>
-                    <span className="bg-oxide-red text-iron-white font-mono text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 flex items-center gap-1">
+                    <span className="bg-oxide-red text-iron-white font-mono text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                       {project.status}
                     </span>
                   </div>
-                  <div className="absolute bottom-3 right-3 bg-earth-black/85 text-dust-tan font-mono text-[10px] px-2 py-0.5">
-                    {project.tag}
+                  <div className="absolute bottom-2.5 right-2.5 bg-earth-black/85 text-dust-tan font-mono text-[10px] px-2 py-0.5">
+                    {project.category}
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6 md:p-8">
+                <div className="p-6 md:p-7">
                   <span className="font-mono text-xs uppercase tracking-wider text-oxide-red font-semibold block mb-1">
-                    {project.country}
+                    {project.location} · {project.country}
                   </span>
-                  <h3 className="text-heading-2 font-medium text-earth-black mb-3 group-hover:text-oxide-red transition-colors">
+                  <h3 className="text-heading-2 font-medium text-earth-black mb-3 group-hover:text-oxide-red transition-colors leading-snug">
                     {project.title}
                   </h3>
                   <p className="text-body-sm text-quarry-grey leading-relaxed mb-6">
-                    {project.description}
+                    {project.excerpt}
                   </p>
 
-                  <div className="space-y-2.5 border-t border-slab-grey/40 pt-5">
-                    {project.keyDetails.map((detail, idx) => (
-                      <div key={idx} className="flex items-start gap-2.5 text-xs text-earth-black font-mono">
-                        <CheckCircle2 size={14} className="text-oxide-red mt-0.5 shrink-0" />
-                        <span>{detail}</span>
+                  {/* Highlights from stats */}
+                  <div className="space-y-2 border-t border-slab-grey/40 pt-4">
+                    {project.stats.slice(0, 2).map((stat, idx) => (
+                      <div key={idx} className="flex items-start gap-2 text-xs text-earth-black font-mono">
+                        <CheckCircle2 size={13} className="text-oxide-red mt-0.5 shrink-0" />
+                        <span>
+                          <strong className="font-semibold">{stat.label}:</strong> {stat.value}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -81,12 +90,12 @@ export function ActiveProjectsSection() {
               </div>
 
               {/* Bottom Card Footer */}
-              <div className="p-6 md:px-8 md:pb-8 pt-0">
+              <div className="p-6 md:p-7 pt-0">
                 <Link
-                  href="/projects"
+                  href={`/projects/${project.slug}`}
                   className="w-full bg-[#EAE7DF] border border-slab-grey hover:bg-earth-black hover:text-iron-white hover:border-earth-black transition-colors font-mono text-xs uppercase font-semibold py-3 px-4 flex items-center justify-between text-earth-black group-hover:bg-oxide-red group-hover:text-iron-white group-hover:border-oxide-red"
                 >
-                  <span>Explore Project Specs</span>
+                  <span>Inspect project specifications</span>
                   <ArrowRight size={14} />
                 </Link>
               </div>

@@ -1,94 +1,130 @@
 import React from "react";
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 import { SITE_FACTS } from "@/lib/siteFacts";
-import { SITE_IMAGES } from "@/lib/images";
 
 export function HomeHero() {
   return (
-    <section className="relative w-full h-[90vh] min-h-[640px] max-h-[960px] flex flex-col justify-end overflow-hidden bg-coal-dark">
-      {/* Background Image with Dark Industrial Texture & Gradient Overlay */}
-      <div className="absolute inset-0 z-0 select-none">
-        <Image
-          src={SITE_IMAGES.homeHero.src}
-          alt={SITE_IMAGES.homeHero.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="img-cover object-center scale-[1.02] transform transition-transform duration-1000 ease-out"
-        />
-        {/* Subtle Industrial Mesh/Dot Texture */}
-        <div
-          className="absolute inset-0 opacity-20 pointer-events-none"
-          style={{
-            backgroundImage: "radial-gradient(rgba(242, 240, 235, 0.4) 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-          }}
-        />
-        {/* Cinematic Gradient: Dark Coal to Deep Tone */}
-        <div className="absolute inset-0 bg-gradient-to-t from-earth-black via-earth-black/75 to-earth-black/40" />
-      </div>
-
-      {/* Hero Content Container */}
-      <div className="relative z-10 max-w-content mx-auto w-full px-6 md:px-12 pb-16 md:pb-24">
-        <div className="max-w-3xl">
-          {/* Authentic Company Tagline Overline */}
-          <div className="flex items-center gap-3 mb-5">
-            <span className="w-2.5 h-2.5 bg-oxide-red inline-block" />
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-dust-tan font-medium">
-              Established {SITE_FACTS.foundedYear} · {SITE_FACTS.footprintRegions}
-            </span>
-          </div>
-
-          {/* Statement Headline: Real Brochure Headline */}
-          <h1 className="text-display-lg sm:text-[3.5rem] md:text-display-xl font-medium text-iron-white tracking-tight leading-[0.94] mb-6">
-            Building the Industries That Power Progress.
-          </h1>
-
-          {/* Authentic Subtitle from Company Reference */}
-          <p className="text-body-lg text-dust-tan max-w-2xl mb-8 leading-relaxed font-normal">
-            Mining, infrastructure, railways, and industrial solutions across Africa, Asia, the Middle East and beyond. From concept to commissioning.
-          </p>
-
-          {/* Purposeful CTAs */}
-          <div className="flex flex-wrap items-center gap-4">
-            <Button
-              variant="primary"
-              href="/projects"
-              className="!bg-oxide-red hover:!bg-earth-black shadow-sm"
-            >
-              Explore Our Work
-            </Button>
-            <Button
-              variant="secondary"
-              href="/capabilities"
-              className="!border-iron-white !text-iron-white hover:!bg-iron-white hover:!text-earth-black"
-            >
-              Core Capabilities
-            </Button>
-          </div>
+    <div className="w-full">
+      {/* 1. Hero Main Frame */}
+      <section className="relative w-full min-h-[580px] lg:h-[82vh] max-h-[880px] flex flex-col justify-end overflow-hidden bg-coal-dark">
+        {/* Background Image: real Fiza site photo */}
+        {/* // TODO: [REPLACE: /images/hero-real.jpg] with real client-supplied Fiza site photo if available */}
+        <div className="absolute inset-0 z-0 select-none">
+          <Image
+            src="/images/hero-real.jpg"
+            alt="Fiza Engineering heavy open-pit mining operations with hydraulic excavators and haul fleet"
+            fill
+            priority
+            sizes="100vw"
+            className="img-cover object-center scale-[1.01] transition-transform duration-1000 ease-out"
+          />
+          {/* Subtle Industrial Mesh Texture */}
+          <div
+            className="absolute inset-0 opacity-20 pointer-events-none"
+            style={{
+              backgroundImage: "radial-gradient(rgba(242, 240, 235, 0.35) 1px, transparent 1px)",
+              backgroundSize: "28px 28px",
+            }}
+          />
+          {/* Cinematic Dark Coal Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-earth-black via-earth-black/70 to-earth-black/35" />
         </div>
 
-        {/* Authentic Footprint Quick Stat Counter Bar */}
-        <div className="hidden lg:grid grid-cols-4 gap-6 pt-10 mt-12 border-t border-slab-grey/20 max-w-4xl text-iron-white font-mono text-xs">
-          <div>
-            <span className="block text-oxide-red text-base font-semibold">{SITE_FACTS.fleetSize}</span>
-            <span className="text-dust-tan text-[11px] uppercase tracking-wider">Heavy Machines</span>
-          </div>
-          <div>
-            <span className="block text-iron-white text-base font-semibold">{SITE_FACTS.countries}</span>
-            <span className="text-dust-tan text-[11px] uppercase tracking-wider">Countries</span>
-          </div>
-          <div>
-            <span className="block text-iron-white text-base font-semibold">{SITE_FACTS.continents}</span>
-            <span className="text-dust-tan text-[11px] uppercase tracking-wider">Active Continents</span>
-          </div>
-          <div>
-            <span className="block text-oxide-red text-base font-semibold">{SITE_FACTS.yearsInBusinessLabel}</span>
-            <span className="text-dust-tan text-[11px] uppercase tracking-wider">Experience</span>
+        {/* Hero Copy & Actions */}
+        <div className="relative z-10 max-w-content mx-auto w-full px-6 md:px-12 pb-14 md:pb-20 pt-32">
+          <div className="max-w-3xl">
+            {/* Overline with established date from siteFacts */}
+            <div className="flex items-center gap-2.5 mb-5">
+              <span className="w-2.5 h-2.5 bg-oxide-red inline-block" />
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-dust-tan font-medium">
+                Est. {SITE_FACTS.foundedYear} · {SITE_FACTS.yearsInBusinessLabel} Direct Execution
+              </span>
+            </div>
+
+            {/* Specific Headline naming actual operations */}
+            <h1 className="text-display-lg sm:text-[3.25rem] md:text-[3.75rem] font-medium text-iron-white tracking-tight leading-[0.96] mb-5">
+              Mining, rail and heavy civil works across Africa.
+            </h1>
+
+            {/* Concise Subtext: exactly 16 words (max 20 words) */}
+            <p className="text-body-lg text-dust-tan max-w-2xl mb-8 leading-relaxed font-normal">
+              Direct open-pit concessions, heavy-haul railway corridors, and turnkey processing plants operating across key African resource jurisdictions.
+            </p>
+
+            {/* Specific, Non-Duplicate CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/projects"
+                className="btn-primary !bg-oxide-red hover:!bg-earth-black text-iron-white text-xs py-3.5 px-7 font-mono uppercase tracking-wider font-semibold shadow-sm transition-colors"
+              >
+                View active projects
+              </Link>
+              <Link
+                href="/capabilities"
+                className="btn-secondary !border-iron-white !text-iron-white hover:!bg-iron-white hover:!text-earth-black text-xs py-3.5 px-7 font-mono uppercase tracking-wider font-semibold transition-colors"
+              >
+                See our services
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* 2. Single Stats Row directly under the hero (Kept ONCE on the page, imported from siteFacts) */}
+      <section className="w-full bg-[#181816] border-b border-slab-grey/20 text-iron-white py-8">
+        <div className="max-w-content mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-slab-grey/15">
+            <div className="pt-4 md:pt-0">
+              <span className="font-mono text-xs uppercase tracking-wider text-quarry-grey block mb-1">
+                Fleet Capacity
+              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="font-heading text-3xl sm:text-4xl font-semibold text-oxide-red">
+                  {SITE_FACTS.fleetSize}
+                </span>
+                <span className="text-xs font-mono text-dust-tan">Machines</span>
+              </div>
+            </div>
+
+            <div className="pt-4 md:pt-0 md:pl-8">
+              <span className="font-mono text-xs uppercase tracking-wider text-quarry-grey block mb-1">
+                Jurisdictions
+              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="font-heading text-3xl sm:text-4xl font-semibold text-iron-white">
+                  {SITE_FACTS.countries}
+                </span>
+                <span className="text-xs font-mono text-dust-tan">Countries</span>
+              </div>
+            </div>
+
+            <div className="pt-4 md:pt-0 md:pl-8">
+              <span className="font-mono text-xs uppercase tracking-wider text-quarry-grey block mb-1">
+                Global Footprint
+              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="font-heading text-3xl sm:text-4xl font-semibold text-iron-white">
+                  {SITE_FACTS.continents}
+                </span>
+                <span className="text-xs font-mono text-dust-tan">Continents</span>
+              </div>
+            </div>
+
+            <div className="pt-4 md:pt-0 md:pl-8">
+              <span className="font-mono text-xs uppercase tracking-wider text-quarry-grey block mb-1">
+                Track Record
+              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="font-heading text-3xl sm:text-4xl font-semibold text-oxide-red">
+                  {SITE_FACTS.yearsInBusinessLabel}
+                </span>
+                <span className="text-xs font-mono text-dust-tan">Experience</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
