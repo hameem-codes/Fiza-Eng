@@ -218,15 +218,25 @@ function ProjectsContent() {
                   >
                     <div>
                       {/* Image Banner */}
-                      <div className="relative aspect-[16/10] w-full overflow-hidden bg-slab-grey mb-6">
+                      <div className="relative aspect-[16/9] w-full overflow-hidden bg-slab-grey mb-6">
                         <Image
                           src={project.image}
                           alt={project.imageAlt || project.name}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          className="img-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                          className="img-cover transition-transform duration-500 group-hover:scale-[1.05] saturate-[0.85]"
                         />
-                        <div className="absolute top-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] uppercase tracking-wider px-2 py-0.5">
+                        {/* Vignette Overlay */}
+                        <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.5)] pointer-events-none mix-blend-multiply" />
+                        
+                        {/* Hover Overlay */}
+                        <div className="absolute inset-0 bg-earth-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+                          <span className="text-iron-white font-mono text-xs font-bold tracking-[0.15em] uppercase flex items-center gap-1.5">
+                            View Project <ArrowRight size={14} />
+                          </span>
+                        </div>
+
+                        <div className="absolute top-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 z-20">
                           {project.country}
                         </div>
                       </div>
