@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { NEWS_ARTICLES } from "@/lib/constants";
+import { NEWS_ARTICLES, NewsArticle } from "@/lib/news";
 import { PROJECTS } from "@/lib/projects";
 import { formatDate } from "@/lib/utils";
 
@@ -23,19 +23,14 @@ export function generateMetadata({ params }: Props): Metadata {
   const article = NEWS_ARTICLES.find((a) => a.slug === params.slug);
   if (!article) {
     return {
-      title: "News Dispatch | Fiza Engineering",
+      title: "News | Fiza Engineering",
     };
   }
 
-  const fullTitle = `${article.headline.slice(0, 40)} | Fiza Engineering`;
-  const title = fullTitle.length <= 60 ? fullTitle : `${article.headline.slice(0, 38)} | Fiza Engineering`;
-
-  const rawDesc = article.leadParagraph;
-  const description = rawDesc.length >= 120 && rawDesc.length <= 155
-    ? rawDesc
-    : rawDesc.length > 155
-    ? `${rawDesc.slice(0, 151)}...`
-    : `${rawDesc} Official news from Fiza Engineering Corporation.`.slice(0, 150);
+  const title = `${article.title} | News | Fiza Engineering`;
+  const description = article.summary.length <= 155
+    ? article.summary
+    : `${article.summary.slice(0, 151)}...`;
 
   return {
     title,
@@ -49,12 +44,14 @@ export function generateMetadata({ params }: Props): Metadata {
       url: `https://fiza-one.vercel.app/news/${article.slug}`,
       siteName: "Fiza Engineering Corporation",
       type: "article",
+      publishedTime: article.date,
+      authors: [article.author.name],
       images: [
         {
           url: article.image,
           width: 1200,
           height: 630,
-          alt: article.headline,
+          alt: article.imageAlt || article.title,
         },
       ],
     },
@@ -73,20 +70,44 @@ export default function ArticlePage({ params }: Props) {
     notFound();
   }
 
-  const related = NEWS_ARTICLES.filter((a) => a.slug !== params.slug).slice(0, 2);
-
-  // Map news article to related project from /lib/projects.ts
-  const articleProjectMap: Record<string, string> = {
-    "falea-terminal-phase-one-complete": "falea-bauxite-corridor",
-    "expanding-heavy-fleet-central-africa": "katanga-copper-processing",
-  };
-  const relatedProjectSlug = articleProjectMap[article.slug];
-  const relatedProject = relatedProjectSlug
-    ? PROJECTS.find((p) => p.slug === relatedProjectSlug)
+  const relatedArticles = NEWS_ARTICLES.filter((a) => a.slug !== params.slug).slice(0, 2);
+  const relatedProject = article.relatedProjectSlug
+    ? PROJECTS.find((p) => p.slug === article.relatedProjectSlug)
     : null;
+
+  // JSON-LD structured data for NewsArticle
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": article.title,
+    "description": article.summary,
+    "image": [article.image],
+    "datePublished": article.date,
+    "dateModified": article.date,
+    "author": [
+      {
+        "@type": "Person",
+        "name": article.author.name,
+        "jobTitle": article.author.role,
+      },
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Fiza Engineering Corporation",
+      "url": "https://fiza-one.vercel.app",
+    },
+  };
+
+  const articleUrl = `https://fiza-one.vercel.app/news/${article.slug}`;
 
   return (
     <div className="w-full pt-[72px]">
+      {/* Article Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Header Bar */}
       <section className="bg-iron-white py-16 border-b border-slab-grey">
         <div className="max-w-content mx-auto px-6 md:px-12">
@@ -94,17 +115,22 @@ export default function ArticlePage({ params }: Props) {
             href="/news"
             className="text-label text-oxide-red font-mono uppercase tracking-[0.2em] inline-flex items-center gap-2 mb-4 hover:underline"
           >
-            ← Back To Newsroom
+            ← Back To News
           </Link>
-          <div className="flex items-center gap-4 text-xs font-mono text-quarry-grey mb-4">
-            <span className="bg-earth-black text-iron-white px-2 py-0.5 uppercase tracking-wider text-[10px]">
+          <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-quarry-grey mb-4">
+            <span className="bg-earth-black text-iron-white px-2 py-0.5 uppercase tracking-wider text-[10px] font-semibold">
               {article.category}
             </span>
             <span>PUBLISHED {formatDate(article.date)}</span>
+            <span>·</span>
+            <span>{article.readingTime}</span>
           </div>
-          <h1 className="text-display-lg sm:text-[3.25rem] font-medium text-earth-black leading-[1.0] max-w-4xl">
-            {article.headline}
+          <h1 className="text-display-lg sm:text-[3rem] font-medium text-earth-black leading-[1.05] max-w-4xl mb-4">
+            {article.title}
           </h1>
+          <div className="text-sm font-mono text-quarry-grey">
+            By <span className="font-semibold text-earth-black">{article.author.name}</span>, {article.author.role}
+          </div>
         </div>
       </section>
 
@@ -114,85 +140,118 @@ export default function ArticlePage({ params }: Props) {
           <div className="relative aspect-[21/9] w-full bg-slab-grey border border-slab-grey overflow-hidden">
             <Image
               src={article.image}
-              alt={article.headline}
+              alt={article.imageAlt || article.title}
               fill
               priority
               sizes="100vw"
               className="img-cover"
             />
-            <div className="absolute bottom-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] px-2.5 py-1 uppercase">
-              FIELD PHOTOGRAPHIC ARCHIVE · OPERATIONAL DISPATCH
+            <div className="absolute bottom-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] px-2.5 py-1 uppercase tracking-wider">
+              OFFICIAL DISPATCH ARCHIVE · {article.category}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Main Layout: Magazine-Style Single Column (Max 720px) + Sidebar */}
+      {/* Main Layout: Body Column + Sidebar */}
       <section className="w-full bg-iron-white py-20 md:py-28 border-b border-slab-grey">
         <div className="max-w-content mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            {/* Article Body (7 Columns, max 720px) */}
+            {/* Article Body */}
             <article className="lg:col-span-8 max-w-[720px]">
               <p className="text-body-lg text-earth-black font-medium leading-relaxed mb-8 pb-6 border-b border-slab-grey">
-                {article.leadParagraph}
+                {article.summary}
               </p>
 
-              <div className="space-y-6 text-quarry-grey text-body leading-relaxed">
-                {article.bodyParagraphs.map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
+              {/* Formatted Body with Subheadings */}
+              <div className="space-y-8 text-quarry-grey text-body leading-relaxed">
+                {article.sections && article.sections.length > 0 ? (
+                  article.sections.map((sec, i) => (
+                    <div key={i} className="space-y-4">
+                      <h3 className="text-heading-2 font-medium text-earth-black text-xl pt-2">
+                        {sec.heading}
+                      </h3>
+                      {sec.content.map((p, j) => (
+                        <p key={j}>{p}</p>
+                      ))}
+                    </div>
+                  ))
+                ) : (
+                  article.body.map((p, i) => <p key={i}>{p}</p>)
+                )}
               </div>
 
-              {/* Pull Quote with Oxide Red Left Border */}
+              {/* Pull Quote */}
               {article.pullQuote && (
-                <div className="pull-quote my-12">
-                  <p className="text-heading-2 font-medium italic text-earth-black leading-snug">
+                <div className="pull-quote my-12 p-6 bg-[#F5F3ED] border-l-4 border-oxide-red font-mono">
+                  <p className="text-heading-3 font-medium italic text-earth-black leading-snug font-sans text-lg">
                     &ldquo;{article.pullQuote.quote}&rdquo;
                   </p>
-                  <span className="block text-label font-mono not-italic text-quarry-grey uppercase tracking-wider mt-4">
+                  <span className="block text-label font-mono not-italic text-quarry-grey uppercase tracking-wider mt-3 text-xs">
                     — {article.pullQuote.author}
                   </span>
                 </div>
               )}
 
-              <div className="space-y-6 text-quarry-grey text-body leading-relaxed">
+              {/* Audit Statement */}
+              <div className="mt-8 pt-6 border-t border-slab-grey text-xs text-quarry-grey">
                 <p>
                   All project milestones are audited by third-party engineering inspectors and verified against ISO standards for structural, environmental, and worker safety protocols.
                 </p>
               </div>
 
-              <div className="mt-12 pt-8 border-t border-slab-grey flex items-center justify-between text-xs font-mono text-quarry-grey">
-                <span>COMMUNICATIONS DESK</span>
-                <span>DOC REF: FEC-DISPATCH-{article.slug.toUpperCase().slice(0, 10)}</span>
+              {/* Share Links */}
+              <div className="mt-10 pt-6 border-t border-slab-grey flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+                <span className="text-earth-black font-semibold uppercase tracking-wider">
+                  Share Dispatch:
+                </span>
+                <div className="flex items-center gap-3">
+                  <a
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(articleUrl)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="tag hover:bg-earth-black hover:text-iron-white text-xs"
+                  >
+                    Share on X
+                  </a>
+                  <a
+                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="tag hover:bg-earth-black hover:text-iron-white text-xs"
+                  >
+                    Share on LinkedIn
+                  </a>
+                  <a
+                    href={`mailto:?subject=${encodeURIComponent(article.title)}&body=${encodeURIComponent(articleUrl)}`}
+                    className="tag hover:bg-earth-black hover:text-iron-white text-xs"
+                  >
+                    Email
+                  </a>
+                </div>
               </div>
             </article>
 
-            {/* Sidebar (4 Columns) */}
+            {/* Sidebar */}
             <aside className="lg:col-span-4 flex flex-col space-y-8">
-              <div className="bg-[#EBE8E0] p-6 border border-slab-grey font-mono text-xs">
-                <span className="text-label text-earth-black uppercase tracking-wider block mb-3 pb-2 border-b border-slab-grey font-bold">
-                  Corporate Dispatches
-                </span>
-                <p className="text-quarry-grey leading-relaxed mb-4">
-                  For press inquiries, technical documentation requests, or photographic assets, contact our corporate communications desk.
-                </p>
-                <Link
-                  href="/contact"
-                  className="text-label font-bold text-oxide-red uppercase tracking-wider hover:underline block"
-                >
-                  Media & Public Relations →
-                </Link>
-              </div>
-              {/* Related Project */}
+              {/* Related Project Card */}
               {relatedProject && (
-                <div className="bg-iron-white p-6 border border-slab-grey font-mono text-xs">
-                  <span className="text-label text-earth-black uppercase tracking-wider block mb-3 pb-2 border-b border-slab-grey font-bold">
+                <div className="bg-[#EBE8E0] p-6 border border-slab-grey font-mono text-xs">
+                  <span className="text-label text-earth-black uppercase tracking-wider block mb-2 font-bold pb-2 border-b border-slab-grey">
                     Related Project
                   </span>
+                  <div className="relative aspect-[16/10] w-full overflow-hidden my-3 border border-slab-grey">
+                    <Image
+                      src={relatedProject.image}
+                      alt={relatedProject.imageAlt || relatedProject.name}
+                      fill
+                      className="img-cover"
+                    />
+                  </div>
                   <span className="font-mono text-[10px] text-oxide-red uppercase tracking-wider block mb-1">
                     {relatedProject.country} · {relatedProject.sector}
                   </span>
-                  <h4 className="text-heading-3 font-medium text-earth-black text-sm mb-3 leading-snug">
+                  <h4 className="text-heading-3 font-medium text-earth-black text-sm mb-3 leading-snug font-sans">
                     {relatedProject.name}
                   </h4>
                   <Link
@@ -204,24 +263,40 @@ export default function ArticlePage({ params }: Props) {
                 </div>
               )}
 
+              {/* Corporate Dispatches Inquiries */}
+              <div className="bg-[#EBE8E0] p-6 border border-slab-grey font-mono text-xs">
+                <span className="text-label text-earth-black uppercase tracking-wider block mb-3 pb-2 border-b border-slab-grey font-bold">
+                  Media & Press Desk
+                </span>
+                <p className="text-quarry-grey leading-relaxed mb-4 font-sans text-xs">
+                  For press inquiries, technical documentation requests, or photographic assets, contact our corporate communications desk.
+                </p>
+                <Link
+                  href="/contact"
+                  className="text-label font-bold text-oxide-red uppercase tracking-wider hover:underline block"
+                >
+                  Media Relations Inquiry →
+                </Link>
+              </div>
+
               {/* Related Stories */}
-              {related.length > 0 && (
+              {relatedArticles.length > 0 && (
                 <div>
-                  <span className="text-label text-earth-black font-mono uppercase tracking-wider block mb-4">
-                    Related Dispatches
+                  <span className="text-label text-earth-black font-mono uppercase tracking-wider block mb-4 font-bold text-xs">
+                    More News
                   </span>
                   <div className="space-y-4">
-                    {related.map((rel) => (
+                    {relatedArticles.map((rel) => (
                       <Link
-                        key={rel.id}
+                        key={rel.slug}
                         href={`/news/${rel.slug}`}
                         className="group block p-4 border border-slab-grey bg-iron-white hover:border-earth-black transition-colors"
                       >
                         <span className="font-mono text-[10px] text-oxide-red uppercase tracking-wider block mb-1">
                           {rel.category}
                         </span>
-                        <h4 className="text-heading-3 font-medium text-earth-black text-sm group-hover:text-oxide-red transition-colors leading-snug">
-                          {rel.headline}
+                        <h4 className="text-heading-3 font-medium text-earth-black text-sm group-hover:text-oxide-red transition-colors leading-snug font-sans">
+                          {rel.title}
                         </h4>
                       </Link>
                     ))}

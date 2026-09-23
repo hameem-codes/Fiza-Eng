@@ -19,6 +19,9 @@ export { PROJECTS, hiddenProjects } from "./projects";
 export type { ProductItem, KeySpec } from "./products";
 export { PRODUCTS, TRADED_MINERALS, ALL_CATALOG_ITEMS, SHOW_PRODUCT_SPECS } from "./products";
 
+export type { NewsArticle, Author, NewsSection } from "./news";
+export { NEWS_ARTICLES, NEWS_CATEGORIES, HIDE_UNVERIFIED_NEWS, getVisibleArticles } from "./news";
+
 export interface MineralResource {
   id: string;
   name: string;
@@ -28,21 +31,6 @@ export interface MineralResource {
   annualVolume: string;
   description: string;
   specifications: { label: string; value: string }[];
-}
-
-export interface NewsArticle {
-  id: string;
-  slug: string;
-  date: string;
-  category: string;
-  headline: string;
-  leadParagraph: string;
-  bodyParagraphs: string[];
-  pullQuote?: {
-    quote: string;
-    author: string;
-  };
-  image: string;
 }
 
 export interface Leader {
@@ -328,57 +316,6 @@ export const MINERALS: MineralResource[] = [
       { label: "U + Th (Radionuclides)", value: "< 120 ppm Low Trace" },
       { label: "Bulk Density", value: "2.65 t/m³" }
     ]
-  }
-];
-
-export const NEWS_ARTICLES: NewsArticle[] = [
-  {
-    id: "falea-terminal-phase-one-complete",
-    slug: "falea-terminal-phase-one-complete",
-    date: "2026-08-14",
-    category: "INFRASTRUCTURE & MINING",
-    headline: "Phase One of the Falea Mineral Corridor Completed Ahead of Schedule",
-    leadParagraph: "Fiza Engineering Corporation has officially commissioned the first 94 kilometers of the Falea heavy-haul logistics artery in southwestern Mali, clearing the corridor for commercial mineral transit.",
-    bodyParagraphs: [
-      "Following 14 months of sustained earthmoving across challenging lateritic terrain, the specialized civil infrastructure division of Fiza has completed all bridges, culverts, and crushed-basalt pavement courses. The roadway links remote extraction plateaus directly to the river barge loading facility.",
-      "The engineering team deployed 85 heavy units including rigid frame haulers, motorized graders, and vibrating compactors working double shifts. Reinforced concrete bridge piers were anchored directly into deep bedrocks to prevent seasonal monsoon scour.",
-      "With initial load testing demonstrating that 90-tonne triple road trains can safely sustain speeds of 65 km/h, the corridor will slash transit times by over 70%, lowering per-tonne export logistics costs for partner mining entities."
-    ],
-    pullQuote: {
-      quote: "We do not wait for ideal conditions. We build roads that withstand torrential rains and carry forty-tonne axles day after day.",
-      author: "Dr. Amara Diallo, Chief Operating Officer"
-    },
-    image: SITE_IMAGES.news.faleaHaulRoad.src
-  },
-  {
-    id: "expanding-heavy-fleet-central-africa",
-    slug: "expanding-heavy-fleet-central-africa",
-    date: "2026-06-28",
-    category: "FLEET LOGISTICS",
-    headline: "Fiza Mobilizes 45 Additional Heavy Units to Katanga Operations",
-    leadParagraph: "In response to expanding multi-year overburden stripping agreements, Fiza has completed the offloading and transit of 45 tier-1 heavy mining machines through the Port of Dar es Salaam into the DRC.",
-    bodyParagraphs: [
-      "The shipment includes twelve 100-tonne rigid haul trucks, eight hydraulic excavators, and five tracked dozer units, bringing Fiza's active fleet in Central Africa to over 220 mechanized pieces.",
-      "All units were customized at Fiza's regional depot with high-ambient cooling packs, specialized rock protection guards, and GPS-enabled satellite fleet telemetry to allow real-time dispatch monitoring from the regional office in Kinshasa."
-    ],
-    image: SITE_IMAGES.news.solarMicrogrid.src
-  },
-  {
-    id: "sustainable-hybrid-microgrid-commissioned",
-    slug: "sustainable-hybrid-microgrid-commissioned",
-    date: "2026-04-12",
-    category: "ENERGY SYSTEMS",
-    headline: "25MW Industrial Solar-Diesel Hybrid Microgrid Energized",
-    leadParagraph: "Fiza's industrial power division has synchronized a 25MW hybrid power station at an isolated mine site, cutting fossil fuel consumption by 34% annually.",
-    bodyParagraphs: [
-      "Operating off-grid requires continuous reliability. By pairing a 16MW photovoltaic solar field with high-capacity lithium iron phosphate (LFP) energy storage and rapid-response diesel gensets, the facility delivers stable voltage to critical ball mills and flotation circuits.",
-      "The control system was designed in-house to automatically modulate generator load based on real-time solar irradiance, setting a new benchmark for mining sustainability across West Africa."
-    ],
-    pullQuote: {
-      quote: "Heavy industry requires guaranteed power. Our hybrid systems provide that certainty without burning diesel unnecessarily.",
-      author: "Elena Rostova, VP of Engineering"
-    },
-    image: SITE_IMAGES.news.railModernization.src
   }
 ];
 
