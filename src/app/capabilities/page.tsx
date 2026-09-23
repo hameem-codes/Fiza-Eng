@@ -102,7 +102,8 @@ export default function CapabilitiesPage() {
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="img-cover"
                   />
-                  <div className="absolute top-4 left-4 bg-earth-black text-iron-white font-mono text-[11px] tracking-wider px-3 py-1">
+                  <div className="absolute inset-0 bg-earth-black/25 pointer-events-none" />
+                  <div className="absolute top-4 left-4 bg-earth-black text-iron-white font-mono text-[11px] tracking-wider px-3 py-1 z-10">
                     SERVICE 0{idx + 1}
                   </div>
                 </div>
@@ -194,7 +195,8 @@ export default function CapabilitiesPage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="img-cover"
                     />
-                    <div className="absolute top-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] tracking-wider px-2 py-0.5">
+                    <div className="absolute inset-0 bg-earth-black/25 pointer-events-none" />
+                    <div className="absolute top-3 left-3 bg-earth-black text-iron-white font-mono text-[10px] tracking-wider px-2 py-0.5 z-10">
                       SERVICE 0{idx + 4}
                     </div>
                   </div>
