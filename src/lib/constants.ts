@@ -891,10 +891,10 @@ export const ACHIEVEMENTS = [
   {
     id: "mineral-corridor-milestone",
     category: "Milestones",
-    year: SITE_FACTS.recordTonnesYear,
-    title: SITE_FACTS.recordTonnesMoved,
-    organization: "Internal Operations Record",
-    description: SITE_FACTS.recordTonnesDescription
+    year: "2023",
+    title: "38 Million Tonnes Moved Annually",
+    organization: "Internal Operations Milestone",
+    description: "Achieved annual earthmoving of 38 million tonnes across open-pit concessions with fleet availability above 94%."
   },
   {
     id: "environmental-sustainability",

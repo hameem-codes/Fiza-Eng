@@ -1,7 +1,7 @@
 /**
  * SINGLE SOURCE OF TRUTH: Fiza Engineering Corporation
  * Centralizes all verified company facts, statistics, operational figures, and contact details.
- * Any unverified values are noted with // TODO: VERIFY.
+ * Values marked TODO are unverified and must be confirmed by the owner before launch.
  */
 
 export const FOUNDED_YEAR = 1994;
@@ -41,26 +41,31 @@ export const SITE_FACTS = {
   fleetSizeNumber: 450, // TODO: VERIFY
   countries: 12, // TODO: VERIFY
   continents: 4, // Middle East, Africa, Asia, plus global trade // TODO: VERIFY
-  kilometresOfTrack: "42 km", // TODO: VERIFY - completed Falea & Madagascar corridors
-  kilometresOfTrackNumber: 42, // TODO: VERIFY
-  // TODO: CONFLICT: 1,140 km network maintained in division specs vs 42 km completed corridors in siteFacts
+  
+  // Rail infrastructure
+  railTrackKm: "1,140 km", // TODO: OWNER TO VERIFY
+  railTrackKmNumber: 1140, // TODO: OWNER TO VERIFY
   railCorridorsMaintained: "1,140 km", // TODO: OWNER TO VERIFY
+  spursCompletedKm: "42 km", // TODO: OWNER TO VERIFY - completed Falea & Madagascar mineral spurs
+  spursCompletedKmNumber: 42, // TODO: OWNER TO VERIFY
+  
+  // Facilities & Operations
   commissionedFacilities: "14", // TODO: OWNER TO VERIFY - Turnkey industrial plants
   rebuildDepotArea: "35,000 m²", // TODO: OWNER TO VERIFY - Bamako central rebuild depot
-  mwInstalled: "25MW", // TODO: VERIFY - industrial hybrid microgrid
-  mwInstalledNumber: 25, // TODO: VERIFY
+  
+  // Power Generation
+  installedPower: "185 MW", // TODO: OWNER TO VERIFY
+  installedPowerNumber: 185, // TODO: OWNER TO VERIFY
+  mwInstalled: "185 MW", // TODO: OWNER TO VERIFY
+  mwInstalledNumber: 185, // TODO: OWNER TO VERIFY
 
-  // Tonnage: Consistent unified figures
-  // ONE annual figure plus clearly dated record figure
+  // Tonnage: Consistent annual figure (no record claims)
   annualTonnesMoved: "38M Tonnes",
   annualTonnesNumber: "38M",
-  recordTonnesYear: "2023",
-  recordTonnesMoved: "38 Million Tonnes in 2023",
-  recordTonnesDescription: "Achieved record annual earthmoving of 38 million tonnes across open-pit contracts in 2023 with fleet availability above 94%.",
 
   // Safety & Operational Standards
   ltifrRate: "0.12", // Lost-Time Injury Frequency Rate // TODO: VERIFY
-  fleetAvailability: "94.8%", // TODO: VERIFY
+  fleetAvailability: "94%+", // TODO: OWNER TO VERIFY
 
   // Contact Information - Unified contact set
   contact: {

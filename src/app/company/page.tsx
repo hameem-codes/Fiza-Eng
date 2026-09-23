@@ -109,8 +109,8 @@ const TIMELINE_MILESTONES = [
     description: "Executed railway track renewal and heavy-haul rolling stock operations across specialized mineral corridors."
   },
   {
-    year: String(currentYear),
-    title: `${SITE_FACTS.yearsInBusinessLabel} of Integrated Operations`,
+    year: "2026",
+    title: `Operations across ${SITE_FACTS.countries} countries`,
     description: `Operating mining, civil, rail, and agro-industrial infrastructure projects across ${SITE_FACTS.countries} countries on ${SITE_FACTS.continents} continents.`
   }
 ];
