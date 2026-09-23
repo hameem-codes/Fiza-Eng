@@ -45,19 +45,22 @@ export const SITE_FACTS = {
   // Rail infrastructure
   railTrackKm: "1,140 km", // TODO: OWNER TO VERIFY
   railTrackKmNumber: 1140, // TODO: OWNER TO VERIFY
-  railCorridorsMaintained: "1,140 km", // TODO: OWNER TO VERIFY
   spursCompletedKm: "42 km", // TODO: OWNER TO VERIFY - completed Falea & Madagascar mineral spurs
   spursCompletedKmNumber: 42, // TODO: OWNER TO VERIFY
   
   // Facilities & Operations
   commissionedFacilities: "14", // TODO: OWNER TO VERIFY - Turnkey industrial plants
   rebuildDepotArea: "35,000 m²", // TODO: OWNER TO VERIFY - Bamako central rebuild depot
+  haulRoadsBuiltKm: "850+ km", // TODO: OWNER TO VERIFY - All-weather heavy civil haul roads
+  arableLandHectares: "45,000 hectares", // TODO: OWNER TO VERIFY - Commercial agriculture land developed
+  procuredEquipmentMachines: "850+ machines", // TODO: OWNER TO VERIFY - Sourced and rebuilt equipment units
   
+  // Commodity Trading Volume
+  annualTradedMineralTonnes: "4.2M tonnes", // TODO: OWNER TO VERIFY - Traded mineral volume
+
   // Power Generation
   installedPower: "185 MW", // TODO: OWNER TO VERIFY
   installedPowerNumber: 185, // TODO: OWNER TO VERIFY
-  mwInstalled: "185 MW", // TODO: OWNER TO VERIFY
-  mwInstalledNumber: 185, // TODO: OWNER TO VERIFY
 
   // Tonnage: Consistent annual figure (no record claims)
   annualTonnesMoved: "38M Tonnes",

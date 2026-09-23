@@ -121,7 +121,7 @@ export function Footer() {
               Turnkey Plants
             </Link>
             <Link href="/capabilities" className="text-body-sm text-quarry-grey hover:text-iron-white transition-colors">
-              All 8 Divisions →
+              All Services →
             </Link>
           </div>
 

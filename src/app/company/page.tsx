@@ -24,8 +24,7 @@ const WHAT_SETS_US_APART = [
     desc: "Our teams assemble turnkey processing plants, crushing stations, and electrical control centers in-house."
   },
   {
-    // TODO: CONFLICT: 1,140 km network maintained in division specs vs 42 km completed corridors in siteFacts
-    metric: SITE_FACTS.railCorridorsMaintained,
+    metric: SITE_FACTS.railTrackKm,
     label: "Corridors Maintained",
     title: "Heavy-Haul Rail Competency",
     desc: "We rehabilitate and operate specialized 32-tonne axle-load railway tracks to move extraction volume to coastal ports."
@@ -120,10 +119,10 @@ export default function CompanyPage() {
     <div className="w-full pt-[72px]">
       {/* 1. Hero Section */}
       <section className="relative w-full h-[60vh] min-h-[460px] flex items-end overflow-hidden bg-coal-dark">
-        {/* // TODO: [REPLACE: /images/company-hero.jpg] with verified client corporate photo if provided */}
+        {/* // TODO: REPLACE WITH REAL FIZA PHOTO */}
         <Image
           src={SITE_IMAGES.company.hero.src}
-          alt={SITE_IMAGES.company.hero.alt}
+          alt="Open-pit mining operation"
           fill
           priority
           sizes="100vw"
@@ -169,15 +168,16 @@ export default function CompanyPage() {
             </div>
 
             <div className="lg:col-span-5 relative h-[380px] sm:h-[460px] border border-slab-grey lg:-mr-8 overflow-hidden bg-slab-grey/40">
+              {/* // TODO: REPLACE WITH REAL FIZA PHOTO */}
               <Image
                 src={SITE_IMAGES.company.fieldOps.src}
-                alt={SITE_IMAGES.company.fieldOps.alt}
+                alt="Engineers reviewing site plans"
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="img-cover object-center"
               />
               <div className="absolute bottom-3 left-3 bg-earth-black text-iron-white px-3 py-1 font-mono text-[10px] uppercase">
-                Open-pit operations, West Africa
+                Engineers reviewing site plans
               </div>
             </div>
           </div>

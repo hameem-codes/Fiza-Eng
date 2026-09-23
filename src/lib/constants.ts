@@ -10,6 +10,7 @@ export interface Capability {
   scope: string[];
   keyMetrics: { label: string; value: string }[];
   image: string;
+  bigStat: { value: string; label: string };
 }
 
 export interface Project {
@@ -127,19 +128,21 @@ export const CAPABILITIES: Capability[] = [
     slug: "mining-services",
     title: "Mining Services",
     tagline: "High-tonnage extraction, fleet mobilization, and deposit feasibility.",
-    description: "Fiza operates turnkey pit-to-port mining operations with over 450 heavy earthmoving units across West and Central Africa. From geological core validation to 24/7 overburden stripping, we deliver industrial output under demanding field conditions.",
+    description: "We provide turnkey pit-to-port mining operations using our fleet of 450+ heavy earthmoving machines across West and Central Africa. Our work spans geological validation, round-the-clock overburden stripping, and site restoration.",
     scope: [
       "Open-Pit Overburden Stripping & Haulage",
       "Exploratory Core Drilling & Assay Coordination",
-      "Tailings Management & Remediation Infrastructure",
-      "Pit Dewatering & In-Situ Slurry Pumping Systems",
-      "Continuous Heavy Fleet Maintenance & On-Site Machine Shops"
+      "Tailings Management & Remediation Infrastructure"
     ],
     keyMetrics: [
-      { label: "Annual Material Moved", value: SITE_FACTS.annualTonnesMoved },
+      { label: "Annual Material Moved", value: `${SITE_FACTS.annualTonnesNumber} tonnes` },
       { label: "Fleet Availability Rate", value: SITE_FACTS.fleetAvailability },
       { label: "Safety Lost-Time Frequency", value: SITE_FACTS.ltifrRate }
     ],
+    bigStat: {
+      value: `${SITE_FACTS.annualTonnesNumber} tonnes`,
+      label: "Annual Material Moved"
+    },
     image: SITE_IMAGES.capabilities.miningServices.src
   },
   {
@@ -147,19 +150,21 @@ export const CAPABILITIES: Capability[] = [
     slug: "mineral-trading",
     title: "Mineral Trading",
     tagline: "Direct physical commodity flows from African concessions to global smelters.",
-    description: "We bridge African extraction corridors directly to industrial end-users in Asia, Europe, and the Middle East. We supply bulk commodities directly to international refineries and smelters through long-term off-take agreements.",
+    description: "We connect African extraction operations directly to industrial end-users across Asia, Europe, and the Middle East. We supply bulk bauxite, iron ore, copper, and lithium to international refineries through long-term agreements.",
     scope: [
-      "Bauxite (Metallurgical & Chemical Grade)",
-      "High-Grade Hematite & Magnetite Iron Ore (Fe 62-65%)",
-      "Cathode Copper & Blister Ingots",
-      "Industrial Manganese & High-Assay Lithium Concentrates",
-      "Port Stockpiling, Assay Certification & Letter of Credit Execution"
+      "Bauxite & High-Grade Iron Ore Supply",
+      "Cathode Copper & Lithium Concentrates",
+      "Port Stockpiling, Assay Certification & Logistics"
     ],
     keyMetrics: [
-      { label: "Annual Traded Volume", value: "4.2M Metric Tonnes" },
+      { label: "Annual Traded Volume", value: SITE_FACTS.annualTradedMineralTonnes },
       { label: "Active Off-Take Port Hubs", value: "5 Deep-Water Terminals" },
       { label: "Assay Purity Average", value: "99.2% Standard Grade" }
     ],
+    bigStat: {
+      value: SITE_FACTS.annualTradedMineralTonnes,
+      label: "Annual Traded Volume"
+    },
     image: SITE_IMAGES.capabilities.mineralTrading.src
   },
   {
@@ -167,19 +172,21 @@ export const CAPABILITIES: Capability[] = [
     slug: "railway-solutions",
     title: "Railway Solutions",
     tagline: "Heavy-haul rail corridors connecting isolated deposits to deep-water ports.",
-    description: "We provide heavy-haul rail infrastructure for bulk mineral transport from remote extraction sites to deep-water ports. Fiza engineers, tracks, ballasts, and maintains standard and narrow gauge industrial corridors built to withstand 32-tonne axle loads in adverse soils.",
+    description: "We build and maintain heavy-haul railway corridors connecting inland mineral deposits to ocean ports. Our services include track laying, ballast tamping, rolling stock maintenance, and corridor operation rated for 32-tonne axle loads.",
     scope: [
       "Heavy-Haul Track Laying & Ballast Tamping",
-      "Locomotive & Rolling Stock Overhaul and Fleet Leasing",
-      "Turnkey Siding Infrastructure at Pitheads & Processing Plants",
-      "Automated Signaling & Centralized Dispatch Control Systems",
-      "Track Alignment Rehabilitation & Sub-Grade Stabilization"
+      "Locomotive & Rolling Stock Fleet Maintenance",
+      "Signaling Systems & Sub-Grade Stabilization"
     ],
     keyMetrics: [
-      { label: "Track Network Maintained", value: "1,140 Kilometers" },
+      { label: "Track Network Maintained", value: SITE_FACTS.railTrackKm },
       { label: "Axle Load Rating", value: "32.5 Tonnes" },
       { label: "Rolling Stock Units Managed", value: "620 Railcars" }
     ],
+    bigStat: {
+      value: SITE_FACTS.railTrackKm,
+      label: "Track Maintained"
+    },
     image: SITE_IMAGES.capabilities.railwaySolutions.src
   },
   {
@@ -187,19 +194,21 @@ export const CAPABILITIES: Capability[] = [
     slug: "infrastructure",
     title: "Heavy Infrastructure",
     tagline: "Arterial haul roads, bridges, water reticulation, and industrial civil works.",
-    description: "Remote operations require uncompromising civil foundations. We erect arterial haulage bridges spanning major rivers, carve all-weather lateral roads through challenging terrain, and construct industrial concrete foundations that outlast project cycles.",
+    description: "We engineer and construct heavy civil works for industrial sites. Our capabilities include 90-tonne class haul roads, reinforced concrete river bridges, mass foundations, and bulk water management structures.",
     scope: [
-      "Heavy Mining Haul Roads (Cat 777 Class Ready)",
-      "High-Capacity Pre-Stressed Concrete Bridges",
-      "Industrial Bulk Earthworks & Soil Stabilization",
-      "Bulk Water Pipelines & High-Capacity Drainage Reservoirs",
-      "Port Terminal Slabs & Heavy Stacking Yards"
+      "90-tonne class haul roads",
+      "High-Capacity Reinforced Concrete Bridges",
+      "Bulk Earthworks, Foundations & Drainage"
     ],
     keyMetrics: [
-      { label: "All-Weather Haul Roads Built", value: "850+ km" },
+      { label: "All-Weather Haul Roads Built", value: SITE_FACTS.haulRoadsBuiltKm },
       { label: "Structural Concrete Poured", value: "420,000 m³" },
       { label: "Bridge Spans Completed", value: "18 River Crossings" }
     ],
+    bigStat: {
+      value: SITE_FACTS.haulRoadsBuiltKm,
+      label: "Haul Roads Built"
+    },
     image: SITE_IMAGES.capabilities.heavyCivil.src
   },
   {
@@ -207,19 +216,21 @@ export const CAPABILITIES: Capability[] = [
     slug: "turnkey-plants",
     title: "Turnkey Industrial Plants",
     tagline: "Integrated mineral processing, crushing circuits, and smelting facilities.",
-    description: "From greenfield pad to commercial commissioning, Fiza delivers modular processing facilities: crushing circuits, magnetic separation plants, froth flotation units, and cement grinding stations engineered for remote reliability.",
+    description: "We design, fabricate, and assemble modular mineral processing facilities from greenfield sites to full commissioning. Plants include multi-stage crushing circuits, magnetic separation, flotation units, and automated control centers.",
     scope: [
-      "Multi-Stage Jaw & Cone Crushing Stations (up to 1,500 TPH)",
-      "Dense Media Separation (DMS) Circuits",
-      "Ball Mill & SAG Mill Erection and Dynamic Balancing",
-      "Structural Steel Fabrication & Erection",
-      "SCADA Automation, Motor Control Centers & Power Synchronization"
+      "Primary & Secondary Crushing Stations",
+      "Dense Media & Magnetic Separation Circuits",
+      "Structural Steel Fabrication & SCADA Automation"
     ],
     keyMetrics: [
-      { label: "Commissioned Plants", value: "14 Facilities" },
+      { label: "Commissioned Plants", value: `${SITE_FACTS.commissionedFacilities} facilities` },
       { label: "Peak Processing Capacity", value: "1,500 TPH" },
       { label: "Commissioning Runway", value: "Average 11 Months" }
     ],
+    bigStat: {
+      value: `${SITE_FACTS.commissionedFacilities} facilities`,
+      label: "Commissioned Facilities"
+    },
     image: SITE_IMAGES.capabilities.turnkeyPlants.src
   },
   {
@@ -227,19 +238,21 @@ export const CAPABILITIES: Capability[] = [
     slug: "agriculture",
     title: "Commercial Agriculture",
     tagline: "Large-scale land clearing, center-pivot irrigation, and agro-processing hubs.",
-    description: "Deploying heavy earthmoving discipline to food security, Fiza clears arable savannah, installs multi-thousand-hectare automated pivot irrigation schemes, and constructs grain silos and palm processing mills.",
+    description: "We develop large-scale agricultural projects across arable land. Our work includes bush clearing, land leveling, center-pivot irrigation systems, grain storage silos, and agro-processing facilities.",
     scope: [
-      "Precision Land Clearing & Root Ripping",
-      "Center-Pivot Installation & River Intake Stations",
-      "Grain Storage Silos & Automated Aeration Elevators",
-      "Agro-Industrial Transport Networks",
-      "Soil Mineralization & Topsoil Conservation Engineering"
+      "Precision Land Clearing & Soil Preparation",
+      "Center-Pivot Irrigation & Intake Stations",
+      "Grain Storage Silos & Milling Facilities"
     ],
     keyMetrics: [
-      { label: "Arable Land Developed", value: "45,000 Hectares" },
+      { label: "Arable Land Developed", value: SITE_FACTS.arableLandHectares },
       { label: "Irrigation Systems Active", value: "78 Pivot Units" },
       { label: "Grain Storage Capacity", value: "120,000 Metric Tonnes" }
     ],
+    bigStat: {
+      value: SITE_FACTS.arableLandHectares,
+      label: "Arable Land Developed"
+    },
     image: SITE_IMAGES.capabilities.commercialAgriculture.src
   },
   {
@@ -247,19 +260,21 @@ export const CAPABILITIES: Capability[] = [
     slug: "equipment-procurement",
     title: "Equipment Procurement & Rebuild",
     tagline: "Global sourcing, refurbishment, and rapid deployment of heavy machinery.",
-    description: "Capital equipment shortages freeze project schedules. We maintain global sourcing channels across Europe, North America, and Japan, securing tier-1 machinery, rebuilding powertrains, and executing bonded transit into African interiors.",
+    description: "We source, inspect, and deliver heavy mining machinery from global channels. Our technical teams rebuild powertrains, supply replacement components, and manage transport directly to remote project sites.",
     scope: [
-      "Heavy Mining Fleet Sourcing (Excavators 50T-200T, Cat/Komatsu)",
-      "Powertrain Rebuild & Component Exchange Programs",
-      "OEM Consumable Warehousing (Ground Engaging Tools, Undercarriage)",
-      "Oversized Multimodal Transport Logistics (Roll-on/Roll-off & Lowbed)",
-      "Operator Certification & Maintenance Crew Training"
+      "Excavators 50T-200T, tier-1 OEM brands",
+      "Powertrain Rebuild & Component Exchange",
+      "Heavy Equipment Logistics & Operator Training"
     ],
     keyMetrics: [
-      { label: "Machines Delivered to Africa", value: "850+ Heavy Units" },
+      { label: "Machines Delivered to Africa", value: SITE_FACTS.procuredEquipmentMachines },
       { label: "Critical Parts Stockpile", value: "$18.5M Inventory" },
       { label: "Transit Lead Time Average", value: "32 Days Port to Site" }
     ],
+    bigStat: {
+      value: SITE_FACTS.procuredEquipmentMachines,
+      label: "Delivered Machinery"
+    },
     image: SITE_IMAGES.capabilities.equipmentRemanufacturing.src
   },
   {
@@ -267,19 +282,21 @@ export const CAPABILITIES: Capability[] = [
     slug: "industrial-power",
     title: "Industrial Microgrids",
     tagline: "Off-grid hybrid solar, heavy fuel oil (HFO), and substation engineering.",
-    description: "Remote mining requires uninterruptible megawatts. Fiza designs, installs, and operates base-load hybrid plants combining solar PV arrays with high-efficiency diesel/HFO gensets and battery energy storage systems (BESS).",
+    description: "We build and operate dedicated power generation systems for remote industrial sites. Our installations combine utility-scale solar arrays, heavy fuel oil or diesel generators, and battery storage to ensure continuous power.",
     scope: [
-      "Base-Load HFO & Gas Generator Station Commissioning",
-      "Industrial Utility-Scale Solar PV Arrays (10MW - 50MW)",
-      "BESS Integration for Peak Shaving & Frequency Response",
-      "33kV / 66kV / 132kV Overhead Transmission Corridors",
-      "Switchgear Engineering & Power Factor Compensation"
+      "Base-Load Generator Stations",
+      "Industrial Solar PV Arrays & Battery Storage",
+      "High-Voltage Transmission Lines & Substations"
     ],
     keyMetrics: [
-      { label: "Installed Generation Capacity", value: "185 Megawatts" },
+      { label: "Installed Generation Capacity", value: SITE_FACTS.installedPower },
       { label: "Microgrid Uptime", value: "99.94%" },
       { label: "Fuel Displacement via Solar", value: "32% Annual" }
     ],
+    bigStat: {
+      value: SITE_FACTS.installedPower,
+      label: "Generation Capacity"
+    },
     image: SITE_IMAGES.capabilities.energyMicrogrids.src
   }
 ];
@@ -343,7 +360,7 @@ export const ACTIVE_PORTFOLIO_PROJECTS: ActivePortfolioProject[] = [
       "Rolling stock engineering with partner syndicates",
       "Strategic logistics corridor expansion"
     ],
-    image: SITE_IMAGES.capabilities.railwaySolutions.src
+    image: SITE_IMAGES.projects.toamasinaRail.src
   }
 ];
 
@@ -363,8 +380,8 @@ export const PROJECTS: Project[] = [
     image: SITE_IMAGES.projects.faleaMali.src,
     gallery: [
       SITE_IMAGES.projects.faleaMali.src,
-      SITE_IMAGES.capabilities.heavyCivil.src,
-      SITE_IMAGES.capabilities.turnkeyPlants.src
+      SITE_IMAGES.projects.civilBridge.src,
+      SITE_IMAGES.projects.industrialCircuit.src
     ],
     stats: [
       { label: "Annual Ore Moved", value: "8.5M Tonnes" },
@@ -390,7 +407,7 @@ export const PROJECTS: Project[] = [
     image: SITE_IMAGES.projects.katangaCopper.src,
     gallery: [
       SITE_IMAGES.projects.katangaCopper.src,
-      SITE_IMAGES.capabilities.mineralTrading.src
+      SITE_IMAGES.projects.industrialCircuit.src
     ],
     stats: [
       { label: "Circuit Throughput", value: "1,500 TPH" },
@@ -416,7 +433,7 @@ export const PROJECTS: Project[] = [
     image: SITE_IMAGES.projects.toamasinaRail.src,
     gallery: [
       SITE_IMAGES.projects.toamasinaRail.src,
-      SITE_IMAGES.capabilities.heavyCivil.src
+      SITE_IMAGES.projects.civilBridge.src
     ],
     stats: [
       { label: "Rehabilitated Track", value: "42 Kilometers" },
@@ -486,9 +503,9 @@ export const PROJECTS: Project[] = [
     challenge: "Extreme ambient dust and heat fluctuations requiring specialized pneumatic conveyance and explosion-proof electrical substations.",
     solution: "Integrated specialized steel silos with automated thermocouple monitoring systems and a 4MW synchronized diesel-solar power station.",
     outcome: "Decreased post-harvest grain losses in the Sikasso agrarian basin by over 30% in its initial harvest cycle.",
-    image: SITE_IMAGES.capabilities.commercialAgriculture.src,
+    image: SITE_IMAGES.projects.sikassoAgro.src,
     gallery: [
-      SITE_IMAGES.capabilities.commercialAgriculture.src
+      SITE_IMAGES.projects.sikassoAgro.src
     ],
     stats: [
       { label: "Storage Volume", value: "60,000 Tonnes" },

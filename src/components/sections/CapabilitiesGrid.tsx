@@ -39,7 +39,7 @@ export function CapabilitiesGrid() {
             href="/capabilities"
             className="text-label font-bold text-earth-black hover:text-oxide-red uppercase tracking-wider inline-flex items-center gap-2 transition-colors font-mono"
           >
-            Explore all 8 capabilities <ArrowRight size={14} />
+            See all services <ArrowRight size={14} />
           </Link>
         </div>
 
