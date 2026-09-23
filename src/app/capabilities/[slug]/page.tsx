@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { CAPABILITIES, PROJECTS, PRODUCTS } from "@/lib/constants";
+import { CAPABILITIES, PRODUCTS } from "@/lib/constants";
+import { PROJECTS } from "@/lib/projects";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 
 interface Props {
@@ -236,20 +237,20 @@ export default function CapabilityDetailPage({ params }: Props) {
                   <div className="relative aspect-[16/10] w-full overflow-hidden mb-4 bg-slab-grey">
                     <Image
                       src={proj.image}
-                      alt={proj.title}
+                      alt={proj.imageAlt || proj.name}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="img-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     />
                   </div>
                   <span className="font-mono text-xs text-oxide-red uppercase tracking-wider block mb-1">
-                    {proj.country} · {proj.category}
+                    {proj.country} · {proj.sector}
                   </span>
                   <h3 className="text-heading-3 font-medium text-earth-black group-hover:text-oxide-red transition-colors mb-2">
-                    {proj.title}
+                    {proj.name}
                   </h3>
                   <p className="text-body-sm text-quarry-grey leading-relaxed">
-                    {proj.excerpt}
+                    {proj.summary}
                   </p>
                 </Link>
               ))}

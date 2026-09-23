@@ -132,7 +132,7 @@ export default function MiningPage() {
                     <Tag active>ACTIVE EXTRACTION</Tag>
                   </div>
                   <h3 className="text-heading-1 font-medium text-earth-black mb-4">
-                    Katanga Copper-Cobalt & Lithium
+                    Katanga Copper-Cobalt Operations
                   </h3>
                   <p className="text-body text-quarry-grey leading-relaxed mb-6">
                     Operating inside the Kolwezi mining district with over 220 heavy pieces. We operate turnkey 1,500 TPH primary crushing stations and are constructing the 180 km Manono critical minerals access route to connect hard-rock lithium deposits to regional rail.
@@ -140,7 +140,7 @@ export default function MiningPage() {
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 font-mono text-xs border-t border-slab-grey pt-4">
                     <div>
                       <span className="text-quarry-grey block uppercase text-[10px]">Key Commodities</span>
-                      <span className="text-earth-black font-semibold text-sm">Grade-A Copper & Spodumene</span>
+                      <span className="text-earth-black font-semibold text-sm">Grade-A Copper & Cobalt</span>
                     </div>
                     <div>
                       <span className="text-quarry-grey block uppercase text-[10px]">Crushing Capacity</span>

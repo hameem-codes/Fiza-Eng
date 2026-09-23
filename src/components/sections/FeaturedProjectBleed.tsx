@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { PROJECTS } from "@/lib/constants";
+import { PROJECTS } from "@/lib/projects";
 import { Tag } from "@/components/ui/Tag";
 
 export function FeaturedProjectBleed() {
@@ -13,7 +13,7 @@ export function FeaturedProjectBleed() {
       <div className="absolute inset-0 z-0">
         <Image
           src={featured.image}
-          alt={featured.title}
+          alt={featured.imageAlt || featured.name}
           fill
           className="img-cover object-center"
         />
@@ -25,16 +25,16 @@ export function FeaturedProjectBleed() {
           <div className="flex items-center gap-3 mb-4">
             <Tag active>FEATURED PROJECT</Tag>
             <span className="text-iron-white font-mono text-xs uppercase tracking-widest">
-              {featured.location}, {featured.country}
+              {featured.country}
             </span>
           </div>
 
           <h2 className="text-display-lg sm:text-[3.25rem] font-medium text-iron-white leading-[0.98] mb-6">
-            {featured.title}
+            {featured.name}
           </h2>
 
           <p className="text-body-lg text-dust-tan mb-8 leading-relaxed">
-            {featured.excerpt}
+            {featured.summary}
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-6 border-t border-b border-slab-grey/30 mb-8 font-mono">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { NEWS_ARTICLES } from "@/lib/constants";
+import { PROJECTS } from "@/lib/projects";
 import { formatDate } from "@/lib/utils";
 
 interface Props {
@@ -73,6 +74,16 @@ export default function ArticlePage({ params }: Props) {
   }
 
   const related = NEWS_ARTICLES.filter((a) => a.slug !== params.slug).slice(0, 2);
+
+  // Map news article to related project from /lib/projects.ts
+  const articleProjectMap: Record<string, string> = {
+    "falea-terminal-phase-one-complete": "falea-bauxite-corridor",
+    "expanding-heavy-fleet-central-africa": "katanga-copper-processing",
+  };
+  const relatedProjectSlug = articleProjectMap[article.slug];
+  const relatedProject = relatedProjectSlug
+    ? PROJECTS.find((p) => p.slug === relatedProjectSlug)
+    : null;
 
   return (
     <div className="w-full pt-[72px]">
@@ -172,6 +183,26 @@ export default function ArticlePage({ params }: Props) {
                   Media & Public Relations →
                 </Link>
               </div>
+              {/* Related Project */}
+              {relatedProject && (
+                <div className="bg-iron-white p-6 border border-slab-grey font-mono text-xs">
+                  <span className="text-label text-earth-black uppercase tracking-wider block mb-3 pb-2 border-b border-slab-grey font-bold">
+                    Related Project
+                  </span>
+                  <span className="font-mono text-[10px] text-oxide-red uppercase tracking-wider block mb-1">
+                    {relatedProject.country} · {relatedProject.sector}
+                  </span>
+                  <h4 className="text-heading-3 font-medium text-earth-black text-sm mb-3 leading-snug">
+                    {relatedProject.name}
+                  </h4>
+                  <Link
+                    href={`/projects/${relatedProject.slug}`}
+                    className="text-label font-bold text-oxide-red uppercase tracking-wider hover:underline block"
+                  >
+                    View project →
+                  </Link>
+                </div>
+              )}
 
               {/* Related Stories */}
               {related.length > 0 && (

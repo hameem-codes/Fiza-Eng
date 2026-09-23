@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { PROJECTS } from "@/lib/constants";
+import { PROJECTS } from "@/lib/projects";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 export function ActiveProjectsSection() {
@@ -54,7 +54,7 @@ export function ActiveProjectsSection() {
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-slab-grey/40 border-b border-slab-grey">
                     <Image
                       src={project.image}
-                      alt={project.title}
+                      alt={project.imageAlt || project.name}
                       fill
                       sizes="(max-width: 1024px) 100vw, 33vw"
                       className="img-cover transition-transform duration-500 group-hover:scale-[1.03]"
@@ -69,7 +69,7 @@ export function ActiveProjectsSection() {
                       </span>
                     </div>
                     <div className="absolute bottom-2.5 right-2.5 bg-earth-black/85 text-dust-tan font-mono text-[10px] px-2 py-0.5">
-                      {project.category}
+                      {project.sector}
                     </div>
                   </div>
 
@@ -80,10 +80,10 @@ export function ActiveProjectsSection() {
                       {project.country}
                     </span>
                     <h3 className="text-heading-2 font-medium text-earth-black mb-3 group-hover:text-oxide-red transition-colors leading-snug">
-                      {project.title}
+                      {project.name}
                     </h3>
                     <p className="text-body-sm text-quarry-grey leading-relaxed mb-6">
-                      {project.excerpt}
+                      {project.summary}
                     </p>
 
                     {/* Highlights from safe verified stats */}

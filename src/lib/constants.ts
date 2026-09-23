@@ -13,24 +13,8 @@ export interface Capability {
   bigStat: { value: string; label: string };
 }
 
-export interface Project {
-  id: string;
-  slug: string;
-  title: string;
-  category: string;
-  location: string;
-  country: string;
-  status: "ACTIVE" | "IN DEVELOPMENT" | "COMPLETED";
-  excerpt: string;
-  challenge: string;
-  solution: string;
-  outcome: string;
-  image: string;
-  gallery: string[];
-  stats: { label: string; value: string }[];
-  timeline: string;
-  client: string;
-}
+export type { Project, ProjectStatus } from "./projects";
+export { PROJECTS, hiddenProjects } from "./projects";
 
 export interface MineralResource {
   id: string;
@@ -94,16 +78,6 @@ export interface ProcessStep {
   detail: string;
 }
 
-export interface ActivePortfolioProject {
-  id: string;
-  country: string;
-  title: string;
-  status: "Active" | "In Development";
-  tag: string;
-  description: string;
-  keyDetails: string[];
-  image: string;
-}
 
 export interface OfficeLocation {
   city: string;
@@ -150,11 +124,11 @@ export const CAPABILITIES: Capability[] = [
     slug: "mineral-trading",
     title: "Mineral Trading",
     tagline: "Direct physical commodity flows from African concessions to global smelters.",
-    description: "We connect African extraction operations directly to industrial end-users across Asia, Europe, and the Middle East. We supply bulk bauxite, iron ore, copper, and lithium to international refineries through long-term agreements.",
+    description: "We connect African extraction operations directly to industrial end-users across Asia, Europe, and the Middle East. We supply bulk bauxite, iron ore (hematite and magnetite), and copper (cathode and blister) to international refineries through long-term agreements.",
     scope: [
-      "Bauxite & High-Grade Iron Ore Supply",
-      "Cathode Copper & Lithium Concentrates",
-      "Port Stockpiling, Assay Certification & Logistics"
+      "Bauxite (Metallurgical & Chemical Grade)",
+      "High-Grade Iron Ore (Hematite & Magnetite)",
+      "Cathode Copper & Blister Ingots"
     ],
     keyMetrics: [
       { label: "Annual Traded Volume", value: SITE_FACTS.annualTradedMineralTonnes },
@@ -301,221 +275,7 @@ export const CAPABILITIES: Capability[] = [
   }
 ];
 
-export const ACTIVE_PORTFOLIO_PROJECTS: ActivePortfolioProject[] = [
-  {
-    id: "mali-bauxite",
-    country: "Mali",
-    title: "Bauxite Mining Concession & Corridor",
-    status: "Active",
-    tag: "Commercial Extraction",
-    description: "Full-scale open-pit bauxite extraction and haulage infrastructure backed by an 85-unit heavy fleet, a dedicated 94-kilometer crushed-basalt logistics corridor, and high-throughput barge loading.",
-    keyDetails: [
-      "8.5 MTPA annual material moved",
-      "94 km all-weather haul road",
-      "Direct river barge loading terminal",
-      "Commercial export to international alumina refineries"
-    ],
-    image: SITE_IMAGES.projects.faleaMali.src
-  },
-  {
-    id: "drc-gold",
-    country: "Democratic Republic of Congo",
-    title: "Gold Mining & Extraction Operations",
-    status: "Active",
-    tag: "Mechanized Fleet Deployment",
-    description: "Active gold extraction concession supported by direct heavy machinery mobilization, in-pit crushing circuits, on-site metallurgical assaying, and environmental containment.",
-    keyDetails: [
-      "100% owned heavy excavator & hauler deployment",
-      "On-site assay validation & core analysis",
-      "Advanced slurry containment & water recycling",
-      "24/7 continuous extraction operations"
-    ],
-    image: SITE_IMAGES.projects.katangaCopper.src
-  },
-  {
-    id: "madagascar-ilmenite",
-    country: "Madagascar",
-    title: "Ilmenite Mineral Sand Operations",
-    status: "Active",
-    tag: "52.4% TiO₂ Certified Assay",
-    description: "High-grade heavy mineral sand concession with certified 52.4% Titanium Dioxide (TiO₂) assay concentrations, supported by specialized spiral separation circuits and dedicated rail transfer.",
-    keyDetails: [
-      "52.4% TiO₂ certified assay grade",
-      "Low trace radionuclide profile",
-      "Dedicated narrow-gauge rail spur to ocean port",
-      "Multi-year off-take supply agreements"
-    ],
-    image: SITE_IMAGES.projects.toamasinaRail.src
-  },
-  {
-    id: "ethiopia-railway",
-    country: "Ethiopia",
-    title: "Railway Localization Programme",
-    status: "Active",
-    tag: "Heavy Rail Modernization",
-    description: "National railway capability development initiative focused on domestic track component fabrication, sleeper plant localization, ballast rehabilitation, and technical skills transfer.",
-    keyDetails: [
-      "Track rehabilitation & ballast tamping",
-      "Domestic railway maintenance capacity building",
-      "Rolling stock engineering with partner syndicates",
-      "Strategic logistics corridor expansion"
-    ],
-    image: SITE_IMAGES.projects.toamasinaRail.src
-  }
-];
 
-export const PROJECTS: Project[] = [
-  {
-    id: "falea-bauxite-corridor",
-    slug: "falea-bauxite-corridor",
-    title: "Falea Bauxite & Mineral Corridor",
-    category: "Mining Services & Rail",
-    location: "Kayes Region",
-    country: "Mali",
-    status: "ACTIVE",
-    excerpt: "Turnkey development of an 8.5 MTPA bauxite deposit including a 94-kilometer dedicated heavy haul access road and river barge loading terminal.",
-    challenge: "The plateau deposit sat 120 km from the nearest paved arterial road with seasonal monsoons rendering standard unpaved laterite tracks impassable for 90-tonne triple-trailer road trains.",
-    solution: "Fiza mobilized 85 heavy machines to stabilize a 94-kilometer crushed-basalt corridor, erected two double-lane reinforced concrete river crossings, and installed an automated 1,200 TPH barge conveyor system.",
-    outcome: "Haulage cycle time dropped from 14 hours to 3.2 hours. First ore shipped 45 days ahead of contracted deadline.",
-    image: SITE_IMAGES.projects.faleaMali.src,
-    gallery: [
-      SITE_IMAGES.projects.faleaMali.src,
-      SITE_IMAGES.projects.civilBridge.src,
-      SITE_IMAGES.projects.industrialCircuit.src
-    ],
-    stats: [
-      { label: "Annual Ore Moved", value: "8.5M Tonnes" },
-      { label: "Haul Road Length", value: "94 Kilometers" },
-      { label: "Fleet Deployed", value: "85 Heavy Units" },
-      { label: "Local Workforce Trained", value: "480 Engineers" }
-    ],
-    timeline: "2023 - Present",
-    client: "National Mineral Resources Directorate & Syndicate Partners"
-  },
-  {
-    id: "katanga-copper-processing",
-    slug: "katanga-copper-processing",
-    title: "Katanga Copper-Cobalt Plant",
-    category: "Turnkey Plants",
-    location: "Kolwezi District",
-    country: "Democratic Republic of Congo",
-    status: "ACTIVE",
-    excerpt: "Engineering, procurement, and construction of a modular 1,500 TPH primary crushing station and dense media separation circuit.",
-    challenge: "Integrating high-throughput crushing machinery inside an active extraction concession without disrupting existing open-cast haulage flow.",
-    solution: "Designed a pre-fabricated structural steel framework anchored to mass-pour raft foundations, assembled using twin 250-tonne all-terrain crawler cranes.",
-    outcome: "Attained target 1,500 TPH nameplate capacity within 72 hours of cold commissioning. Zero lost-time incidents across 620,000 man-hours.",
-    image: SITE_IMAGES.projects.katangaCopper.src,
-    gallery: [
-      SITE_IMAGES.projects.katangaCopper.src,
-      SITE_IMAGES.projects.industrialCircuit.src
-    ],
-    stats: [
-      { label: "Circuit Throughput", value: "1,500 TPH" },
-      { label: "Structural Steel Erection", value: "3,200 Tonnes" },
-      { label: "Lost Time Incidents", value: "Zero" },
-      { label: "Construction Runway", value: "10 Months" }
-    ],
-    timeline: "2022 - 2024",
-    client: "Katanga Mineral Consortium"
-  },
-  {
-    id: "toamasina-bulk-rail-terminal",
-    slug: "toamasina-bulk-rail-terminal",
-    title: "Toamasina Bulk Mineral Rail Terminal",
-    category: "Railway Solutions",
-    location: "Atsinanana Region",
-    country: "Madagascar",
-    status: "COMPLETED",
-    excerpt: "Complete rehabilitation of a 42-kilometer heavy-haul narrow-gauge rail spur connecting inland nickel-cobalt tailings to the ocean port.",
-    challenge: "Steep grades, tropical cyclone erosion, and deteriorated legacy ballast from the 1970s limiting axle loads to under 14 tonnes.",
-    solution: "Complete subgrade re-engineering with geotextile reinforcement, automated mechanized ballast tampers, and 50 kg/m continuous welded rail installation.",
-    outcome: "Permitted 25-tonne axle loads and tripled daily train throughput from 3 to 9 return mineral consists.",
-    image: SITE_IMAGES.projects.toamasinaRail.src,
-    gallery: [
-      SITE_IMAGES.projects.toamasinaRail.src,
-      SITE_IMAGES.projects.civilBridge.src
-    ],
-    stats: [
-      { label: "Rehabilitated Track", value: "42 Kilometers" },
-      { label: "Axle Load Increase", value: "+78% Capacity" },
-      { label: "Turnaround Time", value: "-45% Reduction" }
-    ],
-    timeline: "2021 - 2023",
-    client: "Madagascar Port & Rail Infrastructure Authority"
-  },
-  {
-    id: "bamako-industrial-logistics-hub",
-    slug: "bamako-industrial-logistics-hub",
-    title: "Bamako Heavy Equipment Base & Hub",
-    category: "Infrastructure",
-    location: "Bamako Industrial Zone",
-    country: "Mali",
-    status: "ACTIVE",
-    excerpt: "A 35,000 m² central depot featuring 6-bay heavy equipment rebuild workshops, bonded mineral storage, and central logistics dispatch.",
-    challenge: "Lack of domestic component rebuild facilities forced mining operators in Mali to air-freight diesel engines to South Africa or Europe.",
-    solution: "Constructed a certified tier-1 remanufacturing workshop with 50-tonne overhead gantry cranes, dynamometer engine test cells, and automated parts inventory.",
-    outcome: "Turnaround for hydraulic excavator rebuilds reduced from 12 weeks to 14 days, saving regional operators millions in fleet downtime.",
-    image: SITE_IMAGES.projects.sikassoRebuild.src,
-    gallery: [
-      SITE_IMAGES.projects.sikassoRebuild.src
-    ],
-    stats: [
-      { label: "Depot Footprint", value: "35,000 m²" },
-      { label: "Overhead Crane Capacity", value: "50 Tonnes" },
-      { label: "Annual Rebuild Capacity", value: "120 Powertrains" }
-    ],
-    timeline: "2020 - Continuous",
-    client: "Fiza Engineering Corporation"
-  },
-  {
-    id: "manono-lithium-infrastructure",
-    slug: "manono-lithium-infrastructure",
-    title: "Manono Critical Minerals Access Route",
-    category: "Infrastructure & Mining",
-    location: "Tanganyika Province",
-    country: "Democratic Republic of Congo",
-    status: "IN DEVELOPMENT",
-    excerpt: "Engineering a 180 km heavy-duty logistics artery connecting prospective hard-rock lithium deposits to the national rail head.",
-    challenge: "Traversing difficult floodplains with seasonal river swell requiring extensive elevated causeways and high-capacity drainage structures.",
-    solution: "Pioneering cellular embankment engineering using geo-cells packed with river gravel and armored with crushed granite rip-rap.",
-    outcome: "Construction phase 1 completed on schedule; test convoys carrying drill rigs deployed successfully.",
-    image: SITE_IMAGES.projects.manonoCorridor.src,
-    gallery: [
-      SITE_IMAGES.projects.manonoCorridor.src
-    ],
-    stats: [
-      { label: "Planned Roadway", value: "180 Kilometers" },
-      { label: "Elevated Causeways", value: "14 Sections" },
-      { label: "Projected Haul Capacity", value: "2.4M TPA" }
-    ],
-    timeline: "2024 - 2027",
-    client: "Central African Energy Metals Consortium"
-  },
-  {
-    id: "sikasso-agro-processing",
-    slug: "sikasso-agro-processing",
-    title: "Sikasso Grain & Oilseed Industrial Plant",
-    category: "Commercial Agriculture",
-    location: "Sikasso Region",
-    country: "Mali",
-    status: "COMPLETED",
-    excerpt: "Turnkey development of a 60,000-tonne automated silo grain terminal and continuous cottonseed oil solvent extraction plant.",
-    challenge: "Extreme ambient dust and heat fluctuations requiring specialized pneumatic conveyance and explosion-proof electrical substations.",
-    solution: "Integrated specialized steel silos with automated thermocouple monitoring systems and a 4MW synchronized diesel-solar power station.",
-    outcome: "Decreased post-harvest grain losses in the Sikasso agrarian basin by over 30% in its initial harvest cycle.",
-    image: SITE_IMAGES.projects.sikassoAgro.src,
-    gallery: [
-      SITE_IMAGES.projects.sikassoAgro.src
-    ],
-    stats: [
-      { label: "Storage Volume", value: "60,000 Tonnes" },
-      { label: "Processing Throughput", value: "450 Tonnes/Day" },
-      { label: "Farmers Supported", value: "14,000 Growers" }
-    ],
-    timeline: "2022 - 2024",
-    client: "Malian Agro-Industrial Development Board"
-  }
-];
 
 export const MINERALS: MineralResource[] = [
   {

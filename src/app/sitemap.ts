@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
-import { CAPABILITIES, PROJECTS, PRODUCTS, NEWS_ARTICLES } from "@/lib/constants";
+import { CAPABILITIES, PRODUCTS, NEWS_ARTICLES } from "@/lib/constants";
+import { PROJECTS } from "@/lib/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://fiza-one.vercel.app";
